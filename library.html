@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Private Video Access</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    iframe {
+      margin-top: 20px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Loading video...</h2>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("v");
+
+    if (!code) {
+      document.body.innerHTML = "<h2>Invalid access — no code provided.</h2>";
+    } else {
+      fetch("https://api.ipify.org?format=json")
+        .then(res => res.json())
+        .then(data => {
+          const ip = data.ip;
+          const url = `https://script.google.com/macros/s/AKfycbw5nCbczsCOH81q-2p0VNbJtceKOJ3fzDHnOE1JI7JXC0vcZbW89RRBBBGEHzdqKumm/exec?v=${code}&ip=${ip}`;
+
+          fetch(url)
+            .then(res => res.text())
+            .then(videoId => {
+              if (videoId === "INVALID") {
+                document.body.innerHTML = "<h2>Access Denied</h2><p>Your code is invalid.</p>";
+              } else {
+                document.body.innerHTML = `
+                  <h2>Your video:</h2>
+                  <iframe width="1000" height="562"
+        src="https://www.youtube.com/embed/${videoId}?modestbranding=1&controls=1&rel=0&disablekb=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+</iframe>  
+        <div style="margin-top: 20px; text-align: left; max-width: 1000px; margin-left: auto; margin-right: auto; font-size: 14px; line-height: 1.6;">
+          <p>00:00 Introduction<br>
+          00:19 Real Case, Measurable benefits<br>
+          00:43 Spot Business<br>
+          01:47 Contracted Business<br>
+          03:20 Pricera‘s approach<br>
+          04:20 Simplified use-case demo<br>
+          04:57 Common pricing practices<br>
+          06:13 Demo – Create a quote<br>
+          07:00 Edit pricing model<br>
+          07:47 Update pricing model<br>
+          08:39 Generate pricing agreement<br>
+          09:14 Intro ML/AI<br>
+          09:51 Challenge costing model<br>
+          10:55 Optimize pricing<br>
+          11:43 Challenge Mark-up model<br>
+          12:45 GenAI</p>
+        </div>;
+              `}
+            })
+            .catch(() => {
+              document.body.innerHTML = "<h2>Server error</h2><p>Try again later.</p>";
+            });
+        })
+        .catch(() => {
+          document.body.innerHTML = "<h2>Could not get your IP</h2><p>Check your network or disable ad blockers.</p>";
+        });
+    }
+  </script>
+</body>
+</html>
