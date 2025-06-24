@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricera - CPQ Software for Process Manufacturing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #f64467;
+            --primary-dark: #d81d23;
+            --secondary: #ff0000;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 0;
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            transition: opacity 0.3s;
+        }
+
+        .logo img:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Language selector */
+        .language-selector {
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .language-selector select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid var(--light-gray);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Features */
+        .features {
+            background-color: white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .feature-card:hover .feature-img img {
+            transform: scale(1.1);
+        }
+
+        .feature-content {
+            padding: 30px;
+        }
+
+        .feature-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Team */
+        .team {
+            background-color: #f8fafc;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            padding: 30px;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid var(--light-gray);
+        }
+
+        .team-member h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .team-member p.position {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-member p.bio {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Contact */
+        .contact {
+            background-color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            color: var(--gray);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .btn {
+                display: block;
+                width: max-content;
+                margin: 0 auto 15px;
+            }
+
+            .btn-outline {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .logo {
+                height: 32px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Image Logo -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img id="logoImg" src="images/logo.png" alt="Pricera">
+                </a>
+                <div class="language-selector">
+                    <select id="languageSelector" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                    </select>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about" data-en="About" data-ar="عن">About</a></li>
+                    <li><a href="#solution" data-en="Solution" data-ar="الحل">Solution</a></li>
+                    <li><a href="#benefits" data-en="Benefits" data-ar="الفوائد">Benefits</a></li>
+                    <li><a href="#differentiation" data-en="Differentiation" data-ar="التميز">Differentiation</a></li>
+                    <li><a href="#validation" data-en="Validation" data-ar="التحقق">Validation</a></li>
+                    <li><a href="#team" data-en="Team" data-ar="الفريق">Team</a></li>
+                    <li><a href="#contact" data-en="Contact" data-ar="الاتصال">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 id="heroTitle">Transform Your Pricing & Quoting Process</h1>
+            <p id="heroDescription">Pricera is a SaaS CPQ software solution designed to transform the way B2B manufacturing industries, particularly process manufacturing sectors, handle pricing and quoting.</p>
+            <a href="#contact" class="btn" id="getStartedBtn">Get Started</a>
+            <a href="#demo" class="btn btn-outline" id="requestDemoBtn">Request Demo</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="aboutTitle">Pricing Complexity of the Process Industry</h2>
+                <p id="aboutDescription">Process manufacturing industries face unique challenges when it comes to pricing.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/cost-challenge.jpg" alt="Pricera automation dashboard">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="pricingChallengesTitle">Pricing Challenges</h3>
+                        <p id="pricingChallengesDescription">Companies face increasing pricing complexity due to raw material volatility, adoption of indexed and value-based pricing, intricate pricing equations, and misalignment across siloed teams.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/feature-automation.webp" alt="Pricera automation dashboard">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="customizedProductsTitle">Customized Products</h3>
+                        <p id="customizedProductsDescription">In addition to standard and commoditized products—which can themselves be challenging to price—these sectors also deal with customized items adding further complexity to the quoting process, spot or longterm.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/operational impact.avif" alt="Pricera automation dashboard">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="operationalImpactTitle">Operational Impact</h3>
+                        <p id="operationalImpactDescription">These challenges lead to time-consuming and error-prone quotations, lost sales, margin erosion, and inefficient workflows that can consume up to 50% of sales resources.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="features" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="solutionTitle">How We Solve It</h2>
+                <p id="solutionDescription">Pricera eliminates the need for cumbersome spreadsheets, manual pricing rules, and lengthy alignment meetings.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/demo.png" alt="Automated Solution">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="singleAutomatedToolTitle">Single Automated Tool</h3>
+                        <p id="singleAutomatedToolDescription">It offers a single, automated SaaS tool that simplifies pricing and quoting processes across plants, divisions, and even countries.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/Equation.png" alt="Integration">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="powerfulPricingEngineTitle">Powerful Pricing Engine</h3>
+                        <p id="powerfulPricingEngineDescription">Whether used as a standalone solution or integrated with existing CRM/ERP systems, Pricera adapts to the unique sales processes and product complexities of each company.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/AIML.png" alt="AI and ML">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="aiMachineLearningTitle">AI & Machine Learning</h3>
+                        <p id="aiMachineLearningDescription">Its AI and Machine Learning module leverages collected sales data to optimize pricing strategies and drive continuous improvement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="benefitsTitle">Benefits</h2>
+                <p id="benefitsDescription">Pricera delivers transformative results for businesses.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/efficiency.webp" alt="Efficiency">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="increasedEfficiencyTitle">Increased Efficiency</h3>
+                        <p id="increasedEfficiencyDescription">By reducing quotation times by over 90%, it shrinks sales cycles from months, weeks, days to just minutes.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/revenuegrowth.jpg" alt="Revenue Growth">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="revenueGrowthTitle">Revenue Growth</h3>
+                        <p id="revenueGrowthDescription">This efficiency, combined with optimized pricing models, boosts revenue and operating profits.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Compliance">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="policyComplianceTitle">Policy Compliance</h3>
+                        <p id="policyComplianceDescription">Pricera automates compliance while maintaining complete transparency - the foundation for reliable B2B manufacturing operations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differentiation Section -->
+    <section id="differentiation" class="features" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="differentiationTitle">Our Differentiation</h2>
+                <p id="differentiationDescription">Pricera stands out by focusing specifically on the $7 trillion process manufacturing industry.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/industryspecific.jpg" alt="Industry Focus">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="processIndustrySpecificTitle">Process Industry-Specific</h3>
+                        <p id="processIndustrySpecificDescription">Pricera specializes in the $7 trillion process manufacturing sector - an underserved market where traditional pricing solutions fail to address the extreme complexity of industrial pricing dynamics.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/lightweight.avif" alt="Lightweight Solution">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="lightweightSolutionTitle">Lightweight Solution</h3>
+                        <p id="lightweightSolutionDescription">Unlike bulky, one-size-fits-all solutions, Pricera is designed to handle the intricate pricing models of process manufacturing without requiring heavy configurations or disrupting existing sales practices.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" alt="Advanced Technology">
+                    </div>
+                    <div class="feature-content">
+                        <h3 id="advancedTechnologyTitle">Advanced Technology</h3>
+                        <p id="advancedTechnologyDescription">The AI and machine learning features enable businesses to optimize pricing strategies and support continuous improvement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Validation Section -->
+    <section id="validation" class="features" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="validationTitle">Recognized by Industry Leaders</h2>
+                <p id="validationDescription"></p>
+            </div>
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/manufacturing.jpg" alt="manufacturing">
+                    </div>
+                    <div class="feature-content">
+                        <p id="manufacturingDescription">Tested and validated in real-world industrial settings, including Metal Processing, Extrusion, Wood Processing, and Painting.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/websummit.png" alt="Websummit">
+                    </div>
+                    <div class="feature-content">
+                        <p id="websummitDescription">Featured Startup at Web Summit 2025</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="images/antler.png" alt="Antler">
+                    </div>
+                    <div class="feature-content">
+                        <p id="antlerDescription">Selected by Antler – program 2024</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="teamTitle">The Team</h2>
+                <p id="teamDescription">We are the first EMEA-native pricing solution designed specifically for the process manufacturing industry.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="images/Kamal.jpg" alt="Karim Chamas">
+                    <h3>Kamal Nariani</h3>
+                    <p class="position">CSO</p>
+                    <p class="bio" id="kamalBio">Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master’s degree in International Business(Shivaji University), a Bachelor’s degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).
+                    <br><br> Spoken languages: Hindi, English</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/mic.jpeg" alt="Michael Hoffmann">
+                    <h3>Michael Hoffmann</h3>
+                    <p class="position">CEO</p>
+                    <p class="bio" id="michaelBio">Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree.
+                    <br><br> Spoken languages: French, German, English, Arabic</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/andre.jpg" alt="Kamal">
+                    <h3>Andrzej Rojek</h3>
+                    <p class="position">CTO</p>
+                    <p class="bio" id="andrzejBio">Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology.
+                    <br><br> Spoken languages: Polish, English.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="demoTitle">Request a Demo</h2>
+                <p id="demoDescription">A web link to the demo will be provided upon request.</p>
+            </div>
+            <div style="text-align: center;">
+                <a href="#contact" class="btn" id="requestDemoBtn2">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="contactTitle">Get in Touch</h2>
+                <p id="contactDescription">Contact us to learn more about how Pricera can transform your pricing process.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 id="contactInfoTitle">Contact Information</h3>
+                    <p id="contactInfoDescription">Have questions or want to learn more about our CPQ solution? Reach out to us and we'll get back to you as soon as possible.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 id="addressTitle">Address</h4>
+                                <p>Pricera LLC<br>Level 21, Doha Tower, West Bay<br>Doha, Qatar<br>Essen, Germany<br>Paris, France<br></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 id="emailTitle">Email</h4>
+                                <p>info@pricera.site</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Pricera</h3>
+                    <p id="footerDescription">A SaaS CPQ software solution designed to transform the way B2B manufacturing industries handle pricing and quoting.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3 id="quickLinksTitle">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about" id="aboutLink">About</a></li>
+                        <li><a href="#solution" id="solutionLink">Solution</a></li>
+                        <li><a href="#benefits" id="benefitsLink">Benefits</a></li>
+                        <li><a href="#differentiation" id="differentiationLink">Differentiation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 id="companyTitle">Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#team" id="teamLink">Team</a></li>
+                        <li><a href="#demo" id="demoLink">Demo</a></li>
+                        <li><a href="#contact" id="contactLink">Contact</a></li>
+                        <li><a href="#" id="privacyPolicyLink">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 id="contactUsTitle">Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> info@pricera.site</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p id="copyrightText">&copy; 2025 Pricera LLC. All Rights Reserved. Design L D Vinci</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ?
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Add shadow to header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Language translations
+        const translations = {
+            en: {
+                logoSrc: "images/logo.png",
+                heroTitle: "Transform Your Pricing & Quoting Process",
+                heroDescription: "Pricera is a SaaS CPQ software solution designed to transform the way B2B manufacturing industries, particularly process manufacturing sectors, handle pricing and quoting.",
+                getStartedBtn: "Get Started",
+                requestDemoBtn: "Request Demo",
+                aboutTitle: "Pricing Complexity of the Process Industry",
+                aboutDescription: "Process manufacturing industries face unique challenges when it comes to pricing.",
+                pricingChallengesTitle: "Pricing Challenges",
+                pricingChallengesDescription: "Companies face increasing pricing complexity due to raw material volatility, adoption of indexed and value-based pricing, intricate pricing equations, and misalignment across siloed teams.",
+                customizedProductsTitle: "Customized Products",
+                customizedProductsDescription: "In addition to standard and commoditized products—which can themselves be challenging to price—these sectors also deal with customized items adding further complexity to the quoting process, spot or longterm",
+                operationalImpactTitle: "Operational Impact",
+                operationalImpactDescription: "These challenges lead to time-consuming and error-prone quotations, lost sales, margin erosion, and inefficient workflows that can consume up to 50% of sales resources.",
+                solutionTitle: "How We Solve It",
+                solutionDescription: "Pricera eliminates the need for cumbersome spreadsheets, manual pricing rules, and lengthy alignment meetings.",
+                singleAutomatedToolTitle: "Single Automated Tool",
+                singleAutomatedToolDescription: "It offers a single, automated SaaS tool that simplifies pricing and quoting processes across plants, divisions, and even countries.",
+                powerfulPricingEngineTitle: "Powerful Pricing Engine",
+                powerfulPricingEngineDescription: "Whether used as a standalone solution or integrated with existing CRM/ERP systems, Pricera adapts to the unique sales processes and product complexities of each company.",
+                aiMachineLearningTitle: "AI & Machine Learning",
+                aiMachineLearningDescription: "Its AI and Machine Learning module leverages collected sales data to optimize pricing strategies and drive continuous improvement.",
+                benefitsTitle: "Benefits",
+                benefitsDescription: "Pricera delivers transformative results for businesses.",
+                increasedEfficiencyTitle: "Increased Efficiency",
+                increasedEfficiencyDescription: "By reducing quotation times by over 90%, it shrinks sales cycles from months, weeks, days to just minutes.",
+                revenueGrowthTitle: "Revenue Growth",
+                revenueGrowthDescription: "This efficiency, combined with optimized pricing models, boosts revenue and operating profits.",
+                policyComplianceTitle: "Policy Compliance",
+                policyComplianceDescription: "Pricera automates compliance while maintaining complete transparency - the foundation for reliable B2B manufacturing operations.",
+                differentiationTitle: "Our Differentiation",
+                differentiationDescription: "Pricera stands out by focusing specifically on the $7 trillion process manufacturing industry.",
+                processIndustrySpecificTitle: "Process Industry-Specific",
+                processIndustrySpecificDescription: "Pricera specializes in the $7 trillion process manufacturing sector - an underserved market where traditional pricing solutions fail to address the extreme complexity of industrial pricing dynamics.",
+                lightweightSolutionTitle: "Lightweight Solution",
+                lightweightSolutionDescription: "Unlike bulky, one-size-fits-all solutions, Pricera is designed to handle the intricate pricing models of process manufacturing without requiring heavy configurations or disrupting existing sales practices.",
+                advancedTechnologyTitle: "Advanced Technology",
+                advancedTechnologyDescription: "The AI and machine learning features enable businesses to optimize pricing strategies and support continuous improvement.",
+                validationTitle: "Proven in Real-World Industrial Settings",
+                validationDescription: "",
+                websummitDescription: "Featured Startup at Web Summit 2025",
+                antlerDescription: "Selected by Antler – Cohort participant & program graduate 2024",
+                manufacturingDescription: "Tested and validated in real-world industrial settings",
+                teamTitle: "The Team",
+                teamDescription: "We are the first EMEA-native pricing solution designed specifically for the process manufacturing industry.",
+                kamalBio: "Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master’s degree in International Business(Shivaji University), a Bachelor’s degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).<br><br> Spoken languages: Hindi, English",
+                michaelBio: "Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree.<br><br> Spoken languages: French, German, English, Arabic",
+                andrzejBio: "Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology.<br><br> Spoken languages: Polish, English.",
+                demoTitle: "Request a Demo",
+                demoDescription: "A web link to the demo will be provided upon request.",
+                requestDemoBtn2: "Request Demo",
+                contactTitle: "Get in Touch",
+                contactDescription: "Contact us to learn more about how Pricera can transform your pricing process.",
+                contactInfoTitle: "Contact Information",
+                contactInfoDescription: "Have questions or want to learn more about our CPQ solution? Reach out to us and we'll get back to you as soon as possible.",
+                addressTitle: "Address",
+                emailTitle: "Email",
+                footerDescription: "A SaaS CPQ software solution designed to transform the way B2B manufacturing industries handle pricing and quoting.",
+                quickLinksTitle: "Quick Links",
+                aboutLink: "About",
+                solutionLink: "Solution",
+                benefitsLink: "Benefits",
+                differentiationLink: "Differentiation",
+                companyTitle: "Company",
+                teamLink: "Team",
+                demoLink: "Demo",
+                contactLink: "Contact",
+                privacyPolicyLink: "Privacy Policy",
+                contactUsTitle: "Contact Us",
+                copyrightText: "© 2025 Pricera LLC. All Rights Reserved. Design L D Vinci"
+            },
+            ar: {
+                logoSrc: "images/logo-ar.svg",
+                heroTitle: "تحول عملية التسعير والموافقة",
+                heroDescription: "Pricera هو حل برمجي SaaS CPQ مصمم لتحويل طريقة تعامل صناعات التصنيع B2B، وخاصة قطاعات التصنيع العملية، مع التسعير والموافقة.",
+                getStartedBtn: "البدء",
+                requestDemoBtn: "طلب عرض توضيحي",
+                aboutTitle: "تعقيد التسعير في صناعة العمليات",
+                aboutDescription: "تواجه صناعات التصنيع العملية تحديات فريدة عندما يتعلق الأمر بالتسعير.",
+                pricingChallengesTitle: "تحديات التسعير",
+                pricingChallengesDescription: "تواجه الشركات تعقيدًا متزايدًا في التسعير بسبب تقلب المواد الخام، وتبني التسعير المفهرس والقائم على القيمة، ومعادلات التسعير المعقدة، وغياب التنسيق بين الفرق المعزولة.",
+                customizedProductsTitle: "منتجات مخصصة",
+                customizedProductsDescription: "بالإضافة إلى المنتجات القياسية والسلع الأساسية - والتي قد تكون صعبة التسعير في حد ذاتها - تتعامل هذه القطاعات أيضًا مع العناصر المخصصة التي تضيف تعقيدًا إضافيًا لعملية الموافقة، سواء كانت فورية أو طويلة الأجل.",
+                operationalImpactTitle: "التأثير التشغيلي",
+                operationalImpactDescription: "تؤدي هذه التحديات إلى عروض أسعار تستغرق وقتًا طويلاً ومعرضة للأخطاء، وفقدان المبيعات، وتآكل الهوامش، وعمليات غير فعالة يمكن أن تستهلك ما يصل إلى 50% من موارد المبيعات.",
+                solutionTitle: "كيف نحلها",
+                solutionDescription: "Pricera يلغي الحاجة إلى جداول البيانات المعقدة، وقواعد التسعير اليدوية، واجتماعات التنسيق الطويلة.",
+                singleAutomatedToolTitle: "أداة أوتوماتيكية واحدة",
+                singleAutomatedToolDescription: "يقدم أداة SaaS أوتوماتيكية واحدة تبسط عمليات التسعير والموافقة عبر المصانع والأقسام وحتى البلدان.",
+                powerfulPricingEngineTitle: "محرك تسعير قوي",
+                powerfulPricingEngineDescription: "سواء تم استخدامه كحل مستقل أو متكامل مع أنظمة CRM/ERP الموجودة، يتكيف Pricera مع عمليات المبيعات الفريدة وتعقيدات المنتجات لكل شركة.",
+                aiMachineLearningTitle: "الذكاء الاصطناعي والتعلم الآلي",
+                aiMachineLearningDescription: "وحدة الذكاء الاصطناعي والتعلم الآلي تستفيد من بيانات المبيعات المجمعة لتحسين استراتيجيات التسعير ودفع التحسين المستمر.",
+                benefitsTitle: "الفوائد",
+                benefitsDescription: "Pricera يوفر نتائج تحويلية للشركات.",
+                increasedEfficiencyTitle: "زيادة الكفاءة",
+                increasedEfficiencyDescription: "من خلال تقليل أوقات الموافقة بأكثر من 90%، يقلص دورات المبيعات من أشهر وأسابيع وأيام إلى دقائق فقط.",
+                revenueGrowthTitle: "نمو الإيرادات",
+                revenueGrowthDescription: "هذه الكفاءة، إلى جانب نماذج التسعير المحسنة، تعزز الإيرادات والأرباح التشغيلية.",
+                policyComplianceTitle: "الامتثال للسياسات",
+                policyComplianceDescription: "Pricera يوتوماتك الامتثال مع الحفاظ على الشفافية الكاملة - الأساس لعمليات التصنيع B2B الموثوقة.",
+                differentiationTitle: "تميزنا",
+                differentiationDescription: "Pricera يتميز بالتركيز تحديدًا على صناعة التصنيع العملية بقيمة 7 تريليون دولار.",
+                processIndustrySpecificTitle: "خاص بصناعة العمليات",
+                processIndustrySpecificDescription: "Pricera متخصص في قطاع تصنيع العمليات بقيمة 7 تريليون دولار - سوق غير مُخدم بشكل كافٍ حيث تفشل الحلول التقليدية للتسعير في معالجة التعقيد الشديد لديناميات تسعير الصناعة.",
+                lightweightSolutionTitle: "حل خفيف",
+                lightweightSolutionDescription: "على عكس الحلول الضخمة التي تناسب الجميع، تم تصميم Pricera للتعامل مع نماذج التسعير المعقدة لتصنيع العمليات دون الحاجة إلى تكيفات ثقيلة أو تعطيل الممارسات المبيعات الحالية.",
+                advancedTechnologyTitle: "تكنولوجيا متقدمة",
+                advancedTechnologyDescription: "ميزات الذكاء الاصطناعي والتعلم الآلي تمكن الشركات من تحسين استراتيجيات التسعير ودعم التحسين المستمر.",
+                validationTitle: "معترف به من قبل قادة الصناعة",
+                validationDescription: "",
+                websummitDescription: "شركة ناشئة مميزة في قمة الويب 2025",
+                antlerDescription: "تم اختيارها من قبل Antler - مشارك في المجموعة وخريج البرنامج 2024",
+                manufacturingDescription: "تم اختباره والتحقق منه في إعدادات صناعية واقعية، بما في ذلك معالجة المعادن، والبثق، ومعالجة الخشب، والطلاء.",
+                teamTitle: "الفريق",
+                teamDescription: "نحن أول حل تسعير أصلي في منطقة EMEA مصمم خصيصًا لصناعة تصنيع العمليات.",
+                kamalBio: "كامال، رئيس قسم المبيعات، لديه 25 عامًا من الخبرة في استشارات السوق، واتخاذ القرارات الاستراتيجية والنمذجة الاقتصادية. وهو متخصص في تسعير السلع وديناميات السوق في قطاع النفط والغاز، وقد شغل مناصب رئيسية في QatarEnergy وQAPCO وDow Chemical. كامال حاصل على درجة الماجستير في الأعمال الدولية (جامعة شيفاجي)، ودرجة البكالوريوس في الهندسة الكيميائية (جامعة DAVV) والابتكار المؤسسي (كلية تيبير للأعمال بجامعة كارنيجي ميلون). اللغات المتحدثة: الهندية، الإنجليزية",
+                michaelBio: "مايكل هوفمان، المؤسس والرئيس التنفيذي، يجلب 20 عامًا من الخبرة في صناعة التصنيع - البلاستيك، والمعادن، والفضاء الجوي عبر أدوار الهندسة والمبيعات في أوروبا والشرق الأوسط. مع الاعتراف بتحديات التسعير والموافقة مباشرة في صناعة تصنيع العمليات، طور مايكل أسس Pricera. وهو حاصل على ماجستير إدارة الأعمال من INSEAD ودرجة الماجستير في الهندسة من ESIEE. اللغات المتحدثة: الفرنسية، الألمانية، الإنجليزية، العربية",
+                andrzejBio: "أندريه روجيك، المؤسس المشارك والرئيس التقني، يقود فريق تطوير البرمجيات في Mosaic Lab المتخصص في حلول CRM والتسعير وERP المخصصة منذ عام 2007. مع الخبرة عبر منصات متعددة وCPQs، يقدمون حلولاً مخصصة وغير مرتبطة بالنظام تلبي احتياجات العملاء بشكل أفضل. كما يتفوقون في تطوير تطبيقات الجوال والذكاء الاصطناعي، مما يدفع الابتكار عبر الصناعات. أندريه تخرج من جامعة فروتسواف للعلوم والتكنولوجيا. اللغات المتحدثة: البولندية، الإنجليزية.",
+                demoTitle: "طلب عرض توضيحي",
+                demoDescription: "سيتم توفير رابط ويب للعرض التوضيحي عند الطلب.",
+                requestDemoBtn2: "طلب عرض توضيحي",
+                contactTitle: "تواصل معنا",
+                contactDescription: "تواصل معنا لمعرفة المزيد حول كيفية تحويل Pricera لعملية التسعير الخاصة بك.",
+                contactInfoTitle: "معلومات الاتصال",
+                contactInfoDescription: "هل لديك أسئلة أو تريد معرفة المزيد حول حل CPQ الخاص بنا؟ تواصل معنا وسنعود إليك في أقرب وقت ممكن.",
+                addressTitle: "العنوان",
+                emailTitle: "البريد الإلكتروني",
+                footerDescription: "حل برمجي SaaS CPQ مصمم لتحويل طريقة تعامل صناعات التصنيع B2B مع التسعير والموافقة.",
+                quickLinksTitle: "روابط سريعة",
+                aboutLink: "عن",
+                solutionLink: "الحل",
+                benefitsLink: "الفوائد",
+                differentiationLink: "التميز",
+                companyTitle: "الشركة",
+                teamLink: "الفريق",
+                demoLink: "العرض التوضيحي",
+                contactLink: "الاتصال",
+                privacyPolicyLink: "سياسة الخصوصية",
+                contactUsTitle: "تواصل معنا",
+                copyrightText: "© 2025 شركة Pricera LLC. كل الحقوق محفوظة. تصميم L D Vinci"
+            }
+        };
+
+        // Function to change language
+        function changeLanguage(lang = null) {
+            if (!lang) {
+                lang = document.getElementById('languageSelector').value;
+            }
+
+            const elements = document.querySelectorAll('[id]');
+            const navAnchors = document.querySelectorAll('.nav-links a');
+
+            // Change logo based on language
+            document.getElementById('logoImg').src = translations[lang].logoSrc;
+
+            // Update text content based on language
+            elements.forEach(element => {
+                const id = element.getAttribute('id');
+                if (translations[lang][id]) {
+                    element.textContent = translations[lang][id];
+                }
+            });
+
+            // Update navigation links based on language
+            navAnchors.forEach(anchor => {
+                const langKey = lang === 'en' ? 'data-en' : 'data-ar';
+                anchor.textContent = anchor.getAttribute(langKey);
+            });
+
+            // Change the language attribute of the HTML tag
+            document.documentElement.lang = lang;
+
+            // Change the direction of the text based on the language
+            if (lang === 'ar') {
+                document.body.style.direction = 'rtl';
+                document.body.style.textAlign = 'right';
+            } else {
+                document.body.style.direction = 'ltr';
+                document.body.style.textAlign = 'left';
+            }
+        }
+
+        // Function to detect user's country and set language
+        function detectCountryAndSetLanguage() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const country = data.country;
+                    // Map countries to languages
+                    const countryToLanguage = {
+                        'SA': 'ar', // Saudi Arabia
+                        'EG': 'ar', // Egypt
+                        'AE': 'ar', // United Arab Emirates
+                        'DZ': 'ar', // Algeria
+                        'BH': 'ar', // Bahrain
+                        'COM': 'ar', // Comoros
+                        'DJ': 'ar', // Djibouti
+                        'EG': 'ar', // Egypt
+                        'IQ': 'ar', // Iraq
+                        'JO': 'ar', // Jordan
+                        'KW': 'ar', // Kuwait
+                        'LB': 'ar', // Lebanon
+                        'LY': 'ar', // Libya
+                        'MR': 'ar', // Mauritania
+                        'MA': 'ar', // Morocco
+                        'OM': 'ar', // Oman
+                        'PS': 'ar', // Palestine
+                        'QA': 'ar', // Qatar
+                        'SA': 'ar', // Saudi Arabia
+                        'SO': 'ar', // Somalia
+                        'SD': 'ar', // Sudan
+                        'SY': 'ar', // Syria
+                        'TN': 'ar', // Tunisia
+                        'AE': 'ar', // United Arab Emirates
+                        'YE': 'ar'  // Yemen
+                    };
+
+                    // Set language based on country
+                    const lang = countryToLanguage[country] || 'en';
+                    document.getElementById('languageSelector').value = lang;
+                    changeLanguage(lang);
+                })
+                .catch(error => {
+                    console.error('Error detecting country:', error);
+                });
+        }
+
+        // Call the function to detect country and set language
+        detectCountryAndSetLanguage();
+    </script>
+</body>
+</html>
