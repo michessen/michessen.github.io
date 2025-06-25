@@ -100,9 +100,12 @@
 
         /* Language selector */
         .language-selector {
-            margin-left: auto;
-            margin-right: 20px;
-        }
+        margin-left: auto;
+        margin-right: 20px;
+        cursor: pointer;
+        color: var(--primary);
+        font-weight: 500;
+         }   
 
         .language-selector select {
             padding: 8px;
@@ -499,12 +502,10 @@
                 <a href="#" class="logo">
                     <img id="logoImg" src="images/logo.png" alt="Pricera">
                 </a>
-                <div class="language-selector">
-                    <select id="languageSelector" onchange="changeLanguage()">
-                        <option value="en">English</option>
-                        <option value="ar">العربية</option>
-                    </select>
+                <div class="language-selector" onclick="toggleLanguage()">
+                    <span id="languageText">العربية</span>
                 </div>
+                
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -940,9 +941,9 @@
                 manufacturingDescription: "Tested and validated in real-world industrial settings",
                 teamTitle: "The Team",
                 teamDescription: "We are the first EMEA-native pricing solution designed specifically for the process manufacturing industry.",
-                kamalBio: "Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master’s degree in International Business(Shivaji University), a Bachelor’s degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).<br><br> Spoken languages: Hindi, English",
-                michaelBio: "Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree.<br><br> Spoken languages: French, German, English, Arabic",
-                andrzejBio: "Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology.<br><br> Spoken languages: Polish, English.",
+                kamalBio: "Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master’s degree in International Business(Shivaji University), a Bachelor’s degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business). Spoken languages: Hindi, English",
+                michaelBio: "Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree. Spoken languages: French, German, English, Arabic",
+                andrzejBio: "Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology. Spoken languages: Polish, English.",
                 demoTitle: "Request a Demo",
                 demoDescription: "A web link to the demo will be provided upon request.",
                 requestDemoBtn2: "Request Demo",
@@ -1042,8 +1043,9 @@
         // Function to change language
         function changeLanguage(lang = null) {
             if (!lang) {
-                lang = document.getElementById('languageSelector').value;
+                lang = document.documentElement.lang === 'en' ? 'ar' : 'en';
             }
+
 
             const elements = document.querySelectorAll('[id]');
             const navAnchors = document.querySelectorAll('.nav-links a');
@@ -1065,6 +1067,10 @@
                 anchor.textContent = anchor.getAttribute(langKey);
             });
 
+            // Change the language text
+            document.getElementById('languageText').textContent = lang === 'en' ? 'العربية' : 'English';
+
+            
             // Change the language attribute of the HTML tag
             document.documentElement.lang = lang;
 
@@ -1076,6 +1082,13 @@
                 document.body.style.direction = 'ltr';
                 document.body.style.textAlign = 'left';
             }
+        }
+
+        // Function to toggle language
+        function toggleLanguage() {
+            const currentLang = document.documentElement.lang;
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            changeLanguage(newLang);
         }
 
         // Function to detect user's country and set language
