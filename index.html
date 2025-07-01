@@ -100,12 +100,12 @@
 
         /* Language selector */
         .language-selector {
-        margin-left: auto;
-        margin-right: 20px;
-        cursor: pointer;
-        color: var(--primary);
-        font-weight: 500;
-         }   
+            margin-left: auto;
+            margin-right: 20px;
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 500;
+        }   
 
         .language-selector select {
             padding: 8px;
@@ -130,7 +130,7 @@
             font-size: 20px;
             color: var(--gray);
             max-width: 800px;
-            margin: 0 auto 40px;
+            margin: 0 auto 200px;
         }
 
         .btn {
@@ -222,6 +222,22 @@
         }
 
         .feature-card:hover .feature-img img {
+            transform: scale(1.1);
+        }
+
+        .feature-img1 {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .feature-img1 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .feature-card:hover .feature-img1 img {
             transform: scale(1.1);
         }
 
@@ -510,6 +526,7 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <ul class="nav-links" id="navLinks">
+                    <li><a href="#introduction" data-en="Introduction" data-ar="مقدمة">Introduction</a></li>
                     <li><a href="#about" data-en="About" data-ar="عن">About</a></li>
                     <li><a href="#solution" data-en="Solution" data-ar="الحل">Solution</a></li>
                     <li><a href="#benefits" data-en="Benefits" data-ar="الفوائد">Benefits</a></li>
@@ -525,10 +542,29 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 id="heroTitle">Automate and improve your Pricing & Quoting Process</h1>
-            <p id="heroDescription">Pricera is a SaaS CPQ software solution designed to transform the way B2B manufacturing industries, particularly process manufacturing sectors, handle pricing and quoting.</p>
+            <h1 id="heroTitle">Improve your Pricing & Quoting Process</h1>
+            <p id="heroDescription">Pricera is a SaaS pricing software solution designed to transform the way B2B manufacturing industries, particularly process manufacturing sectors, handle pricing and quoting.</p>
             <a href="#contact" class="btn" id="getStartedBtn">Get Started</a>
             <a href="#demo" class="btn btn-outline" id="requestDemoBtn">Request Demo</a>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section id="introduction" class="features">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-img1">
+                        <img src="images/CPQ.svg" alt="Pricera automation dashboard">
+                    </div>
+                </div>
+            </div>
+            <div class="section-title">
+                <h2 id="introTitle">Improve Pricing, Capture More Value</h2>
+                <p id="introDescription">A good price is one that extracts the maximum value from a transaction —tailored to product specifics, customer willingness to pay, and market dynamics.<br> <b>The more value a price captures, the more complex the pricing strategy needs to be.</b>
+                <br><br> <b>Most companies leave money on the table because their tools can't handle complexity.</b> They're forced to resort to simplistic pricing methods: flat rates, spreadsheets, or basic CRM rules that ignore nuanced variables like product specs, customer segments, and real-time costs.
+                <br><br> Our pricing software solution breaks through technical or organization limitations, enabling dynamic, transparent and AI-driven pricing. The result? More value extraction and maximum profitability.</p>
+            </div>
         </div>
     </section>
 
@@ -677,11 +713,10 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" alt="Advanced Technology">
-                    </div>
+                        <img src="images/affordable.svg" alt="Lightweight Solution"></div>
                     <div class="feature-content">
-                        <h3 id="advancedTechnologyTitle">Advanced Technology</h3>
-                        <p id="advancedTechnologyDescription">The AI and machine learning features enable businesses to optimize pricing strategies and support continuous improvement.</p>
+                        <h3 id="advancedTechnologyTitle">Affordable Innovation</h3>
+                        <p id="advancedTechnologyDescription">We've made pricing automation affordable, so even mid-sized manufacturers can compete with the best—not just big corporations.</p>
                     </div>
                 </div>
             </div>
@@ -696,7 +731,6 @@
                 <p id="validationDescription"></p>
             </div>
             <div class="feature-grid">
-
                 <div class="feature-card">
                     <div class="feature-img">
                         <img src="images/manufacturing.jpg" alt="manufacturing">
@@ -721,7 +755,6 @@
                         <p id="antlerDescription">Selected by Antler – program 2024</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -738,7 +771,7 @@
                     <img src="images/Kamal.jpg" alt="Karim Chamas">
                     <h3>Kamal Nariani</h3>
                     <p class="position">CSO</p>
-                    <p class="bio" id="kamalBio">Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master’s degree in International Business(Shivaji University), a Bachelor’s degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).
+                    <p class="bio" id="kamalBio">Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master's degree in International Business(Shivaji University), a Bachelor's degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).
                     <br><br> Spoken languages: Hindi, English</p>
                 </div>
                 <div class="team-member">
@@ -894,20 +927,22 @@
             }
         });
 
-        // Language translations
+        // Translation object
         const translations = {
             en: {
                 logoSrc: "images/logo.png",
-                heroTitle: "Transform Your Pricing & Quoting Process",
-                heroDescription: "Pricera is a SaaS CPQ software solution designed to transform the way B2B manufacturing industries, particularly process manufacturing sectors, handle pricing and quoting.",
+                heroTitle: "Improve your Pricing & Quoting Process",
+                heroDescription: "Pricera is a SaaS pricing software solution designed to transform the way B2B manufacturing industries, particularly process manufacturing sectors, handle pricing and quoting.",
                 getStartedBtn: "Get Started",
                 requestDemoBtn: "Request Demo",
+                introTitle: "Improve Pricing, Capture More Value",
+                introDescription: "A good price is one that extracts the maximum value from a transaction —tailored to product specifics, customer willingness to pay, and market dynamics.<br> <b>The more value a price captures, the more complex the pricing strategy needs to be.</b><br><br> <b>Most companies leave money on the table because their tools can't handle complexity.</b> They're forced to resort to simplistic pricing methods: flat rates, spreadsheets, or basic CRM rules that ignore nuanced variables like product specs, customer segments, and real-time costs.<br><br> Our pricing software solution breaks through technical or organization limitations, enabling dynamic, transparent and AI-driven pricing. The result? More value extraction and maximum profitability.",
                 aboutTitle: "Pricing Complexity of the Process Industry",
                 aboutDescription: "Process manufacturing industries face unique challenges when it comes to pricing.",
                 pricingChallengesTitle: "Pricing Challenges",
                 pricingChallengesDescription: "Companies face increasing pricing complexity due to raw material volatility, adoption of indexed and value-based pricing, intricate pricing equations, and misalignment across siloed teams.",
                 customizedProductsTitle: "Customized Products",
-                customizedProductsDescription: "In addition to standard and commoditized products—which can themselves be challenging to price—these sectors also deal with customized items adding further complexity to the quoting process, spot or longterm",
+                customizedProductsDescription: "In addition to standard and commoditized products—which can themselves be challenging to price—these sectors also deal with customized items adding further complexity to the quoting process, spot or longterm.",
                 operationalImpactTitle: "Operational Impact",
                 operationalImpactDescription: "These challenges lead to time-consuming and error-prone quotations, lost sales, margin erosion, and inefficient workflows that can consume up to 50% of sales resources.",
                 solutionTitle: "How We Solve It",
@@ -932,18 +967,18 @@
                 processIndustrySpecificDescription: "Pricera specializes in the $7 trillion process manufacturing sector - an underserved market where traditional pricing solutions fail to address the extreme complexity of industrial pricing dynamics.",
                 lightweightSolutionTitle: "Lightweight Solution",
                 lightweightSolutionDescription: "Unlike bulky, one-size-fits-all solutions, Pricera is designed to handle the intricate pricing models of process manufacturing without requiring heavy configurations or disrupting existing sales practices.",
-                advancedTechnologyTitle: "Advanced Technology",
-                advancedTechnologyDescription: "The AI and machine learning features enable businesses to optimize pricing strategies and support continuous improvement.",
-                validationTitle: "Proven in Real-World Industrial Settings",
+                advancedTechnologyTitle: "Affordable Innovation",
+                advancedTechnologyDescription: "We've made pricing automation affordable, so even mid-sized manufacturers can compete with the best—not just big corporations.",
+                validationTitle: "From Complexity to Profit: Documented Sales and Profits Boost",
                 validationDescription: "",
                 websummitDescription: "Featured Startup at Web Summit 2025",
-                antlerDescription: "Selected by Antler – Cohort participant & program graduate 2024",
-                manufacturingDescription: "Tested and validated in real-world industrial settings",
+                antlerDescription: "Selected by Antler – program 2024",
+                manufacturingDescription: "Tested and validated in real-world industrial settings, including Metal Processing, Extrusion, Wood Processing, and Painting.",
                 teamTitle: "The Team",
                 teamDescription: "We are the first EMEA-native pricing solution designed specifically for the process manufacturing industry.",
-                kamalBio: "Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master’s degree in International Business(Shivaji University), a Bachelor’s degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business). Spoken languages: Hindi, English",
-                michaelBio: "Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree. Spoken languages: French, German, English, Arabic",
-                andrzejBio: "Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology. Spoken languages: Polish, English.",
+                kamalBio: "Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master's degree in International Business(Shivaji University), a Bachelor's degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).<br><br> Spoken languages: Hindi, English",
+                michaelBio: "Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree.<br><br> Spoken languages: French, German, English, Arabic",
+                andrzejBio: "Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology.<br><br> Spoken languages: Polish, English.",
                 demoTitle: "Request a Demo",
                 demoDescription: "A web link to the demo will be provided upon request.",
                 requestDemoBtn2: "Request Demo",
@@ -973,6 +1008,8 @@
                 heroDescription: "Pricera هو حل برمجي SaaS CPQ مصمم لتحويل طريقة تعامل صناعات التصنيع B2B، وخاصة قطاعات التصنيع العملية، مع التسعير والموافقة.",
                 getStartedBtn: "البدء",
                 requestDemoBtn: "طلب عرض توضيحي",
+                introTitle: "حسّن التسعير، وحقق أقصى قيمة",
+                introDescription: "السعر الجيد هو الذي يستخرج أقصى قيمة من الصفقة — مُصمم خصيصًا وفقًا لخصائص المنتج، واستعداد العميل للدفع، وديناميكيات السوق.<br> <b>كلما زادت القيمة التي يلتقطها السعر، زادت الحاجة إلى استراتيجية تسعير معقدة.</b><br><br> <b>تترك معظم الشركات المال على الطاولة لأن أدواتها لا تستطيع التعامل مع التعقيد.</b> فتضطر لاستخدام طرق تسعير مبسطة: أسعار ثابتة، جداول Excel، أو قواعد أساسية في أنظمة إدارة العلاقات مع العملاء، تتجاهل متغيرات دقيقة مثل مواصفات المنتج، شرائح العملاء، والتكاليف الفعلية في الوقت الحقيقي.<br><br> برنامجنا لحلول التسعير يتجاوز القيود التقنية أو التنظيمية، مما يمكّنك من تسعير ديناميكي وشفاف ومدعوم بالذكاء الاصطناعي. والنتيجة؟ استخلاص قيمة أكبر وتحقيق أقصى ربحية.",
                 aboutTitle: "تعقيد التسعير في صناعة العمليات",
                 aboutDescription: "تواجه صناعات التصنيع العملية تحديات فريدة عندما يتعلق الأمر بالتسعير.",
                 pricingChallengesTitle: "تحديات التسعير",
@@ -1003,8 +1040,8 @@
                 processIndustrySpecificDescription: "Pricera متخصص في قطاع تصنيع العمليات بقيمة 7 تريليون دولار - سوق غير مُخدم بشكل كافٍ حيث تفشل الحلول التقليدية للتسعير في معالجة التعقيد الشديد لديناميات تسعير الصناعة.",
                 lightweightSolutionTitle: "حل خفيف",
                 lightweightSolutionDescription: "على عكس الحلول الضخمة التي تناسب الجميع، تم تصميم Pricera للتعامل مع نماذج التسعير المعقدة لتصنيع العمليات دون الحاجة إلى تكيفات ثقيلة أو تعطيل الممارسات المبيعات الحالية.",
-                advancedTechnologyTitle: "تكنولوجيا متقدمة",
-                advancedTechnologyDescription: "ميزات الذكاء الاصطناعي والتعلم الآلي تمكن الشركات من تحسين استراتيجيات التسعير ودعم التحسين المستمر.",
+                advancedTechnologyTitle: "ابتكار ميسور التكلفة",
+                advancedTechnologyDescription: "لقد جعلنا أتمتة التسعير في متناول الجميع، حتى يتمكن المصنعون متوسّطو الحجم من المنافسة مع الأفضل، وليس فقط مع الشركات الكبرى.",
                 validationTitle: "معترف به من قبل قادة الصناعة",
                 validationDescription: "",
                 websummitDescription: "شركة ناشئة مميزة في قمة الويب 2025",
@@ -1046,7 +1083,6 @@
                 lang = document.documentElement.lang === 'en' ? 'ar' : 'en';
             }
 
-
             const elements = document.querySelectorAll('[id]');
             const navAnchors = document.querySelectorAll('.nav-links a');
 
@@ -1057,7 +1093,11 @@
             elements.forEach(element => {
                 const id = element.getAttribute('id');
                 if (translations[lang][id]) {
-                    element.textContent = translations[lang][id];
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][id];
+                    } else {
+                        element.innerHTML = translations[lang][id];
+                    }
                 }
             });
 
@@ -1069,7 +1109,6 @@
 
             // Change the language text
             document.getElementById('languageText').textContent = lang === 'en' ? 'العربية' : 'English';
-
             
             // Change the language attribute of the HTML tag
             document.documentElement.lang = lang;
@@ -1091,53 +1130,8 @@
             changeLanguage(newLang);
         }
 
-        // Function to detect user's country and set language
-        function detectCountryAndSetLanguage() {
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    const country = data.country;
-                    // Map countries to languages
-                    const countryToLanguage = {
-                        'SA': 'ar', // Saudi Arabia
-                        'EG': 'ar', // Egypt
-                        'AE': 'ar', // United Arab Emirates
-                        'DZ': 'ar', // Algeria
-                        'BH': 'ar', // Bahrain
-                        'COM': 'ar', // Comoros
-                        'DJ': 'ar', // Djibouti
-                        'EG': 'ar', // Egypt
-                        'IQ': 'ar', // Iraq
-                        'JO': 'ar', // Jordan
-                        'KW': 'ar', // Kuwait
-                        'LB': 'ar', // Lebanon
-                        'LY': 'ar', // Libya
-                        'MR': 'ar', // Mauritania
-                        'MA': 'ar', // Morocco
-                        'OM': 'ar', // Oman
-                        'PS': 'ar', // Palestine
-                        'QA': 'ar', // Qatar
-                        'SA': 'ar', // Saudi Arabia
-                        'SO': 'ar', // Somalia
-                        'SD': 'ar', // Sudan
-                        'SY': 'ar', // Syria
-                        'TN': 'ar', // Tunisia
-                        'AE': 'ar', // United Arab Emirates
-                        'YE': 'ar'  // Yemen
-                    };
-
-                    // Set language based on country
-                    const lang = countryToLanguage[country] || 'en';
-                    document.getElementById('languageSelector').value = lang;
-                    changeLanguage(lang);
-                })
-                .catch(error => {
-                    console.error('Error detecting country:', error);
-                });
-        }
-
-        // Call the function to detect country and set language
-        detectCountryAndSetLanguage();
+        // Initialize with English language
+        changeLanguage('en');
     </script>
 </body>
 </html>
