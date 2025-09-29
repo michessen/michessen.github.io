@@ -130,7 +130,7 @@
             font-size: 20px;
             color: var(--gray);
             max-width: 800px;
-            margin: 0 auto 200px;
+            margin: 0 auto 20px;  /* reduce from 200px to something smaller */
         }
 
         .btn {
@@ -277,13 +277,13 @@
         }
 
         .team-member img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 5px solid var(--light-gray);
-        }
+        width: 300px;            /* scale width */
+        height: auto;            /* keep natural proportions */
+        border-radius: 15px;     /* same rounded corners as your file */
+        margin-bottom: 20px;
+
+        object-fit: contain;     /* make sure it fits fully if container restricts */
+}
 
         .team-member h3 {
             font-size: 20px;
@@ -555,7 +555,7 @@
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-img1">
-                        <img src="images/CPQ.svg" alt="Pricera automation dashboard">
+                        <img src="images/hook.png" alt="Pricera automation dashboard">
                     </div>
                 </div>
             </div>
@@ -767,38 +767,54 @@
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section id="team" class="team">
-        <div class="container">
-            <div class="section-title">
-                <h2 id="teamTitle">The Team</h2>
-                <p id="teamDescription">We are the first EMEA-native pricing solution designed specifically for the process manufacturing industry.</p>
-            </div>
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="images/Kamal.jpg" alt="Karim Chamas">
-                    <h3>Kamal Nariani</h3>
-                    <p class="position">CSO</p>
-                    <p class="bio" id="kamalBio">Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master's degree in International Business(Shivaji University), a Bachelor's degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).
-                    <br><br> Spoken languages: Hindi, English</p>
-                </div>
-                <div class="team-member">
-                    <img src="images/mic.jpeg" alt="Michael Hoffmann">
-                    <h3>Michael Hoffmann</h3>
-                    <p class="position">CEO</p>
-                    <p class="bio" id="michaelBio">Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree.
-                    <br><br> Spoken languages: French, German, English, Arabic</p>
-                </div>
-                <div class="team-member">
-                    <img src="images/andre.jpg" alt="Kamal">
-                    <h3>Andrzej Rojek</h3>
-                    <p class="position">CTO</p>
-                    <p class="bio" id="andrzejBio">Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology.
-                    <br><br> Spoken languages: Polish, English.</p>
-                </div>
-            </div>
+ <!-- Team Section -->
+<section id="team" class="team">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="teamTitle">Our Team</h2>
+        <p id="teamDescription">We combine decades of experience in manufacturing, pricing, and enterprise software to build the first EMEA-native pricing solution tailored for the process industry.</p>
+      </div>
+      <div class="team-grid">
+        
+        <div class="team-member">
+          <img src="images/kamal white background.png" alt="Kamal Nariani">
+          <h3>Kamal Nariani</h3>
+          <p class="position">CMO</p>
+          <p class="bio" id="kamalBio">
+            With 20+ years in market consulting and strategic decision-making, Kamal specializes in commodity pricing and market dynamics. 
+            He has held leadership roles at QatarEnergy, QAPCO, and Dow Chemical.  
+            He holds a Master's in International Business (Shivaji University), a Bachelor's in Chemical Engineering (DAVV University), and studied Corporate Innovation at Carnegie Mellon’s Tepper School of Business.  
+            <br><br><strong>Languages:</strong> Hindi, English
+          </p>
         </div>
-    </section>
+        
+        <div class="team-member">
+          <img src="images/Michael- white background.png" alt="Michael Hoffmann">
+          <h3>Michael Hoffmann</h3>
+          <p class="position">CEO</p>
+          <p class="bio" id="michaelBio">
+            Michael, Founder & CEO, brings 20 years of experience in the manufacturing industry across plasturgy, metallurgy, and aerospace, in both engineering and sales. 
+            Experiencing pricing and quoting challenges firsthand, he created the foundations of Pricera.  
+            He holds an INSEAD MBA and an MSc in Engineering from ESIEE Paris.  
+            <br><br><strong>Languages:</strong> French, German, English, Arabic
+          </p>
+        </div>
+        
+        <div class="team-member">
+          <img src="images/andre white background.png" alt="Andrzej Rojek">
+          <h3>Andrzej Rojek</h3>
+          <p class="position">CTO</p>
+          <p class="bio" id="andrzejBio">
+            Andrzej, Co-founder & CTO, has led Mosaic Lab since 2007, delivering enterprise software in CRM, pricing, and ERP. 
+            His team builds system-agnostic, tailored CPQ and AI-driven solutions across industries, with expertise in mobile apps and enterprise integrations.  
+            Andrzej graduated from Wrocław University of Science and Technology.  
+            <br><br><strong>Languages:</strong> Polish, English
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
 
     <!-- Demo Section -->
     <section id="demo" class="features">
@@ -985,9 +1001,11 @@
                 manufacturingDescription: "Tested and validated in real-world industrial settings, including Metal Processing, Extrusion, Wood Processing, and Painting.",
                 teamTitle: "The Team",
                 teamDescription: "We are the first EMEA-native pricing solution designed specifically for the process manufacturing industry.",
-                kamalBio: "Kamal, CSO, has 25 years of experience in market consulting, strategic decision-making and economic modeling. He specializes in commodity pricing and market dynamics in the oil & gas sector and has held key roles at QatarEnergy, QAPCO, Dow Chemical. Kamal holds a Master's degree in International Business(Shivaji University), a Bachelor's degree in Chemical Engineering(DAVV University) and Corporate Innovation (Carnegie Mellon Teppers School of Business).<br><br> Spoken languages: Hindi, English",
-                michaelBio: "Michael Hoffmann, Founder and CEO, brings 20 years of experience in the manufacturing industry – plasturgy, metallurgy, aerospace across engineering and sales roles in Europe and Middle-East. Recognizing the pricing and quoting challenges firsthand in the process manufacturing industry, Michael developed the foundations of Pricera. He holds an INSEAD MBA and an ESIEE MSc Eng. degree.<br><br> Spoken languages: French, German, English, Arabic",
-                andrzejBio: "Andrzej Rojek, co-founder and CTO, leads the Mosaic Lab software development team specialized in custom CRM, pricing, and ERP solutions since 2007. With expertise across multiple platforms and CPQs, they deliver tailored, system-agnostic solutions that best meet client needs. They also excel in mobile app and AI development, driving innovation across industries. Andrzej graduated from the Wrocław University of Science and Technology.<br><br> Spoken languages: Polish, English.",
+                kamalBio: "            With 20+ years in market consulting and strategic decision-making, Kamal specializes in commodity pricing and market dynamics.  He has held leadership roles at QatarEnergy, QAPCO, and Dow Chemical.  He holds a Master's in International Business (Shivaji University), a Bachelor's in Chemical Engineering (DAVV University), and studied Corporate Innovation at Carnegie Mellon’s Tepper School of Business. ",
+
+                michaelBio: "            Michael, Founder & CEO, brings 20 years of experience in the manufacturing industry across plasturgy, metallurgy, and aerospace, in both engineering and sales. Experiencing pricing and quoting challenges firsthand, he created the foundations of Pricera.  He holds an INSEAD MBA and an MSc in Engineering from ESIEE Paris.  ",
+
+                andrzejBio: "            Andrzej, Co-founder & CTO, has led Mosaic Lab since 2007, delivering enterprise software in CRM, pricing, and ERP. His team builds system-agnostic, tailored CPQ and AI-driven solutions across industries, with expertise in mobile apps and enterprise integrations.  Andrzej graduated from Wrocław University of Science and Technology.  ",
                 demoTitle: "Request a Demo",
                 demoDescription: "A web link to the demo will be provided upon request.",
                 requestDemoBtn2: "Request Demo",
