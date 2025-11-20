@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricera - Smart Pricing & Quoting Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #06b6d4;
+            --text-primary: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.6);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #0891b2;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid var(--accent);
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Section */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: var(--text-muted);
+            stroke-width: 1.5;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Differentiators */
+        .differentiators-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .diff-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(20, 27, 46, 0.5) 100%);
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            transition: all 0.4s;
+        }
+
+        .diff-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        
+
+        .diff-card h3 {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .diff-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Industries */
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .industry-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.4s;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .industry-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(30, 41, 59, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            transition: all 0.4s;
+        }
+
+        .industry-card:hover .industry-image {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.3) 0%, rgba(30, 41, 59, 0.9) 100%);
+        }
+
+        .industry-content {
+            padding: 24px;
+        }
+
+        .industry-content h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .industry-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .industry-examples {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .industry-examples li {
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .industry-examples li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Demo Section */
+        .demo-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .demo-card {
+    overflow: visible;  /* Changed from hidden - allows video to expand */
+    position: relative;
+}
+
+.demo-card video {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;  /* Needed for z-index to work */
+}
+
+.demo-card:hover video {
+    transform: scale(1.4);  /* Enlarges beyond container */
+    z-index: 100;  /* Brings video to front */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+        .demo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(30, 41, 59, 0.5) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: var(--text-muted);
+        }
+
+        .demo-content {
+            padding: 24px;
+        }
+
+        .demo-content h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .demo-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Recognition */
+        .recognition-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .recognition-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s;
+            min-height: 120px;
+        }
+
+        .recognition-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .recognition-card img {
+            max-width: 100%;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.4s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+
+        .team-card:hover .team-photo {
+            transform: scale(1.05);
+        }
+
+        .team-photo {
+    width: 300px;
+    height: 185px;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: all 0.4s;
+    margin: 0 auto 20px auto;
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+}
+
+        .team-info {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .team-info h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .team-role {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .team-bio {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(30, 41, 59, 0.5) 100%);
+            border-radius: 16px;
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .cta-section h2 {
+            font-size: 40px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .footer-about p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .footer-section p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer-disclaimer {
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            padding-top: 32px;
+            margin-top: 32px;
+        }
+
+        .footer-disclaimer h4 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .footer-disclaimer p {
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .footer-disclaimer ul {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .footer-disclaimer li {
+            color: var(--text-muted);
+            font-size: 12px;
+            padding: 4px 0;
+        }
+
+        .footer-disclaimer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer-disclaimer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .stats { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .differentiators-grid { grid-template-columns: 1fr; }
+            .industries-grid { grid-template-columns: 1fr; }
+            .demo-showcase { grid-template-columns: 1fr; }
+            .recognition-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <img src="pricera_logo.png" alt="Pricera" class="logo">
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#industries">Industries</a>
+                <a href="#team">Team</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1>Smart Pricing & Quoting<br>for Every Complex Industry</h1>
+                <p class="hero-subtitle">From millions of SKUs in retail to complex on-demand calculations in manufacturing — replacing hundreds of spreadsheets that create sales bottlenecks. One platform that scales with your business.</p>
+                
+
+
+                <div class="stats">
+
+                    <div class="stat-item">
+                        <span class="stat-value">90%</span>
+                        <span class="stat-label">Faster Quoting(*)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">30%</span>
+                        <span class="stat-label">Revenue Increase(*)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">10%</span>
+                        <span class="stat-label">Profit Margin Gain(*)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Showcase -->
+        <section style="background: rgba(0,0,0,0.2);" id="demo">
+            <div class="container">
+                <div class="demo-showcase">
+                    <div class="demo-card">
+                        <video loop muted playsinline>
+                        <source src="demomanus-config.webm" type="video/webm"></video>
+                        <div class="demo-content">
+                            <h3>Smart Configurator</h3>
+                            <p>Guided product configuration with instant price updates</p>
+                        </div>
+                    </div>
+
+
+                    <div class="demo-card">
+                        <video loop muted playsinline>
+                            <source src="demomanus-pricing.webm" type="video/webm"></video>
+                        <div class="demo-content">
+                            <h3>Dynamic Pricing Engine</h3>
+                            <p>Modular pricing tree with visual interface and smart parsing to speed up pricing model creation. Real-time calculations with nested formulas and live cost data.</p>
+                        </div>
+                    </div>
+
+                    <div class="demo-card">
+                        <video loop muted playsinline>
+                            <source src="quote.webm" type="video/webm"></video>
+                        <div class="demo-content">
+                            <h3>Smart Quote Generation</h3>
+                            <p>Instantly generate customer-ready quotations with governed templates, embedded pricing logic, and built-in approval workflows. Fast, consistent, and always compliant with your commercial rules.</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Built for Scale & Complexity</h2>
+                    <p class="section-subtitle">Whether you manage millions of price points or complex custom calculations, Pricera adapts to your needs</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" stroke-linejoin="round" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Lightning-Fast Performance</h3>
+                        <p>Handle millions of SKUs and price books with instant query response times</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/>
+                                <text x="2" y="10" font-size="8" fill="currentColor" stroke="none">f(x)</text>
+                            </svg>
+                        </div>
+                        <h3>Complex Formula Engine</h3>
+                        <p>Build sophisticated pricing logic with nested formulas, indices, and real-time cost factors</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="3"/>
+                                <circle cx="6" cy="6" r="2"/>
+                                <circle cx="18" cy="6" r="2"/>
+                                <circle cx="6" cy="18" r="2"/>
+                                <circle cx="18" cy="18" r="2"/>
+                                <line x1="12" y1="9" x2="6" y2="6"/>
+                                <line x1="12" y1="9" x2="18" y2="6"/>
+                                <line x1="12" y1="15" x2="6" y2="18"/>
+                                <line x1="12" y1="15" x2="18" y2="18"/>
+                            </svg>
+                        </div>
+                        <h3>AI & Machine Learning</h3>
+                        <p>Optimize pricing strategies automatically based on historical data and market conditions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Differentiators -->
+        <section style="background: rgba(0,0,0,0.2);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Why Pricera is Different</h2>
+                    <p class="section-subtitle">A challenger that natively addresses the most complex pricing needs instead of building layers of complexity on legacy solutions</p>
+                </div>
+
+                <div class="differentiators-grid">
+                    <div class="diff-card">
+                        <h3>Smart, Native AI Integration</h3>
+                        <p>Non-intrusive use of AI that complies with B2B industrial requirements. Our AI enhances decision-making without disrupting established workflows or compromising data governance.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>Millions of Auditable Calculations</h3>
+                        <p>Complete transparency and traceability for every pricing decision. Full audit trails ensure compliance with industrial standards and regulatory requirements across all sectors.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>Zero Disruption Implementation</h3>
+                        <p>Our pricing engine replicates even the most complex pricing models. The tool adapts to your company's processes — not the other way around. No business disruption, just enhanced capabilities.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>Easy to Use & Affordable</h3>
+                        <p>Intuitive interface designed for sales teams, not just IT specialists. Accessible pricing for both large enterprises and medium-sized companies — democratizing advanced pricing capabilities for all.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>True Value-Based & Cost-Based Pricing in One</h3>
+                        <p>Most solutions force companies into rigid cost-plus formulas or static price books. Pricera supports both value-based and cost-based pricing — and any hybrid in between. Model willingness-to-pay, competitive benchmarks, cost structures, and commercial rules in one unified, dynamic formula engine.</p>
+                    </div>
+
+                    <div class="diff-card">
+                        <h3>Built for Both Spot Deals & Long-Term Agreements</h3>
+                        <p>Pricera handles fast-moving spot prices and structured long-term agreements with equal ease. Update cost drivers, indices, and formulas in real time for spot quotes, while maintaining governed, versioned pricing models for LTAs. No duplication, no parallel systems — one engine for both worlds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industries -->
+        <section id="industries">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Cross-Industry Excellence</h2>
+                    <p class="section-subtitle">Trusted by businesses across diverse sectors</p>
+                </div>
+
+                <div class="industries-grid">
+                    <div class="industry-card">
+                        <img src="industry_retail_clean.png" alt="Retail & E-commerce" class="industry-image">
+                        <div class="industry-content">
+                            <h3>Retail & E-commerce</h3>
+                            <p>Millions of SKUs, dynamic promotions, multi-channel pricing</p>
+                            <ul class="industry-examples">
+                                <li>Consumer Electronics</li>
+                                <li>Fashion & Apparel</li>
+                                <li>Grocery & FMCG</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="industry-card">
+                        <img src="industry_process.png" alt="Retail & E-commerce" class="industry-image">
+                        <div class="industry-content">
+                            <h3>Process Manufacturing</h3>
+                            <p>Complex formulas, raw material indices, custom specifications</p>
+                            <ul class="industry-examples">
+                                <li>Metals & Mining</li>
+                                <li>Painting & Coating</li>
+                                <li>Chemicals</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="industry-card">
+                        <img src="industry_component.png" alt="Retail & E-commerce" class="industry-image">
+                        <div class="industry-content">
+                            <h3>Component Manufacturing</h3>
+                            <p>Configurable products, volume discounts, technical specifications</p>
+                            <ul class="industry-examples">
+                                <li>Automotive Parts</li>
+                                <li>Electronics Components</li>
+                                <li>Industrial Equipment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="industry-card">
+                        <img src="industry_services_v2.png" alt="Retail & E-commerce" class="industry-image">
+                        <div class="industry-content">
+                            <h3>Professional Services</h3>
+                            <p>Time-based pricing, resource allocation, project quoting</p>
+                            <ul class="industry-examples">
+                                <li>Engineering Services</li>
+                                <li>IT Consulting</li>
+                                <li>Project Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recognition -->
+        <section style="background: rgba(0,0,0,0.2);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Recognized Excellence</h2>
+                </div>
+
+                <div class="recognition-grid">
+                    <div class="recognition-card">
+                        <img src="recognition_impact.png" alt="INSEAD AI Venture Lab">
+                    </div>                  
+                    <div class="recognition-card">
+                        <img src="insead_logo.png" alt="INSEAD AI Venture Lab">
+                    </div>
+                    <div class="recognition-card">
+                        <img src="websummit_logo.png" alt="Web Summit">
+                    </div>
+                    <div class="recognition-card">
+                        <img src="antler_logo.png" alt="Antler">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section id="team">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Meet the Team</h2>
+                    <p class="section-subtitle">Built and tested by sales veterans who deeply understand pricing challenges from the frontlines</p>
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="kamal_nariani.png" alt="Kamal Nariani">
+                        </div>
+                        <div class="team-info">
+                            <h3>Kamal Nariani</h3>
+                            <span class="team-role">CMO</span>
+                            <p class="team-bio">20+ years in market consulting and strategic decision-making. Specializes in commodity pricing and market dynamics. Former leadership at QatarEnergy, QAPCO, and Dow Chemical.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="michael_hoffmann.png" alt="Michael Hoffmann">
+                        </div>
+                        <div class="team-info">
+                            <h3>Michael Hoffmann</h3>
+                            <span class="team-role">CEO</span>
+                            <p class="team-bio">20 years in manufacturing across plasturgy, metallurgy, and aerospace in engineering and sales. Experienced pricing bottlenecks firsthand and created Pricera to solve them. INSEAD MBA.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <img src="andrzej_rojek.png" alt="Andrzej Rojek">
+                        </div>
+                        <div class="team-info">
+                            <h3>Andrzej Rojek</h3>
+                            <span class="team-role">CTO</span>
+                            <p class="team-bio">Leading Mosaic Lab since 2007, delivering enterprise software in CRM, pricing, and ERP. Builds system-agnostic CPQ and AI-driven solutions with expertise in enterprise integrations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section>
+            <div class="container">
+                <div class="cta-section">
+                    <h2>Ready to Transform Your Pricing?</h2>
+                    <p>See how Pricera can reduce quote time and increase revenue through intelligent pricing</p>
+                    <div class="cta-buttons">
+                        <a href="mailto:info@pricera.site" class="btn-secondary">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>Pricera</h3>
+                    <p>Intelligent pricing and quoting platform for complex industries. From millions of SKUs to sophisticated on-demand calculations.</p>
+                    <p><strong>Email:</strong> info@pricera.site</p>
+                    <p><strong>Locations:</strong> Pricera LLC, Doha, Essen, Paris</p>  
+                    <p><strong></strong> Level 21, Doha Tower, West Bay</p>             
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#industries">Industries</a></p>
+
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <p><a href="#team">Team</a></p>
+                    <p><a href="https://www.pricera.site">About</a></p>
+                    <p><a href="mailto:info@pricera.site">Contact</a></p>
+                </div>
+            </div>
+
+            <div class="footer-disclaimer">
+                <h4>Performance Claims & References</h4>
+                <p><strong>Up to 90% Faster Quoting:</strong> Based on internal analysis of process manufacturing companies where pricing complexity creates sales bottlenecks. Time savings vary by industry and implementation scope.</p>
+                <p><strong>Up to 30% Revenue Increase:</strong> Potential revenue uplift in industries with complex pricing strategies, based on pricing optimization best practices documented by leading consulting firms including McKinsey & Company's research on B2B pricing excellence.</p>
+                <p><strong>Up to 10% Profit Margin Gain:</strong> Estimated margin improvement through optimized pricing models and reduced pricing errors. Industry research shows dynamic pricing delivers 5-10% average profit margin improvement, with documented range of 5-20% depending on implementation complexity and industry.</p>
+                
+                <p style="margin-top: 16px;"><strong>Industry References:</strong></p>
+                <ul>
+                    <li>McKinsey & Company: "Pricing Excellence in B2B" - <a href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-power-of-pricing" target="_blank">mckinsey.com</a></li>
+                    <li>Zilliant: "The State of B2B Pricing" - <a href="https://www.zilliant.com" target="_blank">zilliant.com</a></li>
+                    <li>Internal customer case studies available upon request</li>
+                </ul>
+
+                <p style="margin-top: 16px; font-style: italic;">Results may vary based on company size, industry, implementation scope, and existing pricing infrastructure. Performance metrics are estimates and not guaranteed outcomes.</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pricera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.demo-card video').forEach(video => {
+            video.parentElement.addEventListener('mouseenter', () => {
+                video.play();
+            });
+            
+            video.parentElement.addEventListener('mouseleave', () => {
+                video.pause();
+                // Don't reset - video stays at current position
+            });
+        });
+    </script>
+    
+    
+    
+</body>
+</html>
