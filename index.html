@@ -381,32 +381,85 @@
         }
 
         /* Demo Section */
+        /* Demo Flow Wrapper */
+        .demo-flow-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 1px;
+            flex-wrap: nowrap;
+        }
+
+        /* Side containers (Lead and Order) */
+        .side-container {
+            flex: 0 0 90px;
+            min-width: 90px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1.5px solid #475569;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .side-container h3 {
+            font-size: 16px;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        /* Chevron arrows */
+        .chevron {
+            flex: 0 0 40px;
+            min-width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chevron svg {
+            width: 32px;
+            height: 32px;
+            fill: #06b6d4;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.5));
+        }
+
+        /* Original demo showcase grid */
         .demo-showcase {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+            flex: 1;
+            max-width: 2000px;
         }
 
         .demo-card {
-    overflow: visible;  /* Changed from hidden - allows video to expand */
-    position: relative;
-}
+            overflow: visible;
+            position: relative;
+            background: rgba(30, 41, 59, 0.7);
+            border: 2px solid #06b6d4;
+            border-radius: 12px;
+        }
 
-.demo-card video {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    position: relative;  /* Needed for z-index to work */
-}
+        .demo-card video {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
 
-.demo-card:hover video {
-    transform: scale(1.4);  /* Enlarges beyond container */
-    z-index: 100;  /* Brings video to front */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-}
+        .demo-card:hover video {
+            transform: scale(1.3);
+            z-index: 100;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        }
 
         .demo-placeholder {
             width: 100%;
@@ -426,12 +479,22 @@
         .demo-content h3 {
             font-size: 18px;
             margin-bottom: 8px;
-            color: var(--text-primary);
+            color: #22d3ee;
         }
 
         .demo-content p {
-            color: var(--text-muted);
+            color: #94a3b8;
             font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .flow-label {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #06b6d4;
+            font-style: italic;
+            opacity: 0.7;
         }
 
         /* Recognition */
@@ -672,6 +735,30 @@
         }
 
         /* Responsive */
+        @media (max-width: 1400px) {
+            .demo-flow-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .side-container {
+                width: 100%;
+                max-width: 400px;
+                min-height: 80px;
+            }
+
+            .chevron {
+                transform: rotate(90deg);
+                height: 40px;
+            }
+
+            .demo-showcase {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                width: 100%;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
             .stats { grid-template-columns: 1fr; }
@@ -727,38 +814,68 @@
         <!-- Demo Showcase -->
         <section style="background: rgba(0,0,0,0.2);" id="demo">
             <div class="container">
-                <div class="demo-showcase">
-                    <div class="demo-card">
-                        <video loop muted playsinline>
-                        <source src="demomanus-config.webm" type="video/webm"></video>
-                        <div class="demo-content">
-                            <h3>Smart Configurator</h3>
-                            <p>Guided product configuration with instant price updates</p>
+                <h2 class="section-title" style="text-align: center; margin-bottom: 60px;">See Pricera in Action</h2>
+                
+                <div class="demo-flow-wrapper">
+                    <!-- Lead Generation Container -->
+                    <div class="side-container">
+                        <h3>Customer Request</h3>
+                    </div>
+
+                    <!-- Chevron -->
+                    <div class="chevron">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Original 3 Demo Cards -->
+                    <div class="demo-showcase">
+                        <div class="demo-card">
+                            <video loop muted playsinline>
+                                <source src="demomanus-config.webm" type="video/webm">
+                            </video>
+                            <div class="demo-content">
+                                <h3>Smart Configurator</h3>
+                                <p>Bidirectional rule updates with instant pricing. GenAI and ML use natural-language inputs and historical data to prefill configurations and reduce manual work.  </p>
+                            </div>
+                        </div>
+
+                        <div class="demo-card">
+                            <video loop muted playsinline>
+                                <source src="demomanus-pricing.webm" type="video/webm">
+                            </video>
+                            <div class="demo-content">
+                                <h3>Dynamic Pricing Engine</h3>
+                                <p>Modular pricing tree with visual interface and smart parsing to speed up pricing model creation. Real-time calculations with nested formulas and dynamic data.</p>
+                            </div>
+                        </div>
+
+                        <div class="demo-card">
+                            <video loop muted playsinline>
+                                <source src="quote.webm" type="video/webm">
+                            </video>
+                            <div class="demo-content">
+                                <h3>Smart Quote Generation</h3>
+                                <p>Instantly generate customer-ready quotations with governed templates, embedded pricing logic, and built-in approval workflows. Fast, consistent, and always compliant with your commercial rules.</p>
+                            </div>
                         </div>
                     </div>
 
-
-                    <div class="demo-card">
-                        <video loop muted playsinline>
-                            <source src="demomanus-pricing.webm" type="video/webm"></video>
-                        <div class="demo-content">
-                            <h3>Dynamic Pricing Engine</h3>
-                            <p>Modular pricing tree with visual interface and smart parsing to speed up pricing model creation. Real-time calculations with nested formulas and live cost data.</p>
-                        </div>
+                    <!-- Chevron -->
+                    <div class="chevron">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
                     </div>
 
-                    <div class="demo-card">
-                        <video loop muted playsinline>
-                            <source src="quote.webm" type="video/webm"></video>
-                        <div class="demo-content">
-                            <h3>Smart Quote Generation</h3>
-                            <p>Instantly generate customer-ready quotations with governed templates, embedded pricing logic, and built-in approval workflows. Fast, consistent, and always compliant with your commercial rules.</p>
-                            
-                        </div>
+                    <!-- Order Container -->
+                    <div class="side-container">
+                        <h3>Order</h3>
                     </div>
                 </div>
 
-                
+                <div class="flow-label">Lead-to-Cash Flow →</div>
             </div>
         </section>
 
