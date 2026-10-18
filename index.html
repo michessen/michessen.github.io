@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricera · Complex pricing. Zero black box.</title>
-    <meta name="description" content="Pricera is the pricing engine for complex manufacturing industries: index-linked, dimension-driven and contract-specific prices modelled explicitly, tested, versioned and traceable on every quote.">
+    <meta name="description" content="Pricera is the costing and pricing engine for complex manufacturing industries: index-linked, dimension-driven and contract-specific prices modelled explicitly, tested, versioned, traceable on every quote, and checked against actual costs.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Michroma&display=swap" rel="stylesheet">
@@ -32,7 +32,47 @@
             --shadow-lg: 0 8px 16px rgba(38,52,68,.06), 0 24px 64px rgba(38,52,68,.12);
             --radius: 14px;
             --ease-out: cubic-bezier(.16,1,.3,1);
+            --on-green: #ffffff;
         }
+
+        /* ============ Dark mode ============ */
+        html { color-scheme: light; }
+        html.dark { color-scheme: dark; }
+        html.dark {
+            --paper: #11161b;
+            --surface: #1a2129;
+            --surface-soft: #151c23;
+            --ink: #e9eef2;
+            --ink-soft: #b7c2cb;
+            --muted: #8d99a4;
+            --line: #2a343e;
+            --green: #4fae8b;
+            --green-dark: #6fd4ae;
+            --mint: #1c2b25;
+            --mint-line: #2f4a3e;
+            --amber: #d99a45;
+            --amber-bg: #2e2413;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,.25), 0 3px 12px rgba(0,0,0,.28);
+            --shadow-md: 0 4px 8px rgba(0,0,0,.28), 0 12px 32px rgba(0,0,0,.35);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,.3), 0 24px 64px rgba(0,0,0,.42);
+            --on-green: #0d241c;
+        }
+        html.dark header.scrolled { background: rgba(17,22,27,.82); }
+        html.dark .pillar:hover .ic, html.dark .demo-titlebar .replay:hover { background: var(--mint); }
+        html.dark .fall .bar { border-color: var(--mint-line); }
+        html.dark .fall.add .bar { background: #234238; }
+        html.dark .fall.mid .bar { background: #2d5344; border-color: #41735d; }
+        html.dark .badge.warn { border-color: #5c4a2a; }
+        html.dark .recog img { background: #fff; padding: 8px 14px; border-radius: 10px; opacity: 1; filter: none; }
+        html.dark .recog img[alt="CostCtrl"] { background: transparent; }
+        html.dark .partner img { background: transparent; padding: 0; }
+        html.dark .industry .img-wrap { filter: invert(1) hue-rotate(180deg) saturate(.75) brightness(.98); }
+        html.dark .cta-band { background: linear-gradient(135deg, #124033 0%, #1a5644 55%, #2e8266 100%); }
+        html.dark .cta-band .btn-light { color: #16533f; }
+        html.dark .caret { background: rgba(0,0,0,.45); }
+        html.dark body::before { opacity: .18; }
+        html.dark .blob-1 { background: radial-gradient(circle, rgba(79,174,139,.16), transparent 65%); }
+        html.dark .blob-2 { background: radial-gradient(circle, rgba(217,154,69,.10), transparent 65%); }
 
         html { scroll-behavior: smooth; }
 
@@ -43,6 +83,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            transition: background .45s, color .45s;
         }
 
         /* subtle paper grain */
@@ -114,7 +155,7 @@
             transition: transform .25s var(--ease-out), box-shadow .25s, background .25s, border-color .25s;
             position: relative; overflow: hidden;
         }
-        .btn-primary { background: var(--green); color: #fff; box-shadow: 0 2px 8px rgba(33,108,86,.28); }
+        .btn-primary { background: var(--green); color: var(--on-green); box-shadow: 0 2px 8px rgba(33,108,86,.28); }
         .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(33,108,86,.35); }
         .btn-primary::after {
             content: ''; position: absolute; inset: 0;
@@ -203,8 +244,8 @@
         .node .n-name { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
         .node .n-val { color: var(--ink); font-weight: 500; font-size: 13px; margin-top: 2px; }
         .node.out { background: var(--green); border-color: var(--green-dark); }
-        .node.out .n-name, .node.out .n-val { color: #eaf5ef; }
-        .node.out .n-val { color: #fff; }
+        .node.out .n-name, .node.out .n-val { color: var(--on-green); }
+        .node.out .n-val { color: var(--on-green); }
         .node.live { border-color: var(--green); box-shadow: 0 0 0 4px rgba(33,108,86,.12), var(--shadow-sm); }
 
         .tree-foot { display: flex; justify-content: space-between; align-items: center; padding: 10px 6px 4px; border-top: 1px solid var(--line); margin-top: 4px; }
@@ -217,7 +258,7 @@
         .kicker { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
         .section-title { font-size: clamp(30px, 3.4vw, 42px); font-weight: 800; letter-spacing: -.025em; line-height: 1.12; color: var(--ink); }
         .section-sub { font-size: 17.5px; color: var(--muted); margin-top: 18px; line-height: 1.7; }
-        .alt { background: linear-gradient(180deg, #fff 0%, var(--surface-soft) 100%); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .alt { background: linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
         /* ============ Pillars ============ */
         .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -261,6 +302,13 @@
             padding: 4px 12px; border-radius: 7px; cursor: pointer; transition: background .25s;
         }
         .demo-titlebar .replay:hover { background: #ddf0e5; }
+        .theme-btn {
+            background: var(--mint); border: 1px solid var(--mint-line); border-radius: 8px;
+            width: 34px; height: 34px; cursor: pointer; font-size: 15px; line-height: 1;
+            color: var(--green-dark); display: inline-grid; place-items: center;
+            align-self: center; transition: border-color .25s, transform .25s;
+        }
+        .theme-btn:hover { border-color: var(--green); transform: translateY(-1px); }
 
         .demo-ind { display: flex; gap: 6px; padding: 14px 20px 0; flex-wrap: wrap; }
         .demo-ind .ind {
@@ -269,7 +317,7 @@
             background: var(--surface); cursor: pointer; transition: all .3s;
         }
         .demo-ind .ind:hover { color: var(--green-dark); border-color: var(--mint-line); }
-        .demo-ind .ind.on { color: #fff; background: var(--green); border-color: var(--green-dark); font-weight: 500; }
+        .demo-ind .ind.on { color: var(--on-green); background: var(--green); border-color: var(--green-dark); font-weight: 500; }
         .demo-ind .ind-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); align-self: center; margin-right: 4px; opacity: .8; }
 
         .demo-rail { display: flex; gap: 6px; padding: 10px 20px 0; flex-wrap: wrap; }
@@ -295,7 +343,7 @@
         /* scene 1 — AI chat */
         .chat { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
         .bubble { padding: 12px 16px; border-radius: 12px; font-size: 13.5px; line-height: 1.6; max-width: 90%; }
-        .bubble.user { align-self: flex-end; background: var(--green); color: #fff; border-bottom-right-radius: 4px; }
+        .bubble.user { align-self: flex-end; background: var(--green); color: var(--on-green); border-bottom-right-radius: 4px; }
         .bubble.ai { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 4px; box-shadow: var(--shadow-sm); }
         .bubble .who { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--green); margin-bottom: 5px; letter-spacing: .05em; }
         .caret { display: inline-block; width: 7px; height: 14px; background: rgba(255,255,255,.7); margin-left: 2px; vertical-align: -2px; animation: blink .8s step-end infinite; }
@@ -317,7 +365,7 @@
         .mnode .k { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .05em; display: block; }
         .mnode .v { color: var(--ink); font-weight: 500; }
         .mnode.out { background: var(--green); border-color: var(--green-dark); }
-        .mnode.out .k, .mnode.out .v { color: #fff; }
+        .mnode.out .k, .mnode.out .v { color: var(--on-green); }
         .mnode.lookup .v { color: var(--amber); }
         .mnode.hot { border-color: var(--green); box-shadow: 0 0 0 3px rgba(33,108,86,.14); }
         .mnode.dim { border-style: dashed; }
@@ -364,6 +412,37 @@
         .demo-note { text-align: center; margin-top: 18px; font-size: 12.5px; color: var(--muted); }
         .demo-note code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--green); }
 
+        /* cost check scenes */
+        .demo-ind .sep { width: 1px; height: 18px; background: var(--line); align-self: center; margin: 0 6px; }
+        .drift-wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; justify-content: center; height: 100%; }
+        .drow {
+            display: grid; grid-template-columns: 1.5fr .9fr .9fr 1fr; gap: 10px; align-items: center;
+            background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+            padding: 8px 14px; font-size: 12px;
+            opacity: 0; transform: translateX(-10px); transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
+        }
+        .drow.in { opacity: 1; transform: none; }
+        .drow .c1 { font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .drow .num { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; text-align: right; }
+        .drow.head { background: none; border-color: transparent; padding: 0 14px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+        .drow.head .num { font-size: 9.5px; }
+        .drow.note { background: none; border-color: transparent; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--muted); padding-top: 4px; }
+        .badge { font-family: 'IBM Plex Mono', monospace; font-size: 10px; border-radius: 100px; padding: 3px 9px; text-align: center; white-space: nowrap; }
+        .badge.ok { color: var(--green-dark); background: var(--mint); border: 1px solid var(--mint-line); }
+        .badge.warn { color: var(--amber); background: var(--amber-bg); border: 1px solid #ecd9b8; }
+        .drow.q5 { grid-template-columns: .6fr 1.3fr 1.05fr 1.05fr 1fr; }
+        .chiprow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; opacity: 0; transform: translateY(6px); transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+        .chiprow.in { opacity: 1; transform: none; }
+        .prop { max-width: 640px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; box-shadow: var(--shadow-sm); align-self: center; opacity: 0; transform: translateY(10px); transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+        .prop.in { opacity: 1; transform: none; }
+        .prop .who { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--green); margin-bottom: 6px; letter-spacing: .05em; }
+        .prop .txt { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); }
+        .prop .dchk { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--green-dark); }
+        .prop .dchk .li { opacity: 0; transform: translateX(-8px); transition: opacity .4s var(--ease-out), transform .4s var(--ease-out); }
+        .prop .dchk .li.in { opacity: 1; transform: none; }
+        .apply-btn { display: inline-block; margin-top: 12px; background: var(--green); color: var(--on-green); padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 600; opacity: 0; transition: opacity .5s var(--ease-out), box-shadow .5s; }
+        .apply-btn.on { opacity: 1; box-shadow: 0 0 0 4px rgba(33,108,86,.12); }
+
         /* ============ Differentiators ============ */
         .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .diff {
@@ -399,6 +478,9 @@
         /* ============ Recognition ============ */
         .recog { display: flex; justify-content: center; align-items: center; gap: 56px; flex-wrap: wrap; }
         .recog img { height: 46px; opacity: .75; filter: grayscale(40%); transition: opacity .3s, filter .3s, transform .3s; }
+        .recog img:hover { opacity: 1; filter: none; transform: translateY(-2px); }
+        .recog img[alt="CostCtrl"] { background: #1a2129; padding: 8px 14px; border-radius: 10px; }
+        .partner img { height: 15px; vertical-align: -3px; margin-left: 2px; background: #1a2129; padding: 3px 9px; border-radius: 6px; }
         .recog img:hover { opacity: 1; filter: none; transform: translateY(-2px); }
         .recog .impact { height: 86px; }
 
@@ -460,6 +542,9 @@
             .pillars, .diff-grid { grid-template-columns: 1fr; }
             .team-grid { grid-template-columns: 1fr; }
             .demo-stage { height: 640px; }
+            .drow { grid-template-columns: 1.4fr .8fr .8fr .9fr; gap: 6px; padding: 6px 9px; font-size: 10.5px; }
+            .drow .num { font-size: 10px; }
+            .drow.q5 { grid-template-columns: .6fr 1.2fr .9fr .9fr .95fr; }
             .hero { padding-top: 132px; }
             .hero-stats { gap: 28px; flex-wrap: wrap; }
             .cta-band { padding: 52px 28px; }
@@ -482,10 +567,12 @@
             </a>
             <div class="nav-links">
                 <a href="#platform">Platform</a>
+                <a href="#costing">Costing</a>
                 <a href="#demo">Demo</a>
                 <a href="#industries">Industries</a>
                 <a href="#team">Team</a>
                 <a href="mailto:info@pricera.site">Book a demo</a>
+                <button class="theme-btn" id="theme-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
             </div>
         </nav>
     </header>
@@ -499,7 +586,7 @@
                 <div>
                     <div class="eyebrow reveal"><span class="dot"></span>The pricing engine for complex manufacturing industries</div>
                     <h1 class="reveal" data-delay="1">Complex pricing.<br>Zero <span class="accent">black box.</span></h1>
-                    <p class="hero-sub reveal" data-delay="2">Your prices aren't picked from a list. They're calculated: raw-material indices, dimensions and specs, yield and scrap, tolling, volume breaks, the clause on page 12 of the contract. Pricera turns that logic into tested, versioned pricing models your sales team can quote from in minutes, and every number shows its work.</p>
+                    <p class="hero-sub reveal" data-delay="2">Your prices aren't picked from a list. They're calculated: raw-material indices, dimensions and specs, yield and scrap, tolling, volume breaks, the clause on page 12 of the contract. Pricera turns that logic into tested, versioned costing and pricing models your sales team can quote from in minutes, and every number shows its work.</p>
                     <div class="hero-ctas reveal" data-delay="3">
                         <a href="mailto:info@pricera.site" class="btn btn-primary">Book a demo</a>
                         <a href="#demo" class="btn btn-ghost">See it in action&nbsp;↓</a>
@@ -574,19 +661,51 @@
             </div>
         </section>
 
+        <!-- ================= COSTING ================= -->
+        <section id="costing">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="kicker">Costing</div>
+                    <h2 class="section-title">Quote it now. Prove it at close.</h2>
+                    <p class="section-sub">Pricera prices new and custom products from costing models: forward-looking, built from driver rates, routings and recipes. After every close, those assumptions are checked against what your sold items actually cost. Drift is flagged, a re-tune is proposed, you approve.</p>
+                </div>
+                <div class="pillars">
+                    <div class="pillar reveal">
+                        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 10v10"/></svg></div>
+                        <h3>Cost new products</h3>
+                        <p>Press hours, energy, scrap, resin recipe, SG&A allocation, all from versioned driver tables. Every pricing model builds on it.</p>
+                        <span class="tag">costing models</span>
+                    </div>
+                    <div class="pillar reveal" data-delay="1">
+                        <div class="ic"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 3v5h-5"/></svg></div>
+                        <h3>Check against actuals</h3>
+                        <p>Actual cost per sold item lands in Pricera after each close. Driver rates that drifted beyond tolerance are flagged, table by table.</p>
+                        <span class="tag">preview</span>
+                    </div>
+                    <div class="pillar reveal" data-delay="2">
+                        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 8h8M18 8h2M4 16h4M14 16h6"/><circle cx="15" cy="8" r="2.4"/><circle cx="11" cy="16" r="2.4"/></svg></div>
+                        <h3>Re-tune with approval</h3>
+                        <p>The fix is proposed as a new table version, reference cases re-run, and open quotes below margin floor surface in Needs attention. Nothing publishes without you.</p>
+                        <span class="tag">governance</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ================= DEMO ================= -->
         <section id="demo">
             <div class="container">
                 <div class="section-header reveal">
                     <div class="kicker">Demo</div>
                     <h2 class="section-title">See Pricera in action</h2>
-                    <p class="section-sub">One continuous flow: build or describe the pricing logic → review the model → price the configuration → send the quote.</p>
+                    <p class="section-sub">One continuous flow: build or describe the pricing logic → review the model → price the configuration → send the quote. Switch to the Cost check tab to watch actual costs challenge a costing model.</p>
                 </div>
 
                 <div class="demo-app reveal">
                     <div class="demo-titlebar">
                         <span class="w r"></span><span class="w y"></span><span class="w g"></span>
                         <span class="t" id="demo-title"></span>
+                        <button class="replay" id="demo-pause" type="button">❚❚ pause</button>
                         <button class="replay" id="demo-replay" type="button">↻ replay</button>
                     </div>
                     <div class="demo-ind" id="demo-ind"><span class="ind-lbl">industry</span></div>
@@ -599,7 +718,7 @@
                     <div class="demo-stage">
 
                         <!-- 1 · AI prompt -->
-                        <div class="scene" id="scene-0">
+                        <div class="scene" id="scene-0" data-kind="industry">
                             <span class="scene-cap">/models · Generate with AI</span>
                             <div class="chat">
                                 <div class="bubble user"><span id="type-target"></span><span class="caret"></span></div>
@@ -612,13 +731,13 @@
                         </div>
 
                         <!-- 2 · generated model -->
-                        <div class="scene" id="scene-1">
+                        <div class="scene" id="scene-1" data-kind="industry">
                             <span class="scene-cap" id="cap-model"></span>
                             <div class="model-cols" id="model-cols"></div>
                         </div>
 
                         <!-- 3 · pricing run -->
-                        <div class="scene" id="scene-2">
+                        <div class="scene" id="scene-2" data-kind="industry">
                             <span class="scene-cap" id="cap-run"></span>
                             <div class="run-grid">
                                 <div class="cfg" id="cfg-rows"></div>
@@ -627,10 +746,16 @@
                         </div>
 
                         <!-- 4 · quote -->
-                        <div class="scene" id="scene-3">
+                        <div class="scene" id="scene-3" data-kind="industry">
                             <span class="scene-cap" id="cap-quote"></span>
                             <div class="quote" id="quote-box"></div>
                         </div>
+
+                        <!-- cost-check scenes (rendered by JS) -->
+                        <div class="scene" data-kind="check"><span class="scene-cap" data-cap></span><div class="drift-wrap" data-slot></div></div>
+                        <div class="scene" data-kind="check"><span class="scene-cap" data-cap></span><div class="drift-wrap" data-slot></div></div>
+                        <div class="scene" data-kind="check"><span class="scene-cap" data-cap></span><div class="drift-wrap" data-slot></div></div>
+                        <div class="scene" data-kind="check"><span class="scene-cap" data-cap></span><div class="drift-wrap" data-slot></div></div>
 
                     </div>
                 </div>
@@ -703,6 +828,7 @@
                     <img src="insead_logo.png" alt="INSEAD">
                     <img src="websummit_logo.png" alt="Web Summit">
                     <img src="antler_logo.png" alt="Antler">
+                    <img src="costctrl_logo.png" alt="CostCtrl">
                 </div>
             </div>
         </section>
@@ -769,13 +895,15 @@
                         </svg>
                         <span class="word">Pricera</span>
                     </a>
-                    <p>The pricing engine for complex manufacturing industries: calculated prices, modelled explicitly, traceable on every quote.</p>
+                    <p>The costing and pricing engine for complex manufacturing industries: calculated prices, modelled explicitly, traceable on every quote.</p>
                     <p><strong>Email:</strong> <a href="mailto:info@pricera.site" style="display:inline;">info@pricera.site</a></p>
                     <p><strong>Locations:</strong> Doha · Essen · Paris</p>
+                    <p class="partner">Cost actuals powered by <a href="https://www.costctrl.com" target="_blank" rel="noopener"><img src="costctrl_logo.png" alt="CostCtrl"></a></p>
                 </div>
                 <div>
                     <h4>Product</h4>
                     <a href="#platform">Platform</a>
+                    <a href="#costing">Costing</a>
                     <a href="#demo">Demo</a>
                     <a href="#industries">Industries</a>
                 </div>
@@ -792,6 +920,28 @@
     </footer>
 
     <script>
+        // ---- theme: dark in the evening (19:00 - 07:00 local), manual toggle persists ----
+        const themeBtn = document.getElementById('theme-btn');
+        const applyTheme = dark => {
+            document.documentElement.classList.toggle('dark', dark);
+            themeBtn.textContent = dark ? '☀' : '☾';
+        };
+        const eveningHours = () => { const h = new Date().getHours(); return h >= 19 || h < 7; };
+        const autoTheme = () => applyTheme(eveningHours());
+        const store = {
+            get: () => { try { return localStorage.getItem('pricera-theme'); } catch { return null; } },
+            set: v => { try { localStorage.setItem('pricera-theme', v); } catch {} }
+        };
+        autoTheme();
+        themeBtn.addEventListener('click', () => {
+            const dark = !document.documentElement.classList.contains('dark');
+            store.set(dark ? 'dark' : 'light');
+            applyTheme(dark);
+        });
+        const savedTheme = store.get();
+        if (savedTheme) applyTheme(savedTheme === 'dark');
+        setInterval(() => { if (!store.get()) autoTheme(); }, 5 * 60 * 1000);
+
         // ---- header state ----
         const header = document.getElementById('site-header');
         addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 24), { passive: true });
@@ -926,13 +1076,74 @@
                     ['final_price', '$1 187 /t', 90, 'total']
                 ],
                 quote: { id: 'Q-1045', cust: 'Chemwerk Rhineland AG · chemicals segment · USD', line: 'Solvent blend CX-9 · zone EU-2', qty: '120 t', unit: '$1 187.00', amount: '$142 440.00', total: '$142 440.00' }
+            },
+            {
+                kind: 'check',
+                label: 'Cost check',
+                title: 'pricera.app · demo tenant · cost actuals · FY26 Q3 close',
+                caps: ['/data/imports · source: cost actuals', '/models/extrusion_costing · v3 vs actuals',
+                       '/models/extrusion_costing · AI assistant · proposal', '/quotes · needs attention'],
+                actuals: [
+                    ['Extrusion 6063 · 40×40 slot', '€2.65 /m', '€2.91 /m', '+9.8%', 'warn'],
+                    ['Extrusion 6082 · flat bar', '€2.10 /m', '€2.14 /m', '+1.9%', 'ok'],
+                    ['Extrusion 6060 · tube', '€1.84 /m', '€1.79 /m', '−2.7%', 'ok'],
+                ],
+                actualsNote: '1 184 sold lines matched to quotes · 1 family outside ±5%',
+                drivers: [
+                    ['press_rate_eur_h · 22 MN', '€186 /h', '€212 /h', '+14%', 'warn'],
+                    ['energy_tariff · 2026', '€0.142 /kWh', '€0.171 /kWh', '+20%', 'warn'],
+                    ['scrap_rate · 6063', '8.0%', '8.4%', '+0.4 pt', 'ok'],
+                    ['sga_alloc · DACH', '16.0%', '15.1%', '−0.9 pt', 'ok'],
+                ],
+                proposal: {
+                    text: 'Two driver tables drifted beyond tolerance. Proposed: publish press_rates v4 and energy_tariff v7 from Q3 actuals, and extrusion_costing v3 → v4 draft.',
+                    checks: ['12 / 12 reference cases pass', 'cost_total 6063 40×40: €2.65 → €2.91 /m', 'margin guard ≥ 15%: 3 open quotes affected'],
+                    action: 'Apply · publish v4'
+                },
+                recheck: [
+                    ['Q-1043', 'Profilux Systems GmbH', '€3.13 /m · 18%', '€3.43 /m · 18%', 'stale → re-priced', 'flip'],
+                    ['Q-1047', 'Nordprofil AB', '€2.98 /m · 16%', '€2.98 /m · 7.5%', 'below floor · review', 'warn'],
+                    ['Q-1051', 'Alutec Sp. z o.o.', '€3.40 /m · 21%', '€3.40 /m · 12%', 'below floor · review', 'warn'],
+                ],
+                recheckChips: ['✓ tables v4 published', '✓ model v4 pinned on new quotes', '2 quotes need attention']
             }
         ];
 
-        const scenes = [0, 1, 2, 3].map(i => document.getElementById('scene-' + i));
+        const INDUSTRY_STEPS = ['Ask the AI', 'Model generated', 'Price the deal', 'Quote'];
+        const CHECK_STEPS = ['Actuals land', 'Drift diagnosed', 'Re-tune proposed', 'Quotes re-checked'];
+        const scenesInd = [0, 1, 2, 3].map(i => document.getElementById('scene-' + i));
+        const scenesChk = [...document.querySelectorAll('.scene[data-kind="check"]')];
+        let sceneSet = scenesInd;
         const steps = [...document.querySelectorAll('.demo-rail .stp')];
-        let timers = [], curScenario = 0;
-        const later = (ms, fn) => timers.push(setTimeout(fn, ms));
+        let timers = [], curScenario = 0, paused = false;
+        const later = (ms, fn) => {
+            const t = { remaining: ms, last: performance.now(), id: null, done: false, fn };
+            const arm = () => { t.last = performance.now(); t.id = setTimeout(() => { t.done = true; fn(); }, t.remaining); };
+            arm();
+            timers.push(t);
+            return t;
+        };
+        const pauseDemo = () => {
+            if (paused) return;
+            paused = true;
+            timers.forEach(t => {
+                if (!t.done && t.id !== null) {
+                    clearTimeout(t.id);
+                    t.remaining -= performance.now() - t.last;
+                    t.id = null;
+                }
+            });
+        };
+        const resumeDemo = () => {
+            if (!paused) return;
+            paused = false;
+            timers.forEach(t => {
+                if (!t.done && t.id === null) {
+                    const arm = () => { t.last = performance.now(); t.id = setTimeout(() => { t.done = true; t.fn(); }, t.remaining); };
+                    arm();
+                }
+            });
+        };
         const mk = (tag, cls, html) => {
             const e = document.createElement(tag);
             if (cls) e.className = cls;
@@ -943,7 +1154,10 @@
         function renderScenario(i) {
             curScenario = i;
             const s = SCENARIOS[i];
+            const rail = s.kind === 'check' ? CHECK_STEPS : INDUSTRY_STEPS;
+            steps.forEach((st, j) => { st.innerHTML = `<span class="ix">0${j + 1}</span>${rail[j]}`; });
             document.getElementById('demo-title').textContent = s.title;
+            if (s.kind === 'check') { renderCheck(s); return; }
             document.getElementById('cap-model').textContent = s.capModel;
             document.getElementById('cap-run').textContent = s.capRun;
             document.getElementById('cap-quote').textContent = s.capQuote;
@@ -991,8 +1205,73 @@
                 </div>`;
         }
 
+        function renderCheck(s) {
+            const heads = [['item family', 'quoted cost', 'actual cost', 'Δ'],
+                           ['driver table', 'model', 'actual', 'Δ'],
+                           ['quote', 'customer', 'before', 'after', 'status']];
+            scenesChk.forEach((sc, j) => sc.querySelector('[data-cap]').textContent = s.caps[j]);
+            const slot = j => scenesChk[j].querySelector('[data-slot]');
+
+            const trow = (cells, q5) => mk('div', 'drow head' + (q5 ? ' q5' : ''),
+                cells.map((c, k) => `<span class="${k === 0 ? 'c1' : 'num'}">${c}</span>`).join(''));
+
+            // step 0 — actuals
+            slot(0).innerHTML = '';
+            slot(0).append(trow(heads[0]));
+            s.actuals.forEach(r => slot(0).append(mk('div', 'drow',
+                `<span class="c1">${r[0]}</span><span class="num">${r[1]}</span><span class="num">${r[2]}</span><span class="badge ${r[4]}">${r[3]}</span>`)));
+            slot(0).append(mk('div', 'drow note', s.actualsNote));
+
+            // step 1 — drivers
+            slot(1).innerHTML = '';
+            slot(1).append(trow(heads[1]));
+            s.drivers.forEach(r => slot(1).append(mk('div', 'drow',
+                `<span class="c1">${r[0]}</span><span class="num">${r[1]}</span><span class="num">${r[2]}</span><span class="badge ${r[4]}">${r[3]}</span>`)));
+
+            // step 2 — proposal
+            slot(2).innerHTML = '';
+            const prop = mk('div', 'prop');
+            prop.innerHTML = `<span class="who">PRICERA AI · costing assistant</span><span class="txt">${s.proposal.text}</span>
+                <div class="dchk">${s.proposal.checks.map(c => `<span class="li">✓ ${c}</span>`).join('')}</div>
+                <span class="apply-btn">${s.proposal.action}</span>`;
+            slot(2).append(prop);
+
+            // step 3 — quotes re-checked
+            slot(3).innerHTML = '';
+            slot(3).append(trow(heads[2], true));
+            s.recheck.forEach(r => slot(3).append(mk('div', 'drow q5',
+                `<span class="c1">${r[0]}</span><span class="num">${r[1]}</span><span class="num">${r[2]}</span><span class="num">${r[3]}</span><span class="badge warn" data-flip="${r[5]}">${r[5] === 'flip' ? 'stale' : r[4]}</span>`)));
+            const chips = mk('div', 'chiprow');
+            s.recheckChips.forEach((c, k) => chips.append(mk('span', 'badge ' + (k < 2 ? 'ok' : 'warn'), c)));
+            slot(3).append(chips);
+        }
+
+        function runCheck(s) {
+            const rows = j => [...scenesChk[j].querySelectorAll('.drow')];
+            rows(0).forEach((r, k) => later(400 + k * 500, () => r.classList.add('in')));
+            const t1 = 400 + rows(0).length * 500 + 2600;
+            later(t1, () => setStep(1));
+            rows(1).forEach((r, k) => later(t1 + 500 + k * 550, () => r.classList.add('in')));
+            const t2 = t1 + 500 + rows(1).length * 550 + 2600;
+            later(t2, () => setStep(2));
+            const prop = scenesChk[2].querySelector('.prop');
+            const lis = [...prop.querySelectorAll('.li')];
+            later(t2 + 500, () => prop.classList.add('in'));
+            lis.forEach((li, k) => later(t2 + 1200 + k * 600, () => li.classList.add('in')));
+            later(t2 + 1200 + lis.length * 600 + 900, () => prop.querySelector('.apply-btn').classList.add('on'));
+            const t3 = t2 + 1200 + lis.length * 600 + 2600;
+            later(t3, () => setStep(3));
+            rows(3).forEach((r, k) => later(t3 + 500 + k * 550, () => r.classList.add('in')));
+            later(t3 + 500 + rows(3).length * 550 + 900, () => {
+                const flip = scenesChk[3].querySelector('[data-flip="flip"]');
+                if (flip) { flip.classList.replace('warn', 'ok'); flip.textContent = 're-priced'; }
+            });
+            later(t3 + 500 + rows(3).length * 550 + 1600, () => scenesChk[3].querySelector('.chiprow').classList.add('in'));
+        }
+
         function setStep(i) {
-            scenes.forEach((s, j) => s.classList.toggle('on', j === i));
+            [...scenesInd, ...scenesChk].forEach(s => s.classList.remove('on'));
+            sceneSet.forEach((s, j) => s.classList.toggle('on', j === i));
             steps.forEach((st, j) => {
                 st.classList.toggle('on', j === i);
                 st.classList.toggle('done', j < i);
@@ -1000,13 +1279,18 @@
         }
 
         function resetDemo() {
-            timers.forEach(clearTimeout); timers = [];
+            timers.forEach(t => { if (t.id !== null) clearTimeout(t.id); }); timers = [];
+            paused = false;
+            const pb = document.getElementById('demo-pause');
+            if (pb) pb.textContent = '❚❚ pause';
             document.getElementById('type-target').textContent = '';
             document.querySelector('.caret').style.display = '';
             document.getElementById('ai-reply').style.display = 'none';
             document.querySelectorAll('.mnode').forEach(n => n.classList.remove('in', 'hot'));
             document.querySelectorAll('#cfg-rows .row').forEach(r => r.classList.remove('in'));
             document.querySelectorAll('.fall').forEach(f => { f.classList.remove('in'); f.querySelector('.bar').style.width = '0'; });
+            document.querySelectorAll('.drow, .prop, .prop .li, .chiprow').forEach(r => r.classList.remove('in'));
+            document.querySelectorAll('.apply-btn').forEach(b => b.classList.remove('on'));
             const q = document.getElementById('quote-box');
             q.style.opacity = '0';
             q.style.transform = 'translateY(12px)';
@@ -1014,14 +1298,17 @@
 
         function runDemo() {
             resetDemo();
+            const s = SCENARIOS[curScenario];
+            sceneSet = s.kind === 'check' ? scenesChk : scenesInd;
             setStep(0);
-            const prompt = SCENARIOS[curScenario].prompt;
+            if (s.kind === 'check') { runCheck(s); return; }
+            const prompt = s.prompt;
             const target = document.getElementById('type-target');
             let i = 0;
             (function type() {
                 if (i <= prompt.length) {
                     target.textContent = prompt.slice(0, i++);
-                    timers.push(setTimeout(type, 30));
+                    later(30, type);
                 } else {
                     document.querySelector('.caret').style.display = 'none';
                     later(800, () => {
@@ -1060,6 +1347,7 @@
 
         const indWrap = document.getElementById('demo-ind');
         SCENARIOS.forEach((s, i) => {
+            if (s.kind === 'check') indWrap.append(mk('span', 'sep'));
             const b = mk('button', 'ind' + (i === 0 ? ' on' : ''), s.label);
             b.type = 'button';
             b.addEventListener('click', () => {
@@ -1077,6 +1365,11 @@
             if (es[0].isIntersecting && !played) { played = true; runDemo(); obs.disconnect(); }
         }, { threshold: 0.35 }).observe(demoEl);
         document.getElementById('demo-replay').addEventListener('click', runDemo);
+        const pauseBtn = document.getElementById('demo-pause');
+        pauseBtn.addEventListener('click', () => {
+            paused ? resumeDemo() : pauseDemo();
+            pauseBtn.textContent = paused ? '▶ resume' : '❚❚ pause';
+        });
         resetDemo();
 
         // ---- hero tree: live eval flicker ----
