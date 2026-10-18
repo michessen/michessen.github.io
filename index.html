@@ -3,1223 +3,789 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricera - Smart Pricing & Quoting Platform</title>
+    <title>Pricera — Pricing models your sales team can trust</title>
+    <meta name="description" content="Pricera turns the pricing spreadsheets that run your quotes into versioned, explainable calculation models inside your CRM. Smart pricing & quoting for complex industries.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Michroma&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #06b6d4;
-            --text-primary: #f8fafc;
-            --text-muted: #94a3b8;
-            --card-bg: rgba(30, 41, 59, 0.6);
+            /* Palette lifted from the product itself */
+            --paper: #f6f7f9;
+            --surface: #ffffff;
+            --surface-soft: #f7f9f8;
+            --ink: #242d35;
+            --ink-soft: #46515b;
+            --muted: #737e88;
+            --line: #e7ebef;
+            --green: #216c56;
+            --green-dark: #16533f;
+            --mint: #edf6f1;
+            --mint-line: #d5e8de;
+            --amber: #a96b20;
+            --amber-bg: #fff7e8;
+            --shadow-sm: 0 1px 2px rgba(38,52,68,.04), 0 3px 12px rgba(38,52,68,.05);
+            --shadow-md: 0 4px 8px rgba(38,52,68,.05), 0 12px 32px rgba(38,52,68,.08);
+            --shadow-lg: 0 8px 16px rgba(38,52,68,.06), 0 24px 64px rgba(38,52,68,.12);
+            --radius: 14px;
+            --ease-out: cubic-bezier(.16,1,.3,1);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
             line-height: 1.6;
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-        }
-
-        .logo {
-            height: 50px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 14px;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            background: #0891b2;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            padding: 10px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            border: 1px solid var(--accent);
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(6, 182, 212, 0.1);
-        }
-
-        /* Hero */
-        .hero {
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero::before {
+        /* subtle paper grain */
+        body::before {
             content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+            position: fixed;
+            inset: 0;
+            z-index: 0;
             pointer-events: none;
+            opacity: .35;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .025 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
         }
+
+        main, header, footer { position: relative; z-index: 1; }
+
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+        /* ============ Reveal animation ============ */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal[data-delay="1"] { transition-delay: .08s; }
+        .reveal[data-delay="2"] { transition-delay: .16s; }
+        .reveal[data-delay="3"] { transition-delay: .24s; }
+        .reveal[data-delay="4"] { transition-delay: .32s; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            * { animation: none !important; }
+        }
+
+        /* ============ Header ============ */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            transition: background .35s, box-shadow .35s, border-color .35s;
+            border-bottom: 1px solid transparent;
+        }
+        header.scrolled {
+            background: rgba(246,247,249,.82);
+            backdrop-filter: blur(14px) saturate(1.4);
+            -webkit-backdrop-filter: blur(14px) saturate(1.4);
+            border-bottom-color: var(--line);
+            box-shadow: var(--shadow-sm);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; }
+        .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand .mark { width: 30px; height: 30px; display: block; }
+        .brand .word {
+            font-family: 'Michroma', 'Inter', sans-serif; font-size: 16.5px;
+            letter-spacing: .10em; color: var(--green); text-transform: uppercase;
+            -webkit-text-stroke: .45px currentColor; text-stroke: .45px currentColor;
+        }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a {
+            color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500;
+            transition: color .25s; position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0;
+            background: var(--green); border-radius: 2px; transition: width .3s var(--ease-out);
+        }
+        .nav-links a:hover { color: var(--green); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 11px 24px; border-radius: 10px; text-decoration: none;
+            font-weight: 600; font-size: 14.5px; letter-spacing: .01em;
+            transition: transform .25s var(--ease-out), box-shadow .25s, background .25s, border-color .25s;
+            position: relative; overflow: hidden;
+        }
+        .btn-primary { background: var(--green); color: #fff; box-shadow: 0 2px 8px rgba(33,108,86,.28); }
+        .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(33,108,86,.35); }
+        .btn-primary::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.25) 50%, transparent 60%);
+            transform: translateX(-120%);
+            transition: transform .7s var(--ease-out);
+        }
+        .btn-primary:hover::after { transform: translateX(120%); }
+        .btn-ghost { background: transparent; color: var(--green); border: 1.5px solid var(--mint-line); }
+        .btn-ghost:hover { background: var(--mint); border-color: var(--green); transform: translateY(-2px); }
+        .nav-cta { padding: 9px 18px; font-size: 13.5px; }
+
+        /* ============ Hero ============ */
+        .hero {
+            padding: 168px 0 96px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* drifting mesh blobs */
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+        .blob-1 { width: 560px; height: 560px; top: -160px; right: -80px; background: radial-gradient(circle, rgba(33,108,86,.14), transparent 65%); animation: drift 18s ease-in-out infinite alternate; }
+        .blob-2 { width: 480px; height: 480px; bottom: -200px; left: -140px; background: radial-gradient(circle, rgba(169,107,32,.10), transparent 65%); animation: drift 22s ease-in-out infinite alternate-reverse; }
+        @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(-40px,30px) scale(1.08); } }
+
+        .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--mint); border: 1px solid var(--mint-line);
+            color: var(--green); font-size: 12.5px; font-weight: 600;
+            padding: 6px 14px; border-radius: 100px; margin-bottom: 26px;
+            letter-spacing: .02em; text-transform: uppercase;
+        }
+        .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2.4s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(33,108,86,.45);} 50% { box-shadow: 0 0 0 6px rgba(33,108,86,0);} }
 
         .hero h1 {
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: clamp(38px, 4.6vw, 58px);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.06;
+            margin-bottom: 24px; color: var(--ink);
         }
-
-        .hero-subtitle {
-            font-size: 20px;
-            color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto 40px;
-            line-height: 1.8;
+        .hero h1 .accent {
+            background: linear-gradient(120deg, var(--green) 20%, #3f9d7c 80%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: var(--green);
         }
+        .hero-sub { font-size: 19px; color: var(--ink-soft); max-width: 560px; margin-bottom: 34px; line-height: 1.65; }
+        .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
 
-        .hero-cta {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-bottom: 60px;
+        .hero-stats { display: flex; gap: 44px; }
+        .hero-stat .num {
+            font-family: 'IBM Plex Mono', monospace; font-weight: 500;
+            font-size: 34px; color: var(--green); letter-spacing: -.02em; line-height: 1;
         }
+        .hero-stat .lbl { font-size: 12.5px; color: var(--muted); margin-top: 8px; text-transform: uppercase; letter-spacing: .08em; }
+        .hero-stat .lbl sup { font-size: 9px; }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .stat-value {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* Section */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .section-subtitle {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Features */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            padding: 32px;
-            border-radius: 12px;
-            border: 1px solid rgba(148, 163, 184, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ---- Hero pricing-tree visual ---- */
+        .tree-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+            padding: 18px 18px 14px;
             position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 16px;
-            display: block;
-            position: relative;
-            z-index: 1;
-        }
-
-        .feature-icon svg {
-            width: 100%;
-            height: 100%;
-            fill: none;
-            stroke: var(--text-muted);
-            stroke-width: 1.5;
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 14px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Differentiators */
-        .differentiators-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-
-        .diff-card {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(20, 27, 46, 0.5) 100%);
-            padding: 32px;
-            border-radius: 12px;
-            border: 1px solid rgba(6, 182, 212, 0.2);
-            transition: all 0.4s;
-        }
-
-        .diff-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        
-
-        .diff-card h3 {
-            color: var(--accent);
-            font-size: 20px;
-            margin-bottom: 12px;
-        }
-
-        .diff-card p {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        /* Industries */
-        .industries-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .industry-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(148, 163, 184, 0.1);
-            transition: all 0.4s;
-        }
-
-        .industry-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .industry-image {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(30, 41, 59, 0.8) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
-            transition: all 0.4s;
-        }
-
-        .industry-card:hover .industry-image {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.3) 0%, rgba(30, 41, 59, 0.9) 100%);
-        }
-
-        .industry-content {
-            padding: 24px;
-        }
-
-        .industry-content h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-
-        .industry-content p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .industry-examples {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .industry-examples li {
-            color: var(--text-muted);
-            font-size: 13px;
-            padding: 4px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .industry-examples li::before {
-            content: '✓';
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Demo Section */
-        /* Demo Flow Wrapper */
-        .demo-flow-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            gap: 1px;
-            flex-wrap: nowrap;
-        }
-
-        /* Side containers (Lead and Order) */
-        .side-container {
-            flex: 0 0 90px;
-            min-width: 90px;
-            background: rgba(30, 41, 59, 0.5);
-            border: 1.5px solid #475569;
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .side-container h3 {
-            font-size: 16px;
-            color: #94a3b8;
-            line-height: 1.4;
-        }
-
-        /* Chevron arrows */
-        .chevron {
-            flex: 0 0 40px;
-            min-width: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chevron svg {
-            width: 32px;
-            height: 32px;
-            fill: #06b6d4;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.5));
-        }
-
-        /* Original demo showcase grid */
-        .demo-showcase {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            flex: 1;
-            max-width: 2000px;
-        }
-
-        .demo-card {
-            overflow: visible;
-            position: relative;
-            background: rgba(30, 41, 59, 0.7);
-            border: 2px solid #06b6d4;
-            border-radius: 12px;
-        }
-
-        .demo-card video {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px 8px 0 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .demo-card:hover video {
-            transform: scale(1.7);
-            z-index: 100;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-        }
-
-        .demo-placeholder {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(30, 41, 59, 0.5) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
-            color: var(--text-muted);
-        }
-
-        .demo-content {
-            padding: 24px;
-        }
-
-        .demo-content h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: #22d3ee;
-        }
-
-        .demo-content p {
-            color: #94a3b8;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .flow-label {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #06b6d4;
-            font-style: italic;
-            opacity: 0.7;
-        }
-
-        /* Recognition */
-        .recognition-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 32px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .recognition-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s;
-            min-height: 120px;
-        }
-
-        .recognition-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .recognition-card img {
-            max-width: 100%;
-            max-height: 80px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        /* Testimonials Ticker */
-        .testimonials-ticker {
-            overflow: hidden;
-            background: rgba(30, 41, 59, 0.5);
-            padding: 7px 0;
-            border-top: 1px solid rgba(6, 182, 212, 0.2);
-            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
-            max-width: 1200px;  /* Add this */
-            margin: 0 auto;     /* Add this to center it */
-        }
-
-        .ticker-content {
-            display: flex;
-            animation: scroll 15s linear infinite;
-            white-space: nowrap;
-        }
-
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            padding: 0 60px;
-            color: #e2e8f0;
-            font-size: 18px;
-        }
-
-        .ticker-quote {
-            color: #22d3ee;
-            font-style: italic;
-            margin-right: 10px;
-        }
-
-        .ticker-author {
-            color: #94a3b8;
-            font-size: 16px;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-180%);
-            }
-        }
-
-
-
-
-        /* Team */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .team-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(148, 163, 184, 0.1);
-            transition: all 0.4s;
-        }
-
-        .team-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-
-        .team-card:hover .team-photo {
-            transform: scale(1.05);
-        }
-
-        .team-photo {
-    width: 300px;
-    height: 185px;
-    overflow: hidden;
-    border-radius: 15px;
-    transition: all 0.4s;
-    margin: 0 auto 20px auto;
-}
-
-.team-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center center;
-}
-
-        .team-info {
-            padding: 24px;
-            text-align: center;
-        }
-
-        .team-info h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .team-role {
-            display: inline-block;
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .team-bio {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(30, 41, 59, 0.5) 100%);
-            border-radius: 16px;
-            padding: 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        .cta-section h2 {
-            font-size: 40px;
-            margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-section p {
-            font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 60px 0 40px;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-
-        .footer-about h3 {
-            font-size: 20px;
-            margin-bottom: 16px;
-        }
-
-        .footer-about p {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 12px;
-        }
-
-        .footer-section h4 {
-            font-size: 16px;
-            margin-bottom: 16px;
-            color: var(--accent);
-        }
-
-        .footer-section p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .footer-disclaimer {
-            border-top: 1px solid rgba(148, 163, 184, 0.1);
-            padding-top: 32px;
-            margin-top: 32px;
-        }
-
-        .footer-disclaimer h4 {
-            font-size: 14px;
-            margin-bottom: 12px;
-            color: var(--accent);
-        }
-
-        .footer-disclaimer p {
-            color: var(--text-muted);
-            font-size: 12px;
-            line-height: 1.7;
-            margin-bottom: 12px;
-        }
-
-        .footer-disclaimer ul {
-            list-style: none;
-            padding: 0;
-            margin: 16px 0;
-        }
-
-        .footer-disclaimer li {
-            color: var(--text-muted);
-            font-size: 12px;
-            padding: 4px 0;
-        }
-
-        .footer-disclaimer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .footer-disclaimer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 32px;
-            border-top: 1px solid rgba(148, 163, 184, 0.1);
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        /* Responsive */
-        @media (max-width: 1100px) {
-            .demo-flow-wrapper {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .side-container {
-                width: 100%;
-                max-width: 400px;
-                min-height: 80px;
-            }
-
-            .chevron {
-                transform: rotate(90deg);
-                height: 40px;
-            }
-
-            .demo-showcase {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
-            .stats { grid-template-columns: 1fr; }
-            .features-grid { grid-template-columns: 1fr; }
-            .differentiators-grid { grid-template-columns: 1fr; }
+            transform: rotate(.5deg);
+            transition: transform .6s var(--ease-out);
+        }
+        .tree-card:hover { transform: rotate(0) translateY(-4px); }
+        .tree-card .win-bar { display: flex; align-items: center; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+        .win-bar .w { width: 10px; height: 10px; border-radius: 50%; }
+        .w.r { background: #f2b5b0; } .w.y { background: #f5d9a0; } .w.g { background: #a9d6bf; }
+        .win-bar .title { margin-left: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--muted); }
+
+        .tree-stage { position: relative; height: 340px; }
+        .tree-stage svg.edges { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .edge { stroke: var(--mint-line); stroke-width: 1.6; fill: none; }
+        .edge.flow { stroke: var(--green); stroke-width: 1.8; stroke-dasharray: 6 90; animation: flow 2.2s linear infinite; opacity: .9; }
+        @keyframes flow { from { stroke-dashoffset: 96; } to { stroke-dashoffset: 0; } }
+
+        .node {
+            position: absolute; transform: translate(-50%,-50%);
+            background: var(--surface); border: 1px solid var(--line);
+            border-radius: 10px; padding: 8px 12px; min-width: 108px;
+            box-shadow: var(--shadow-sm);
+            font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+            transition: box-shadow .3s, border-color .3s, transform .3s var(--ease-out);
+        }
+        .node:hover { border-color: var(--green); box-shadow: var(--shadow-md); transform: translate(-50%,-50%) scale(1.04); z-index: 5; }
+        .node .n-name { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+        .node .n-val { color: var(--ink); font-weight: 500; font-size: 13px; margin-top: 2px; }
+        .node.out { background: var(--green); border-color: var(--green-dark); }
+        .node.out .n-name, .node.out .n-val { color: #eaf5ef; }
+        .node.out .n-val { color: #fff; }
+        .node.live { border-color: var(--green); box-shadow: 0 0 0 4px rgba(33,108,86,.12), var(--shadow-sm); }
+
+        .tree-foot { display: flex; justify-content: space-between; align-items: center; padding: 10px 6px 4px; border-top: 1px solid var(--line); margin-top: 4px; }
+        .tree-foot .chip { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--muted); }
+        .tree-foot .chip.ok { color: var(--green); }
+
+        /* ============ Sections ============ */
+        section { padding: 96px 0; position: relative; }
+        .section-header { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+        .kicker { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+        .section-title { font-size: clamp(30px, 3.4vw, 42px); font-weight: 800; letter-spacing: -.025em; line-height: 1.12; color: var(--ink); }
+        .section-sub { font-size: 17.5px; color: var(--muted); margin-top: 18px; line-height: 1.7; }
+        .alt { background: linear-gradient(180deg, #fff 0%, var(--surface-soft) 100%); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+        /* ============ Pillars ============ */
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .pillar {
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 28px 26px; position: relative; overflow: hidden;
+            transition: transform .35s var(--ease-out), box-shadow .35s, border-color .35s;
+        }
+        .pillar::before {
+            content: ''; position: absolute; inset: 0 0 auto; height: 3px;
+            background: linear-gradient(90deg, var(--green), #5cb894);
+            transform: scaleX(0); transform-origin: left; transition: transform .45s var(--ease-out);
+        }
+        .pillar:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--mint-line); }
+        .pillar:hover::before { transform: scaleX(1); }
+        .pillar .ic {
+            width: 44px; height: 44px; border-radius: 11px; background: var(--mint);
+            display: grid; place-items: center; margin-bottom: 18px;
+            transition: transform .35s var(--ease-out), background .35s;
+        }
+        .pillar:hover .ic { transform: scale(1.08) rotate(-4deg); background: #ddf0e5; }
+        .pillar .ic svg { width: 22px; height: 22px; stroke: var(--green); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .pillar h3 { font-size: 17px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 8px; }
+        .pillar p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; }
+        .pillar .tag { display: inline-block; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--green); background: var(--mint); padding: 3px 9px; border-radius: 6px; letter-spacing: .02em; }
+
+        /* ============ Demo — interactive app mock ============ */
+        .demo-app {
+            background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+            box-shadow: var(--shadow-lg); overflow: hidden; max-width: 980px; margin: 0 auto;
+        }
+        .demo-titlebar {
+            display: flex; align-items: center; gap: 6px; padding: 12px 16px;
+            border-bottom: 1px solid var(--line); background: var(--surface-soft);
+        }
+        .demo-titlebar .w { width: 10px; height: 10px; border-radius: 50%; }
+        .demo-titlebar .t { margin-left: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--muted); }
+        .demo-titlebar .replay {
+            margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+            color: var(--green); background: var(--mint); border: 1px solid var(--mint-line);
+            padding: 4px 12px; border-radius: 7px; cursor: pointer; transition: background .25s;
+        }
+        .demo-titlebar .replay:hover { background: #ddf0e5; }
+
+        .demo-ind { display: flex; gap: 6px; padding: 14px 20px 0; flex-wrap: wrap; }
+        .demo-ind .ind {
+            font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);
+            padding: 5px 14px; border-radius: 100px; border: 1px solid var(--line);
+            background: var(--surface); cursor: pointer; transition: all .3s;
+        }
+        .demo-ind .ind:hover { color: var(--green-dark); border-color: var(--mint-line); }
+        .demo-ind .ind.on { color: #fff; background: var(--green); border-color: var(--green-dark); font-weight: 500; }
+        .demo-ind .ind-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); align-self: center; margin-right: 4px; opacity: .8; }
+
+        .demo-rail { display: flex; gap: 6px; padding: 10px 20px 0; }
+        .demo-rail .stp {
+            font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);
+            padding: 5px 12px; border-radius: 100px; border: 1px solid var(--line);
+            transition: all .35s; display: flex; align-items: center; gap: 7px;
+        }
+        .demo-rail .stp .ix { font-size: 9.5px; opacity: .7; }
+        .demo-rail .stp.on { color: var(--green-dark); background: var(--mint); border-color: var(--mint-line); font-weight: 500; }
+        .demo-rail .stp.done { color: var(--green); border-color: var(--mint-line); opacity: .65; }
+
+        .demo-stage { position: relative; height: 400px; margin: 14px 20px 20px; }
+        .scene {
+            position: absolute; inset: 0; opacity: 0; transform: translateY(10px);
+            transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
+            pointer-events: none; border: 1px solid var(--line); border-radius: 12px;
+            background: var(--surface-soft); padding: 22px 24px; overflow: hidden;
+        }
+        .scene.on { opacity: 1; transform: none; pointer-events: auto; }
+        .scene-cap { position: absolute; top: 14px; right: 18px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--muted); }
+
+        /* scene 1 — AI chat */
+        .chat { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+        .bubble { padding: 12px 16px; border-radius: 12px; font-size: 13.5px; line-height: 1.6; max-width: 90%; }
+        .bubble.user { align-self: flex-end; background: var(--green); color: #fff; border-bottom-right-radius: 4px; }
+        .bubble.ai { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 4px; box-shadow: var(--shadow-sm); }
+        .bubble .who { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--green); margin-bottom: 5px; letter-spacing: .05em; }
+        .caret { display: inline-block; width: 7px; height: 14px; background: rgba(255,255,255,.7); margin-left: 2px; vertical-align: -2px; animation: blink .8s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .gen-card { margin-top: 6px; border: 1px solid var(--mint-line); background: var(--mint); border-radius: 9px; padding: 10px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--green-dark); }
+        .gen-card .k { color: var(--green); font-weight: 500; }
+
+        /* scene 2 — model tree */
+        .model-cols { display: grid; grid-template-columns: 1.1fr 1.2fr 1fr .9fr; gap: 14px; height: 100%; align-content: center; }
+        .mcol { display: flex; flex-direction: column; gap: 8px; }
+        .mcol .col-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); text-align: center; margin-bottom: 4px; }
+        .mnode {
+            background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+            padding: 7px 11px; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+            opacity: 0; transform: scale(.85) translateY(8px);
+            transition: opacity .45s var(--ease-out), transform .45s var(--ease-out), border-color .3s, box-shadow .3s;
+        }
+        .mnode.in { opacity: 1; transform: none; }
+        .mnode .k { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .05em; display: block; }
+        .mnode .v { color: var(--ink); font-weight: 500; }
+        .mnode.out { background: var(--green); border-color: var(--green-dark); }
+        .mnode.out .k, .mnode.out .v { color: #fff; }
+        .mnode.lookup .v { color: var(--amber); }
+        .mnode.hot { border-color: var(--green); box-shadow: 0 0 0 3px rgba(33,108,86,.14); }
+        .mnode.dim { border-style: dashed; }
+        .mnode.check { border-style: dashed; border-color: rgba(169,107,32,.55); }
+        .mnode.check .v { color: var(--amber); }
+
+        /* scene 3 — pricing run */
+        .run-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 22px; height: 100%; align-content: center; }
+        .cfg { display: flex; flex-direction: column; gap: 8px; }
+        .cfg .row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+            padding: 7px 12px; font-size: 12px; opacity: 0; transform: translateX(-10px);
+            transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
+        }
+        .cfg .row.in { opacity: 1; transform: none; }
+        .cfg .row .f { color: var(--muted); font-size: 11px; }
+        .cfg .row .x { font-family: 'IBM Plex Mono', monospace; font-weight: 500; }
+        .falls { display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+        .fall { display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(6px); transition: opacity .4s var(--ease-out), transform .4s var(--ease-out); }
+        .fall.in { opacity: 1; transform: none; }
+        .fall .lbl { flex: 0 0 118px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); text-align: right; }
+        .fall .bar { height: 16px; border-radius: 4px; background: var(--mint); border: 1px solid var(--mint-line); min-width: 2px; width: 0; transition: width .7s var(--ease-out); }
+        .fall.add .bar { background: #ddefe4; }
+        .fall.mid .bar { background: #c4e5d4; border-color: #a8d3bc; }
+        .fall.total .bar { background: var(--green); border-color: var(--green-dark); }
+        .fall .amt { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink); white-space: nowrap; }
+        .fall.total .amt { color: var(--green-dark); font-weight: 500; }
+
+        /* scene 4 — quote */
+        .quote { max-width: 520px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-md); overflow: hidden; }
+        .quote .qhead { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+        .quote .qhead .qid { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 13px; }
+        .quote .qhead .status { font-size: 10.5px; font-family: 'IBM Plex Mono', monospace; color: var(--green-dark); background: var(--mint); border: 1px solid var(--mint-line); border-radius: 100px; padding: 3px 10px; }
+        .quote .qcust { padding: 10px 18px; font-size: 12.5px; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+        .quote table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .quote td { padding: 9px 18px; border-bottom: 1px solid var(--line); }
+        .quote td.r, .quote th.r { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+        .quote th { padding: 7px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); text-align: left; border-bottom: 1px solid var(--line); background: var(--surface-soft); }
+        .quote .qtotal td { font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: var(--green-dark); font-size: 13.5px; border-bottom: none; }
+        .quote .qfoot { display: flex; gap: 8px; padding: 11px 18px; border-top: 1px solid var(--line); background: var(--surface-soft); }
+        .quote .qfoot .chip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--green-dark); background: var(--mint); padding: 3px 10px; border-radius: 6px; }
+        .quote .qfoot .chip.dim { color: var(--muted); background: var(--surface); border: 1px solid var(--line); }
+        .demo-note { text-align: center; margin-top: 18px; font-size: 12.5px; color: var(--muted); }
+        .demo-note code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--green); }
+
+        /* ============ Differentiators ============ */
+        .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .diff {
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 26px; transition: transform .35s var(--ease-out), box-shadow .35s, border-color .35s;
+        }
+        .diff:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--mint-line); }
+        .diff h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 10px; color: var(--green-dark); display: flex; gap: 10px; align-items: baseline; }
+        .diff h3 .n { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--amber); font-weight: 500; }
+        .diff p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+
+        /* ============ Industries ============ */
+        .industries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .industry {
+            border-radius: var(--radius); overflow: hidden; position: relative;
+            border: 1px solid var(--line); background: var(--surface);
+            transition: transform .4s var(--ease-out), box-shadow .4s;
+        }
+        .industry:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .industry .img-wrap { height: 210px; overflow: hidden; background: #f6f7f9; border-bottom: 1px solid var(--line); }
+        .industry .img-wrap.img-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 10px; background: #f6f7f9; }
+        .industry img { width: 100%; height: 100%; object-fit: contain; transition: transform .7s var(--ease-out); }
+        .industry .img-grid img { object-fit: cover; min-width: 0; min-height: 0; transform: scale(.9); }
+        .industry:hover .img-grid img { transform: scale(.97); }
+        .industry:hover img { transform: scale(1.06); }
+        .industry .body { padding: 22px 24px 26px; }
+        .industry h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+        .industry > .body > p { font-size: 13.5px; color: var(--muted); margin-bottom: 14px; }
+        .industry ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+        .industry li {
+            font-size: 12px; font-weight: 500; color: var(--green-dark);
+            background: var(--mint); border: 1px solid var(--mint-line);
+            padding: 4px 11px; border-radius: 100px;
+        }
+
+        /* ============ Recognition / ticker ============ */
+        .recog { display: flex; justify-content: center; align-items: center; gap: 56px; flex-wrap: wrap; }
+        .recog img { height: 46px; opacity: .75; filter: grayscale(40%); transition: opacity .3s, filter .3s, transform .3s; }
+        .recog img:hover { opacity: 1; filter: none; transform: translateY(-2px); }
+        .recog .impact { height: 86px; }
+
+        .ticker-wrap { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface-soft); padding: 22px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+        .ticker { display: flex; gap: 56px; width: max-content; animation: marquee 36s linear infinite; }
+        .ticker:hover { animation-play-state: paused; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .tick { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+        .tick .q { font-size: 15px; font-weight: 600; color: var(--ink); }
+        .tick .a { font-size: 13px; color: var(--muted); }
+        .tick::after { content: '·'; color: var(--mint-line); font-size: 22px; margin-left: 30px; }
+
+        /* ============ Team ============ */
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .member {
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 30px 26px; text-align: center;
+            transition: transform .35s var(--ease-out), box-shadow .35s, border-color .35s;
+        }
+        .member:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--mint-line); }
+        .member .photo {
+            width: 108px; height: 108px; border-radius: 50%; margin: 0 auto 18px;
+            overflow: hidden; border: 3px solid var(--mint); outline: 1px solid var(--mint-line);
+            transition: transform .4s var(--ease-out);
+        }
+        .member:hover .photo { transform: scale(1.05); }
+        .member .photo img { width: 100%; height: 100%; object-fit: cover; }
+        .member h3 { font-size: 17px; font-weight: 700; }
+        .member .role { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--green); background: var(--mint); padding: 3px 10px; border-radius: 100px; margin: 8px 0 14px; letter-spacing: .06em; }
+        .member p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+
+        /* ============ CTA ============ */
+        .cta-band {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 55%, #2e8266 100%);
+            border-radius: 22px; padding: 72px 48px; text-align: center;
+            position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
+        }
+        .cta-band::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(600px 200px at 30% -10%, rgba(255,255,255,.14), transparent 60%);
+        }
+        .cta-band h2 { font-size: clamp(28px, 3vw, 38px); font-weight: 800; letter-spacing: -.02em; color: #fff; margin-bottom: 14px; }
+        .cta-band p { color: rgba(255,255,255,.82); font-size: 17px; margin-bottom: 32px; }
+        .cta-band .btn-light { background: #fff; color: var(--green-dark); }
+        .cta-band .btn-light:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+        .cta-band .btn-outline { border: 1.5px solid rgba(255,255,255,.45); color: #fff; }
+        .cta-band .btn-outline:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
+        .cta-band .row { display: flex; gap: 14px; justify-content: center; position: relative; }
+
+        /* ============ Footer ============ */
+        footer { border-top: 1px solid var(--line); padding: 64px 0 40px; background: var(--surface-soft); }
+        .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        .foot-grid h3 { font-size: 17px; font-weight: 700; margin-bottom: 12px; }
+        .foot-grid h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 14px; }
+        .foot-grid p, .foot-grid a { font-size: 14px; color: var(--ink-soft); line-height: 1.8; text-decoration: none; display: block; }
+        .foot-grid a:hover { color: var(--green); }
+        .foot-brand { margin-bottom: 14px; }
+        .foot-brand .mark { width: 26px; height: 26px; }
+        .foot-brand .word { font-size: 19px; }
+        .disclaimer { border-top: 1px solid var(--line); padding-top: 28px; margin-top: 8px; }
+        .disclaimer h4 { font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+        .disclaimer p, .disclaimer li { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+        .disclaimer ul { padding-left: 18px; }
+        .disclaimer a { color: var(--green); }
+        .foot-bottom { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 24px; font-size: 12.5px; color: var(--muted); }
+
+        /* ============ Responsive ============ */
+        @media (max-width: 980px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+            .pillars, .diff-grid { grid-template-columns: repeat(2, 1fr); }
+            .demo-stage { height: 520px; }
+            .model-cols { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .run-grid { grid-template-columns: 1fr; gap: 14px; }
             .industries-grid { grid-template-columns: 1fr; }
-            .demo-showcase { grid-template-columns: 1fr; }
-            .recognition-grid { grid-template-columns: 1fr; }
-            .team-grid { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+            .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+            .nav-links { gap: 18px; }
+        }
+        @media (max-width: 640px) {
+            .pillars, .diff-grid { grid-template-columns: 1fr; }
+            .demo-stage { height: 640px; }
+            .hero { padding-top: 132px; }
+            .hero-stats { gap: 28px; flex-wrap: wrap; }
+            .cta-band { padding: 52px 28px; }
+            .nav-links a:not(.btn) { display: none; }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header id="site-header">
         <nav class="container">
-            <img src="pricera_logo.png" alt="Pricera" class="logo">
+            <a href="#top" class="brand" aria-label="Pricera">
+                <svg class="mark" viewBox="0 0 30 30" aria-hidden="true">
+                    <rect x="1.5" y="1.5" width="27" height="27" rx="8" fill="#edf6f1" stroke="#d5e8de"/>
+                    <path d="M13.2 11.4 10.6 18M16.8 11.4l2.6 6.6" stroke="#216c56" stroke-width="1.7" stroke-linecap="round" opacity=".5"/>
+                    <circle cx="15" cy="8.8" r="2.9" fill="#216c56"/>
+                    <circle cx="9.4" cy="20.6" r="2.9" fill="#216c56" opacity=".5"/>
+                    <circle cx="20.6" cy="20.6" r="2.9" fill="#216c56"/>
+                </svg>
+                <span class="word">Pricera</span>
+            </a>
             <div class="nav-links">
-                <a href="#features">Features</a>
+                <a href="#platform">Platform</a>
+                <a href="#demo">Demo</a>
                 <a href="#industries">Industries</a>
                 <a href="#team">Team</a>
+                <a href="mailto:info@pricera.site" class="btn btn-primary nav-cta">Book a demo</a>
             </div>
         </nav>
     </header>
 
-    <main>
-        <!-- Hero -->
+    <main id="top">
+        <!-- ================= HERO ================= -->
         <section class="hero">
-            <div class="container">
-                <h1>Smart Pricing & Quoting<br>for Every Complex Industry</h1>
-                <p class="hero-subtitle">From millions of SKUs in retail to complex on-demand calculations in manufacturing — replacing hundreds of spreadsheets that create sales bottlenecks. One platform that scales with your business.</p>
-                
-
-
-                <div class="stats">
-
-                    <div class="stat-item">
-                        <span class="stat-value">90%</span>
-                        <span class="stat-label">Faster Quoting(*)</span>
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="container hero-grid">
+                <div>
+                    <div class="eyebrow reveal"><span class="dot"></span>Pricing engine + CPQ for complex industries</div>
+                    <h1 class="reveal" data-delay="1">Pricing models your<br>sales team can <span class="accent">trust.</span></h1>
+                    <p class="hero-sub reveal" data-delay="2">Pricera turns the spreadsheets that run your quotes into versioned, explainable calculation models inside your CRM — from millions of retail SKUs to aerospace-grade costing.</p>
+                    <div class="hero-ctas reveal" data-delay="3">
+                        <a href="mailto:info@pricera.site" class="btn btn-primary">Book a demo</a>
+                        <a href="#demo" class="btn btn-ghost">See it in action&nbsp;↓</a>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-value">30%</span>
-                        <span class="stat-label">Revenue Increase(*)</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">10%</span>
-                        <span class="stat-label">Profit Margin Gain(*)</span>
+                    <div class="hero-stats reveal" data-delay="4">
+                        <div class="hero-stat"><div class="num"><span class="count" data-target="90">0</span>%</div><div class="lbl">Faster quoting<sup>*</sup></div></div>
+                        <div class="hero-stat"><div class="num"><span class="count" data-target="30">0</span>%</div><div class="lbl">Revenue increase<sup>*</sup></div></div>
+                        <div class="hero-stat"><div class="num"><span class="count" data-target="10">0</span>%</div><div class="lbl">Margin gain<sup>*</sup></div></div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Demo Showcase -->
-        <section style="background: rgba(0,0,0,0.2);" id="demo">
-            <div class="container">
-                <h2 class="section-title" style="text-align: center; margin-bottom: 60px;">See Pricera in Action</h2>
-                
-                <div class="demo-flow-wrapper">
-                    <!-- Lead Generation Container -->
-                    <div class="side-container">
-                        <h3>Customer Request</h3>
+                <!-- Live pricing-tree visual -->
+                <div class="tree-card reveal" data-delay="2">
+                    <div class="win-bar">
+                        <span class="w r"></span><span class="w y"></span><span class="w g"></span>
+                        <span class="title">pipe_pricing — draft v3 · evaluated live</span>
                     </div>
-
-                    <!-- Chevron -->
-                    <div class="chevron">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    <div class="tree-stage" id="tree">
+                        <svg class="edges" viewBox="0 0 400 340" preserveAspectRatio="none">
+                            <path class="edge"      d="M85,60  C150,60 160,110 190,120"/>
+                            <path class="edge"      d="M85,140 C140,140 160,125 190,122"/>
+                            <path class="edge"      d="M85,220 C140,220 160,190 195,150"/>
+                            <path class="edge"      d="M210,128 C250,140 260,160 285,170"/>
+                            <path class="edge"      d="M200,190 C240,185 255,178 285,172"/>
+                            <path class="edge flow" d="M315,178 C330,190 330,215 322,240"/>
+                            <path class="edge"      d="M300,150 C330,110 340,95 345,80" opacity=".5"/>
                         </svg>
+                        <div class="node" style="left:85px;  top:60px;">  <div class="n-name">input</div><div class="n-val">quantity · 500</div></div>
+                        <div class="node" style="left:85px;  top:140px;"> <div class="n-name">lookup</div><div class="n-val">steel_index</div></div>
+                        <div class="node" style="left:85px;  top:220px;"> <div class="n-name">input</div><div class="n-val">diameter · 60mm</div></div>
+                        <div class="node" style="left:200px; top:128px;"> <div class="n-name">formula</div><div class="n-val">unit_cost</div></div>
+                        <div class="node" style="left:200px; top:200px;"> <div class="n-name">parameter</div><div class="n-val">margin_pct</div></div>
+                        <div class="node" style="left:300px; top:170px;"> <div class="n-name">formula</div><div class="n-val">unit_price</div></div>
+                        <div class="node out" style="left:322px; top:255px;"><div class="n-name">output</div><div class="n-val" id="price-out">€ 1,240.00</div></div>
                     </div>
-
-                    <!-- Original 3 Demo Cards -->
-                    <div class="demo-showcase">
-                        <div class="demo-card">
-                            <video loop muted playsinline poster="poster-config.jpg">
-                                <source src="demomanus-config.webm" type="video/webm">
-                                <source src="demomanus-config.mp4" type="video/mp4">
-                            </video>
-                            <div class="demo-content">
-                                <h3>Smart Configurator</h3>
-                                <p>Bidirectional rule updates with instant pricing. GenAI and ML use natural-language inputs and historical data to prefill configurations and reduce manual work.  </p>
-                            </div>
-                        </div>
-
-                        <div class="demo-card">
-                            <video loop muted playsinline poster="poster-price.jpg">
-                                <source src="demomanus-pricing.webm" type="video/webm">
-                                <source src="demomanus-pricing.mp4" type="video/mp4">
-                            </video>
-                            <div class="demo-content">
-                                <h3>Dynamic Costing & Pricing</h3>
-                                <p>Modular pricing tree with visual interface and smart parsing to speed up pricing model creation. Real-time calculations with nested formulas and dynamic data.</p>
-                            </div>
-                        </div>
-
-                        <div class="demo-card">
-                            <video loop muted playsinline poster="poster-quote.jpg">
-                                <source src="quote.webm" type="video/webm">
-                                <source src="quote.mp4" type="video/mp4">
-                            </video>
-                            <div class="demo-content">
-                                <h3>Smart Quote Generation</h3>
-                                <p>Instantly generate customer-ready quotations with built-in approval workflows. Fast, consistent, and always compliant with your commercial rules.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Chevron -->
-                    <div class="chevron">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                        </svg>
-                    </div>
-
-                    <!-- Order Container -->
-                    <div class="side-container">
-                        <h3>Order</h3>
+                    <div class="tree-foot">
+                        <span class="chip ok">✓ validate() — no diagnostics</span>
+                        <span class="chip" id="tick-chip">eval 12ms</span>
                     </div>
                 </div>
-
-                <div class="flow-label">Lead-to-Cash Flow →</div>
             </div>
         </section>
 
-        <!-- Features -->
-        <section id="features">
+        <!-- ================= PLATFORM ================= -->
+        <section id="platform" class="alt">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Built for Scale & Complexity</h2>
-                    <p class="section-subtitle">Whether you manage millions of price points or complex custom calculations, Pricera adapts to your needs</p>
+                <div class="section-header reveal">
+                    <div class="kicker">The platform</div>
+                    <h2 class="section-title">Built for scale &amp; complexity</h2>
+                    <p class="section-sub">Whether you manage millions of price points or bespoke engineered calculations, Pricera replaces spreadsheet sprawl with governed, auditable pricing logic.</p>
                 </div>
-
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" stroke-linejoin="round" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>Lightning-Fast Performance</h3>
-                        <p>Handle millions of SKUs and price books with instant query response times</p>
+                <div class="pillars">
+                    <div class="pillar reveal">
+                        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v6m0 0l-4-4m4 4l4-4M4 15l4 4h8l4-4M8 19v-6m8 6v-6"/></svg></div>
+                        <h3>Design models your way</h3>
+                        <p>Compose costs, lookups and formulas in a visual tree — or let AI draft the model from a description or a contract PDF. You approve before it publishes.</p>
+                        <span class="tag">calc engine · genAI</span>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/>
-                                <text x="2" y="10" font-size="8" fill="currentColor" stroke="none">f(x)</text>
-                            </svg>
-                        </div>
-                        <h3>Complex Formula Engine</h3>
-                        <p>Build sophisticated pricing logic with nested formulas, indices, and real-time cost factors</p>
+                    <div class="pillar reveal" data-delay="1">
+                        <div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/></svg></div>
+                        <h3>Price at any scale</h3>
+                        <p>Millions of decimal-exact calculations across SKU catalogs and live indices — every quote line ships with its full waterfall snapshot.</p>
+                        <span class="tag">performance · cpq</span>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="3"/>
-                                <circle cx="6" cy="6" r="2"/>
-                                <circle cx="18" cy="6" r="2"/>
-                                <circle cx="6" cy="18" r="2"/>
-                                <circle cx="18" cy="18" r="2"/>
-                                <line x1="12" y1="9" x2="6" y2="6"/>
-                                <line x1="12" y1="9" x2="18" y2="6"/>
-                                <line x1="12" y1="15" x2="6" y2="18"/>
-                                <line x1="12" y1="15" x2="18" y2="18"/>
-                            </svg>
-                        </div>
-                        <h3>AI & Machine Learning</h3>
-                        <p>Optimize pricing strategies automatically based on historical data and market conditions</p>
+                    <div class="pillar reveal" data-delay="2">
+                        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="8" width="4" height="12" rx="1"/><rect x="17" y="4" width="4" height="16" rx="1"/></svg></div>
+                        <h3>Governed &amp; measurable</h3>
+                        <p>Immutable model versions and pinned quote snapshots — with live KPIs on pipeline, margin and quotes needing attention.</p>
+                        <span class="tag">governance · analytics</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Key Differentiators -->
-        <section style="background: rgba(0,0,0,0.2);">
+        <!-- ================= DEMO ================= -->
+        <section id="demo">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Why Pricera is Different</h2>
-                    <p class="section-subtitle">Pricera is the most advanced integrated costing & pricing platform for complex B2B manufacturing. Built for companies where prices are <em>calculated</em>, not selected.</p>
-                    <p class="section-subtitle" style="margin-top: 1rem;">Pricera leverages its proprietary smart conversion engine to industrialize complex Excel-based costing and pricing logic into scalable, governed pricing strategies.</p>
-                    <p class="section-subtitle" style="margin-top: 1rem;">A challenger that natively addresses the most complex pricing needs instead of building layers of complexity on legacy solutions.</p>
+                <div class="section-header reveal">
+                    <div class="kicker">Demo</div>
+                    <h2 class="section-title">See Pricera in action</h2>
+                    <p class="section-sub">Lead-to-cash in one continuous flow — configure, price, quote, order.</p>
                 </div>
 
-                <div class="differentiators-grid">
-                    <div class="diff-card">
-                        <h3>Smart, Native AI Integration</h3>
-                        <p>Non-intrusive use of AI that complies with B2B industrial requirements. Our AI enhances decision-making without disrupting established workflows or compromising data governance.</p>
+                <div class="demo-app reveal">
+                    <div class="demo-titlebar">
+                        <span class="w r"></span><span class="w y"></span><span class="w g"></span>
+                        <span class="t" id="demo-title"></span>
+                        <button class="replay" id="demo-replay" type="button">↻ replay</button>
                     </div>
-                    <div class="diff-card">
-                        <h3>Millions of Auditable Calculations</h3>
-                        <p>Complete transparency and traceability for every pricing decision. Full audit trails ensure compliance with industrial standards and regulatory requirements across all sectors.</p>
+                    <div class="demo-ind" id="demo-ind"><span class="ind-lbl">industry</span></div>
+                    <div class="demo-rail">
+                        <span class="stp" data-step="0"><span class="ix">01</span>Ask the AI</span>
+                        <span class="stp" data-step="1"><span class="ix">02</span>Model generated</span>
+                        <span class="stp" data-step="2"><span class="ix">03</span>Price the deal</span>
+                        <span class="stp" data-step="3"><span class="ix">04</span>Quote</span>
                     </div>
-                    <div class="diff-card">
-                        <h3>Zero Disruption Implementation</h3>
-                        <p>Our pricing engine replicates even the most complex pricing models. The tool adapts to your company's processes — not the other way around. No business disruption, just enhanced capabilities.</p>
-                    </div>
-                    <div class="diff-card">
-                        <h3>Easy to Use & Affordable</h3>
-                        <p>Intuitive interface designed for sales teams, not just IT specialists. Accessible pricing for both large enterprises and medium-sized companies — democratizing advanced pricing capabilities for all.</p>
-                    </div>
-                    <div class="diff-card">
-                        <h3>Unified Commercial Engine</h3>
-                        <p>Cost-plus, value-based, spot, and LTA pricing in one place. Pricera unifies every model into a single dynamic engine, removing the fragmentation of multiple tools. Update real-time indices for spot quotes while keeping governed and versioned logic for long-term agreements. One engine, full consistency, zero parallel systems.</div>
+                    <div class="demo-stage">
 
-                    <div class="diff-card">
-                        <h3>Visual Modular Pricing Tree</h3>
-                        <p>Traditional tools rely on limited waterfall logic, complex formula libraries, and rigid pricebooks.
-                            Waterfalls force fixed sequences, libraries add silos and complexity, and pricebooks need constant manual upkeep.
-                            
-                            Pricera replaces all of this with a single modular pricing tree—visual, connected, and flexible—where every cost, formula, and dependency sits in one transparent model.
+                        <!-- 1 · AI prompt -->
+                        <div class="scene" id="scene-0">
+                            <span class="scene-cap">/models · Generate with AI</span>
+                            <div class="chat">
+                                <div class="bubble user"><span id="type-target"></span><span class="caret"></span></div>
+                                <div class="bubble ai" id="ai-reply" style="display:none">
+                                    <span class="who">PRICERA AI</span>
+                                    Drafted a model from your description — validated against the registry, 3 reference cases pass.
+                                    <div class="gen-card" id="gen-card"></div>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- 2 · generated model -->
+                        <div class="scene" id="scene-1">
+                            <span class="scene-cap" id="cap-model"></span>
+                            <div class="model-cols" id="model-cols"></div>
+                        </div>
+
+                        <!-- 3 · pricing run -->
+                        <div class="scene" id="scene-2">
+                            <span class="scene-cap" id="cap-run"></span>
+                            <div class="run-grid">
+                                <div class="cfg" id="cfg-rows"></div>
+                                <div class="falls" id="falls"></div>
+                            </div>
+                        </div>
+
+                        <!-- 4 · quote -->
+                        <div class="scene" id="scene-3">
+                            <span class="scene-cap" id="cap-quote"></span>
+                            <div class="quote" id="quote-box"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="demo-note">A live walkthrough of the real product flow — <code>placeholder recording: content subject to change</code></div>
+            </div>
+        </section>
+
+        <!-- ================= DIFFERENTIATORS ================= -->
+        <section class="alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="kicker">Why Pricera</div>
+                    <h2 class="section-title">Why teams switch to Pricera</h2>
+                    <p class="section-sub">For pricing that is <em>calculated</em>, not selected.</p>
+                </div>
+                <div class="diff-grid">
+                    <div class="diff reveal"><h3><span class="n">01</span>One model, not waterfalls</h3><p>Costs, lookups and formulas in a single visual tree — cost-plus, value-based, spot and LTA pricing in one engine, no pricebook upkeep.</p></div>
+                    <div class="diff reveal" data-delay="1"><h3><span class="n">02</span>AI that reads contracts</h3><p>Import a customer contract, get a reviewable pricing model with rules, tables and page-level evidence.</p></div>
+                    <div class="diff reveal" data-delay="2"><h3><span class="n">03</span>Auditable, enterprise-grade</h3><p>Every quote pins the exact model version — re-run any price and see why. Multi-tenant with row-level isolation, built for sales teams.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- Industries -->
+        <!-- ================= INDUSTRIES ================= -->
         <section id="industries">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Cross-Industry Applicability</h2>
-                    <p class="section-subtitle">A pricing and CPQ platform engineered for sectors where complexity, customization, and dynamic pricing matter most.</p>
+                <div class="section-header reveal">
+                    <div class="kicker">Industries</div>
+                    <h2 class="section-title">Built for process industries</h2>
+                    <p class="section-sub">Where price means formula, index and engineering — not a number in a catalog.</p>
                 </div>
-
                 <div class="industries-grid">
-                    <div class="industry-card">
-                        <img src="industry_retail_clean.png" alt="Retail & E-commerce" class="industry-image">
-                        <div class="industry-content">
-                            <h3>Retail & E-commerce</h3>
-                            <p>Millions of SKUs, dynamic promotions, multi-channel pricing</p>
-                            <ul class="industry-examples">
-                                <li>B2B E-Commerce</li>
-                                <li>B2B Wholesale Distribution</li>
-                                <li>Grocery & FMCG</li>
-                            </ul>
+                    <div class="industry reveal">
+                        <div class="img-wrap"><img src="ind_metals.webp" alt="Metals & Extrusion"></div>
+                        <div class="body">
+                            <h3>Metals — flat rolled &amp; extrusion</h3>
+                            <p>Index-linked pricing on LME and premiums — coil, FRP sheet &amp; plate, custom profiles.</p>
+                            <ul><li>Aluminium &amp; steel FRP</li><li>Extrusions &amp; profiles</li><li>Toll &amp; service centers</li></ul>
                         </div>
                     </div>
-                    <div class="industry-card">
-                        <img src="industry_process.png" alt="Retail & E-commerce" class="industry-image">
-                        <div class="industry-content">
-                            <h3>Process Manufacturing</h3>
-                            <p>Complex formulas, raw material indices, custom specifications</p>
-                            <ul class="industry-examples">
-                                <li>Metals & Mining</li>
-                                <li>Painting & Coating</li>
-                                <li>Chemicals</li>
-                                <li>Building Materials</li>                                
-                            </ul>
+                    <div class="industry reveal" data-delay="1">
+                        <div class="img-wrap"><img src="ind_chemicals.webp" alt="Chemicals"></div>
+                        <div class="body">
+                            <h3>Chemicals</h3>
+                            <p>Index-based pricing off ICIS and feedstock averages — tolling, zones, rebates and floors.</p>
+                            <ul><li>Specialty chemicals</li><li>Coatings &amp; resins</li><li>Contract &amp; spot pricing</li></ul>
                         </div>
                     </div>
-                    <div class="industry-card">
-                        <img src="industry_component.png" alt="Retail & E-commerce" class="industry-image">
-                        <div class="industry-content">
-                            <h3>Component Manufacturing</h3>
-                            <p>Configurable products, volume discounts, technical specifications</p>
-                            <ul class="industry-examples">
-                                <li>Automotive Parts</li>
-                                <li>Electronics Components</li>
-                                <li>Industrial Equipment</li>
-                            </ul>
+                    <div class="industry reveal" data-delay="2">
+                        <div class="img-wrap img-grid">
+                            <img src="ind_composites.webp" alt="Composites">
+                            <img src="ind_pulp.webp" alt="Pulp &amp; paper">
+                            <img src="ind_glass.webp" alt="Glass &amp; ceramics">
+                            <img src="ind_plastics.webp" alt="Plastics &amp; rubber">
                         </div>
-                    </div>
-                    <div class="industry-card">
-                        <img src="industry_services_v2.png" alt="Retail & E-commerce" class="industry-image">
-                        <div class="industry-content">
-                            <h3>Professional Services</h3>
-                            <p>Time-based pricing, resource allocation, project quoting</p>
-                            <ul class="industry-examples">
-                                <li>Engineering Services</li>
-                                <li>IT Consulting</li>
-                                <li>Project Management</li>
-                            </ul>
+                        <div class="body">
+                            <h3>And many more</h3>
+                            <p>If your price is a formula — layup, recipe, index, tolling — Pricera models it.</p>
+                            <ul><li>Composites</li><li>Pulp &amp; paper</li><li>Glass &amp; ceramics</li><li>Plastics &amp; rubber</li><li>Energy</li><li>Food ingredients</li></ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Recognition -->
-        <section style="background: rgba(0,0,0,0.2);">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Recognized Excellence</h2>
+        <!-- ================= RECOGNITION + TICKER ================= -->
+        <section class="alt" style="padding-bottom: 0;">
+            <div class="container" style="padding-bottom: 72px;">
+                <div class="section-header reveal" style="margin-bottom: 40px;">
+                    <div class="kicker">Recognition</div>
+                    <h2 class="section-title" style="font-size: 30px;">Backed by the best</h2>
                 </div>
-
-                <div class="recognition-grid">
-                    <div class="recognition-card">
-                        <img src="recognition_impact.png" alt="INSEAD AI Venture Lab">
-                    </div>                  
-                    <div class="recognition-card">
-                        <img src="insead_logo.png" alt="INSEAD AI Venture Lab">
-                    </div>
-                    <div class="recognition-card">
-                        <img src="websummit_logo.png" alt="Web Summit">
-                    </div>
-                    <div class="recognition-card">
-                        <img src="antler_logo.png" alt="Antler">
-                    </div>
+                <div class="recog reveal">
+                    <img class="impact" src="recognition_impact.png" alt="INSEAD AI Venture Lab — impact award">
+                    <img src="insead_logo.png" alt="INSEAD">
+                    <img src="websummit_logo.png" alt="Web Summit">
+                    <img src="antler_logo.png" alt="Antler">
+                </div>
+            </div>
+            <div class="ticker-wrap">
+                <div class="ticker" id="ticker">
+                    <div class="tick"><span class="q">"Best product ever"</span><span class="a">— Sales Manager</span></div>
+                    <div class="tick"><span class="q">"Best transformation project"</span><span class="a">— Sales VP</span></div>
+                    <div class="tick"><span class="q">"The solution I was dreaming of"</span><span class="a">— Sales Director</span></div>
+                    <div class="tick"><span class="q">"Very helpful"</span><span class="a">— Finance team</span></div>
+                    <div class="tick"><span class="q">"We'd love to have access"</span><span class="a">— Production team</span></div>
                 </div>
             </div>
         </section>
 
-                <!-- Testimonials Ticker -->
-        <section style="padding: 0;">
-            <div class="testimonials-ticker">
-                <div class="ticker-content">
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"Best product ever"</span>
-                        <span class="ticker-author">— Sales Manager</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"Best transformation project"</span>
-                        <span class="ticker-author">— Sales VP</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"The solution I was dreaming of"</span>
-                        <span class="ticker-author">— Sales Director</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"Very helpful"</span>
-                        <span class="ticker-author">— Finance team</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"We'd love to have access"</span>
-                        <span class="ticker-author">— Production team</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"Best product ever"</span>
-                        <span class="ticker-author">— Sales Manager</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"Best transformation project"</span>
-                        <span class="ticker-author">— Sales VP</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"The solution I was dreaming of"</span>
-                        <span class="ticker-author">— Sales Director</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"Very helpful"</span>
-                        <span class="ticker-author">— Finance team</span>
-                    </div>
-                    <div class="ticker-item">
-                        <span class="ticker-quote">"We'd love to have access"</span>
-                        <span class="ticker-author">— Production team</span>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Team -->
+        <!-- ================= TEAM ================= -->
         <section id="team">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Meet the Team</h2>
-                    <p class="section-subtitle">Built and tested by sales veterans who deeply understand pricing challenges from the frontlines</p>
+                <div class="section-header reveal">
+                    <div class="kicker">Team</div>
+                    <h2 class="section-title">Meet the team</h2>
+                    <p class="section-sub">Built by sales and engineering veterans who understand pricing challenges from the frontlines.</p>
                 </div>
-
                 <div class="team-grid">
-                    <div class="team-card">
-                        <div class="team-photo">
-                            <img src="kamal_nariani.png" alt="Kamal Nariani">
-                        </div>
-                        <div class="team-info">
-                            <h3>Kamal Nariani</h3>
-                            <span class="team-role">CMO</span>
-                            <p class="team-bio">
-                                Co-founder, 20+ years in market consulting and strategic decision-making, specializing in commodity pricing and market dynamics (Qatar Energy, CAPCO, DOW).</br>
-                                Holds a Master's in International Business and a Bachelor's in Chemical Engineering. Studied Corporate Innovation at Carnegie Mellon’s Tepper School of Business.
-                            </p>
-                        </div>
+                    <div class="member reveal">
+                        <div class="photo"><img src="kamal_nariani.png" alt="Kamal Nariani"></div>
+                        <h3>Kamal Nariani</h3>
+                        <span class="role">CMO · Co-founder</span>
+                        <p>20+ years in market consulting and strategic decision-making, specializing in commodity pricing and market dynamics (QatarEnergy, Capco, Dow). Master's in International Business, Corporate Innovation at Carnegie Mellon Tepper.</p>
                     </div>
-                    
-                    <div class="team-card">
-                        <div class="team-photo">
-                            <img src="michael_hoffmann.png" alt="Michael Hoffmann">
-                        </div>
-                        <div class="team-info">
-                            <h3>Michael Hoffmann</h3>
-                            <span class="team-role">CEO</span>
-                            <p class="team-bio">
-                                Founder with 20 years in manufacturing across plasturgy, metallurgy, and aerospace in engineering and sales (Hutchinson, Airbus, Constellium).</br>
-                                Created Pricera to solve sales bottlenecks he experienced firsthand. Holds an INSEAD MBA and MSc in Electrical Engineering from ESIEE Paris.
-                            </p>
-                        </div>
+                    <div class="member reveal" data-delay="1">
+                        <div class="photo"><img src="michael_hoffmann.png" alt="Michael Hoffmann"></div>
+                        <h3>Michael Hoffmann</h3>
+                        <span class="role">CEO · Founder</span>
+                        <p>20 years in manufacturing across plasturgy, metallurgy and aerospace in engineering and sales (Hutchinson, Airbus, Constellium). Created Pricera to solve the sales bottlenecks he lived firsthand. INSEAD MBA, MSc Electrical Engineering ESIEE Paris.</p>
                     </div>
-                    
-                    <div class="team-card">
-                        <div class="team-photo">
-                            <img src="andrzej_rojek.png" alt="Andrzej Rojek">
-                        </div>
-                        <div class="team-info">
-                            <h3>Andrzej Rojek</h3>
-                            <span class="team-role">CTO</span>
-                            <p class="team-bio">
-                                Co-founder, leading Mosaic Lab since 2007 delivering CRM, pricing, and ERP software. Builds system-agnostic CPQ and AI solutions with expertise in enterprise integrations. 
-                                Graduated from Wrocław University of Science and Technology.
-                            </p>
-                        </div>
+                    <div class="member reveal" data-delay="2">
+                        <div class="photo"><img src="andrzej_rojek.png" alt="Andrzej Rojek"></div>
+                        <h3>Andrzej Rojek</h3>
+                        <span class="role">CTO · Co-founder</span>
+                        <p>Leading Mosaic Lab since 2007 delivering CRM, pricing and ERP software. Builds system-agnostic CPQ and AI solutions with deep enterprise-integration expertise. Wrocław University of Science and Technology.</p>
                     </div>
-                    
-                    
                 </div>
             </div>
         </section>
 
-        <!-- CTA -->
+        <!-- ================= CTA ================= -->
         <section>
             <div class="container">
-                <div class="cta-section">
-                    <h2>Ready to Transform Your Pricing?</h2>
-                    <p>See how Pricera can reduce quote time and increase revenue through intelligent pricing</p>
-                    <div class="cta-buttons">
-                        <a href="mailto:info@pricera.site" class="btn-secondary">Contact Sales</a>
+                <div class="cta-band reveal">
+                    <h2>Ready to transform your pricing?</h2>
+                    <p>We convert your existing Excel costing into governed models — no rip-and-replace. See how Pricera cuts quote time and lifts margin.</p>
+                    <div class="row">
+                        <a href="mailto:info@pricera.site" class="btn btn-light">Contact sales</a>
+                        <a href="#demo" class="btn btn-outline">Watch the demo</a>
                     </div>
                 </div>
             </div>
@@ -1228,64 +794,389 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3>Pricera</h3>
-                    <p>Intelligent pricing and quoting platform for complex industries. From millions of SKUs to sophisticated on-demand calculations.</p>
-                    <p><strong>Email:</strong> info@pricera.site</p>
-                    <p><strong>Locations:</strong> Pricera LLC, Doha, Essen, Paris</p>  
-                    <p><strong></strong> Level 21, Doha Tower, West Bay</p>             
+            <div class="foot-grid">
+                <div>
+                    <a href="#top" class="brand foot-brand" aria-label="Pricera">
+                        <svg class="mark" viewBox="0 0 30 30" aria-hidden="true">
+                            <rect x="1.5" y="1.5" width="27" height="27" rx="8" fill="#edf6f1" stroke="#d5e8de"/>
+                            <path d="M13.2 11.4 10.6 18M16.8 11.4l2.6 6.6" stroke="#216c56" stroke-width="1.7" stroke-linecap="round" opacity=".5"/>
+                            <circle cx="15" cy="8.8" r="2.9" fill="#216c56"/>
+                            <circle cx="9.4" cy="20.6" r="2.9" fill="#216c56" opacity=".5"/>
+                            <circle cx="20.6" cy="20.6" r="2.9" fill="#216c56"/>
+                        </svg>
+                        <span class="word">Pricera</span>
+                    </a>
+                    <p>Intelligent pricing and quoting for complex industries — from millions of SKUs to sophisticated on-demand calculations.</p>
+                    <p><strong>Email:</strong> <a href="mailto:info@pricera.site" style="display:inline;">info@pricera.site</a></p>
+                    <p><strong>Locations:</strong> Doha · Essen · Paris</p>
+                    <p>Pricera LLC, Level 21, Doha Tower, West Bay</p>
                 </div>
-                <div class="footer-section">
+                <div>
                     <h4>Product</h4>
-                    <p><a href="#features">Features</a></p>
-                    <p><a href="#industries">Industries</a></p>
-
+                    <a href="#platform">Platform</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#industries">Industries</a>
                 </div>
-                <div class="footer-section">
+                <div>
                     <h4>Company</h4>
-                    <p><a href="#team">Team</a></p>
-                    <p><a href="https://www.pricera.site">About</a></p>
-                    <p><a href="mailto:info@pricera.site">Contact</a></p>
+                    <a href="#team">Team</a>
+                    <a href="https://www.pricera.site">About</a>
+                    <a href="mailto:info@pricera.site">Contact</a>
                 </div>
             </div>
 
-            <div class="footer-disclaimer">
-                <h4>Performance Claims & References</h4>
-                <p><strong>Up to 90% Faster Quoting:</strong> Based on internal analysis of process manufacturing companies where pricing complexity creates sales bottlenecks. Time savings vary by industry and implementation scope.</p>
-                <p><strong>Up to 30% Revenue Increase:</strong> Potential revenue uplift in industries with complex pricing strategies, based on pricing optimization best practices documented by leading consulting firms including McKinsey & Company's research on B2B pricing excellence.</p>
-                <p><strong>Up to 10% Profit Margin Gain:</strong> Estimated margin improvement through optimized pricing models and reduced pricing errors. Industry research shows dynamic pricing delivers 5-10% average profit margin improvement, with documented range of 5-20% depending on implementation complexity and industry.</p>
-                
-                <p style="margin-top: 16px;"><strong>Industry References:</strong></p>
+            <div class="disclaimer">
+                <h4>Performance claims &amp; references</h4>
+                <p><strong>* Up to 90% faster quoting:</strong> based on internal analysis of process-manufacturing companies where pricing complexity creates sales bottlenecks. Time savings vary by industry and implementation scope.</p>
+                <p><strong>* Up to 30% revenue increase:</strong> potential uplift in industries with complex pricing strategies, per B2B pricing-excellence research by leading consulting firms including McKinsey &amp; Company.</p>
+                <p><strong>* Up to 10% profit margin gain:</strong> estimated margin improvement through optimized pricing models and reduced pricing errors; industry research shows dynamic pricing delivers 5–10% average margin improvement.</p>
+                <p><strong>Industry references:</strong></p>
                 <ul>
-                    <li>McKinsey & Company: "Pricing Excellence in B2B" - <a href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-power-of-pricing" target="_blank">mckinsey.com</a></li>
-                    <li>Zilliant: "The State of B2B Pricing" - <a href="https://www.zilliant.com" target="_blank">zilliant.com</a></li>
+                    <li>McKinsey &amp; Company, "The Power of Pricing" — <a href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-power-of-pricing" target="_blank" rel="noopener">mckinsey.com</a></li>
+                    <li>Zilliant, "The State of B2B Pricing" — <a href="https://www.zilliant.com" target="_blank" rel="noopener">zilliant.com</a></li>
                     <li>Internal customer case studies available upon request</li>
                 </ul>
-
-                <p style="margin-top: 16px; font-style: italic;">Results may vary based on company size, industry, implementation scope, and existing pricing infrastructure. Performance metrics are estimates and not guaranteed outcomes.</p>
+                <p style="font-style: italic;">Results vary with company size, industry, implementation scope and existing pricing infrastructure. Metrics are estimates, not guaranteed outcomes.</p>
             </div>
 
-            <div class="footer-bottom">
-                <p>&copy; 2025 Pricera. All rights reserved.</p>
-            </div>
+            <div class="foot-bottom">&copy; 2025 Pricera. All rights reserved.</div>
         </div>
     </footer>
 
     <script>
-        document.querySelectorAll('.demo-card video').forEach(video => {
-            video.parentElement.addEventListener('mouseenter', () => {
-                video.play();
+        // ---- header state ----
+        const header = document.getElementById('site-header');
+        addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 24), { passive: true });
+        header.classList.toggle('scrolled', scrollY > 24);
+
+        // ---- scroll reveal ----
+        const io = new IntersectionObserver(entries => {
+            for (const e of entries) if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        // ---- animated counters ----
+        const counterIO = new IntersectionObserver(entries => {
+            for (const e of entries) {
+                if (!e.isIntersecting) continue;
+                counterIO.unobserve(e.target);
+                const target = +e.target.dataset.target, dur = 1400, t0 = performance.now();
+                (function tick(t) {
+                    const p = Math.min((t - t0) / dur, 1);
+                    e.target.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+                    if (p < 1) requestAnimationFrame(tick);
+                })(t0);
+            }
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.count').forEach(el => counterIO.observe(el));
+
+        // ---- duplicate ticker for seamless loop ----
+        const ticker = document.getElementById('ticker');
+        ticker.innerHTML += ticker.innerHTML;
+
+        // ---- demo walkthrough sequencer — one scripted flow per industry ----
+        const SCENARIOS = [
+            {
+                label: 'Aluminium',
+                title: 'pricera.app — demo tenant · aluminium_sheet_pricing',
+                capModel: '/models/aluminium_sheet_pricing · draft v1',
+                capRun: '/quotes/new · strategy: metals-eu-default',
+                capQuote: '/quotes/Q-1041',
+                prompt: 'Price aluminium sheet off LME plus regional premium, with gauge and width adders, alloy-series and spec surcharges, an incoterm multiplier and packaging freight.',
+                cardTitle: 'aluminium_sheet_pricing',
+                cardMeta: '5 inputs · 4 lookup tables · 6 formula nodes · output: final_price',
+                cols: [
+                    { lbl: 'inputs', nodes: [['number · USD/MT', 'lme_price'], ['number · mm', 'gauge_mm'], ['number · mm', 'width_mm'], ['choice', 'alloy_series'], ['choice', 'incoterm']] },
+                    { lbl: 'lookups & formulas', nodes: [['lookup · 2D', 'dim_adder', 'lookup'], ['lookup · 1D', 'alloy_adder', 'lookup'], ['lookup · 1D', 'spec_adder', 'lookup'], ['lookup · 1D', 'incoterm_mult', 'lookup']] },
+                    { lbl: 'aggregates', nodes: [['formula', 'lme_plus_premium'], ['formula', 'adders_total'], ['formula', 'delivered_price']] },
+                    { lbl: 'output', nodes: [['USD/MT', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
+                ],
+                cfg: [['customer', 'Noralu Benelux BV'], ['item', 'Alu sheet · 5754 H22'], ['gauge × width', '2.5 mm × 1 500 mm'], ['incoterm', 'DAP Rotterdam'], ['quantity', '18 MT'], ['LME + premium', '$2 980.00 /MT']],
+                falls: [
+                    ['lme_plus_premium', '$2 980', 56, ''],
+                    ['+ dim_adder', '+ $260', 62, 'add'],
+                    ['+ alloy_adder', '+ $340', 68, 'add'],
+                    ['+ spec_adder', '+ $90', 71, 'add'],
+                    ['× DAP mult', '×1.04', 77, 'add'],
+                    ['+ freight', '+ $120', 82, 'add'],
+                    ['final_price', '$3 937 /MT', 90, 'total']
+                ],
+                quote: { id: 'Q-1041', cust: 'Noralu Benelux BV · metals segment · USD', line: 'Alu sheet 5754 · 2.5×1 500 mm · DAP Rotterdam', qty: '18 MT', unit: '$3 937.00', amount: '$70 866.00', total: '$70 866.00' }
+            },
+            {
+                label: 'FRP aerospace',
+                title: 'pricera.app — demo tenant · aerospace_frp_pricing',
+                capModel: '/models/aerospace_frp_pricing · draft v1',
+                capRun: '/quotes/new · strategy: aerospace-default',
+                capQuote: '/quotes/Q-1042',
+                prompt: 'Create a pricing model for aerospace FRP sheet: LME base + fabrication, adders for gauge/width, alloy grade and spec & testing, an incoterm multiplier and packaging freight.',
+                cardTitle: 'aerospace_frp_pricing',
+                cardMeta: '6 inputs · 4 lookup tables · 7 formula nodes · outputs: delivered_price, final_price',
+                cols: [
+                    { lbl: 'inputs', nodes: [['number · USD/MT', 'lme_price'], ['number · mm', 'gauge_mm'], ['number · mm', 'width_mm'], ['choice', 'alloy_grade'], ['choice', 'spec_level'], ['choice', 'incoterm']] },
+                    { lbl: 'lookups & formulas', nodes: [['lookup · 2D', 'dim_adder', 'lookup'], ['lookup · 1D', 'alloy_adder', 'lookup'], ['lookup · 1D', 'spec_adder', 'lookup'], ['lookup · 1D', 'incoterm_mult', 'lookup']] },
+                    { lbl: 'aggregates', nodes: [['formula', 'lme_plus_fab'], ['formula', 'adders_total'], ['formula', 'delivered_price']] },
+                    { lbl: 'output', nodes: [['USD/MT', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
+                ],
+                cfg: [['customer', 'Aerodyne Wichita LLC'], ['item', 'FRP sheet · 7075 (T6/T651)'], ['gauge × width', '12 mm × 1 500 mm'], ['incoterm', 'DAP Toulouse'], ['quantity', '4.2 MT'], ['LME base', '$2 850.00 /MT']],
+                falls: [
+                    ['lme_plus_fab', '$3 550', 56, ''],
+                    ['+ dim_adder', '+ $410', 63, 'add'],
+                    ['+ alloy_adder', '+ $620', 72, 'add'],
+                    ['+ spec_adder', '+ $180', 75, 'add'],
+                    ['× DAP mult', '×1.05', 80, 'add'],
+                    ['+ packaging', '+ $240', 84, 'add'],
+                    ['final_price', '$5 238 /MT', 90, 'total']
+                ],
+                quote: { id: 'Q-1042', cust: 'Aerodyne Wichita LLC · aerospace segment · USD', line: 'FRP sheet 7075 · 12×1 500 mm · DAP Toulouse', qty: '4.2 MT', unit: '$5 238.00', amount: '$21 999.60', total: '$21 999.60' }
+            },
+            {
+                label: 'Extrusion',
+                title: 'pricera.app — demo tenant · extrusion_costplus',
+                capModel: '/models/extrusion_costplus · draft v1',
+                capRun: '/quotes/new · strategy: profiles-dach',
+                capQuote: '/quotes/Q-1043',
+                prompt: 'Design a pricing model built on costs and margin. Costs are SG&A + manufacturing costs; manufacturing depends on hourly rates and energy costs — add a 1D or 2D lookup table for each, plus constraints.',
+                cardTitle: 'extrusion_costplus',
+                cardMeta: '5 inputs · 4 lookup tables · 7 formula nodes · 2 constraints · output: final_price',
+                cols: [
+                    { lbl: 'inputs', nodes: [['choice', 'press_line'], ['number · kg/m', 'profile_kg_m'], ['choice', 'alloy'], ['choice', 'surface'], ['number · m', 'qty_m']] },
+                    { lbl: 'lookups & formulas', nodes: [['lookup · 1D', 'press_rate_eur_h', 'lookup'], ['lookup · 1D', 'energy_tariff', 'lookup'], ['lookup · 2D', 'cycle_time', 'lookup'], ['lookup · 1D', 'scrap_rate', 'lookup']] },
+                    { lbl: 'aggregates', nodes: [['formula', 'machine_cost'], ['formula', 'energy_cost'], ['formula', 'mfg_cost'], ['formula', 'sga_alloc'], ['formula', 'cost_total'], ['check', 'margin ≥ 15% · qty ≥ 500 m', 'check']] },
+                    { lbl: 'output', nodes: [['EUR/m', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
+                ],
+                cfg: [['customer', 'Profilux Systems GmbH'], ['item', 'Extrusion · 6063 T6 · 40×40 slot'], ['press line', '22 MN'], ['surface', 'anodised E6'], ['quantity', '2 400 m']],
+                falls: [
+                    ['billet', '€1.18', 38, ''],
+                    ['+ press_rate', '+ €0.74', 50, 'add'],
+                    ['+ energy', '+ €0.31', 55, 'add'],
+                    ['+ sg&a', '+ €0.42', 60, 'add'],
+                    ['= cost_total', '€2.65', 64, 'mid'],
+                    ['× margin', '+18%', 80, 'add'],
+                    ['final_price', '€3.13 /m', 90, 'total']
+                ],
+                quote: { id: 'Q-1043', cust: 'Profilux Systems GmbH · industrial segment · EUR', line: 'Extrusion 6063 · 40×40 slot · anodised E6', qty: '2 400 m', unit: '€3.13', amount: '€7 512.00', total: '€7 512.00' }
+            },
+            {
+                label: 'Composite pipe',
+                title: 'pricera.app — demo tenant · composite_pipe_pricing',
+                capModel: '/models/composite_pipe_pricing · draft v1',
+                capRun: '/quotes/new · strategy: gre-mena',
+                capQuote: '/quotes/Q-1044',
+                prompt: 'Build a pricing model for GRE composite pipe: material cost from a diameter × wall 2D lookup, winding and cure time by pressure class, a liner multiplier, plus end-fitting and hydrotest surcharges.',
+                cardTitle: 'composite_pipe_pricing',
+                cardMeta: '5 inputs · 4 lookup tables · 7 formula nodes · output: final_price',
+                cols: [
+                    { lbl: 'inputs', nodes: [['number · mm', 'diameter_dn'], ['number · mm', 'wall_mm'], ['choice', 'pressure_class'], ['choice', 'liner_type'], ['number · m', 'qty_m']] },
+                    { lbl: 'lookups & formulas', nodes: [['lookup · 2D', 'resin_glass_cost', 'lookup'], ['lookup · 1D', 'cure_time_min', 'lookup'], ['lookup · 1D', 'liner_mult', 'lookup'], ['lookup · 1D', 'hydrotest_fee', 'lookup']] },
+                    { lbl: 'aggregates', nodes: [['formula', 'material_cost'], ['formula', 'machine_cost'], ['formula', 'pipe_base'], ['formula', 'fittings_total']] },
+                    { lbl: 'output', nodes: [['EUR/m', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
+                ],
+                cfg: [['customer', 'Oceanic Desal SA'], ['item', 'GRE pipe DN600 · PN16'], ['liner', 'vinyl ester'], ['quantity', '850 m'], ['line speed', '11 m/h']],
+                falls: [
+                    ['material_cost', '€96', 52, ''],
+                    ['+ winding', '+ €22', 58, 'add'],
+                    ['+ cure', '+ €9', 61, 'add'],
+                    ['× liner_mult', '×1.15', 72, 'add'],
+                    ['+ fittings', '+ €14', 79, 'add'],
+                    ['+ hydrotest', '+ €6', 83, 'add'],
+                    ['final_price', '€166 /m', 90, 'total']
+                ],
+                quote: { id: 'Q-1044', cust: 'Oceanic Desal SA · water segment · EUR', line: 'GRE pipe DN600 · PN16 · vinyl ester liner', qty: '850 m', unit: '€166.00', amount: '€141 100.00', total: '€141 100.00' }
+            },
+            {
+                label: 'Chemicals',
+                title: 'pricera.app — demo tenant · chemicals_index_pricing',
+                capModel: '/models/chemicals_index_pricing · draft v1',
+                capRun: '/quotes/new · strategy: solvents-eu',
+                capQuote: '/quotes/Q-1045',
+                prompt: 'Create an index-based model for specialty chemicals: price = 3-month rolling average of the ICIS index + tolling fee + zone freight − volume rebate, with a floor-price constraint.',
+                cardTitle: 'chemicals_index_pricing',
+                cardMeta: '4 inputs · 1 index series · 3 lookup tables · 6 formula nodes · 1 constraint · output: price_per_t',
+                cols: [
+                    { lbl: 'inputs', nodes: [['series', 'icis_index'], ['number · t', 'qty_t'], ['choice', 'zone'], ['choice', 'grade']] },
+                    { lbl: 'lookups & formulas', nodes: [['index · 3m avg', 'icis_avg', 'lookup'], ['lookup · 1D', 'toll_fee', 'lookup'], ['lookup · 1D', 'zone_freight', 'lookup'], ['lookup · 1D', 'rebate_tier', 'lookup']] },
+                    { lbl: 'aggregates', nodes: [['formula', 'landed_cost'], ['formula', 'rebate_amt'], ['check', 'floor ≥ $1 050', 'check'], ['formula', 'effective_price']] },
+                    { lbl: 'output', nodes: [['USD/t', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
+                ],
+                cfg: [['customer', 'Chemwerk Rhineland AG'], ['item', 'Solvent blend CX-9'], ['index', 'ICIS · 3-mo avg'], ['volume', '120 t'], ['zone', 'EU-2']],
+                falls: [
+                    ['icis_avg_3m', '$1 120', 72, ''],
+                    ['+ tolling', '+ $85', 77, 'add'],
+                    ['+ zone freight', '+ $42', 80, 'add'],
+                    ['− volume rebate', '− $60', 74, 'add'],
+                    ['floor check', '≥ $1 050 ✓', 74, 'mid'],
+                    ['final_price', '$1 187 /t', 90, 'total']
+                ],
+                quote: { id: 'Q-1045', cust: 'Chemwerk Rhineland AG · chemicals segment · USD', line: 'Solvent blend CX-9 · zone EU-2', qty: '120 t', unit: '$1 187.00', amount: '$142 440.00', total: '$142 440.00' }
+            }
+        ];
+
+        const scenes = [0, 1, 2, 3].map(i => document.getElementById('scene-' + i));
+        const steps = [...document.querySelectorAll('.demo-rail .stp')];
+        let timers = [], curScenario = 0;
+        const later = (ms, fn) => timers.push(setTimeout(fn, ms));
+        const mk = (tag, cls, html) => {
+            const e = document.createElement(tag);
+            if (cls) e.className = cls;
+            if (html != null) e.innerHTML = html;
+            return e;
+        };
+
+        function renderScenario(i) {
+            curScenario = i;
+            const s = SCENARIOS[i];
+            document.getElementById('demo-title').textContent = s.title;
+            document.getElementById('cap-model').textContent = s.capModel;
+            document.getElementById('cap-run').textContent = s.capRun;
+            document.getElementById('cap-quote').textContent = s.capQuote;
+            document.getElementById('gen-card').innerHTML =
+                `<span class="k">${s.cardTitle}</span> — draft v1<br>${s.cardMeta}`;
+
+            const mc = document.getElementById('model-cols');
+            mc.innerHTML = '';
+            s.cols.forEach(c => {
+                const col = mk('div', 'mcol');
+                col.append(mk('div', 'col-lbl', c.lbl));
+                c.nodes.forEach(n => col.append(mk('div', 'mnode' + (n[2] ? ' ' + n[2] : ''),
+                    `<span class="k">${n[0]}</span><span class="v">${n[1]}</span>`)));
+                mc.append(col);
             });
-            
-            video.parentElement.addEventListener('mouseleave', () => {
-                video.pause();
-                // Don't reset - video stays at current position
+
+            const cf = document.getElementById('cfg-rows');
+            cf.innerHTML = '';
+            s.cfg.forEach(r => cf.append(mk('div', 'row', `<span class="f">${r[0]}</span><span class="x">${r[1]}</span>`)));
+
+            const fl = document.getElementById('falls');
+            fl.innerHTML = '';
+            s.falls.forEach(f => {
+                const d = mk('div', 'fall' + (f[3] ? ' ' + f[3] : ''),
+                    `<span class="lbl">${f[0]}</span><span class="bar"></span><span class="amt">${f[1]}</span>`);
+                d.dataset.w = f[2];
+                fl.append(d);
             });
+
+            const q = s.quote;
+            document.getElementById('quote-box').innerHTML = `
+                <div class="qhead"><span class="qid">${q.id}</span><span class="status">ready to send</span></div>
+                <div class="qcust">${q.cust}</div>
+                <table>
+                    <tr><th>line</th><th class="r">qty</th><th class="r">unit</th><th class="r">amount</th></tr>
+                    <tr><td>${q.line}</td><td class="r">${q.qty}</td><td class="r">${q.unit}</td><td class="r">${q.amount}</td></tr>
+                </table>
+                <table>
+                    <tr class="qtotal"><td>Total</td><td class="r">${q.total}</td></tr>
+                </table>
+                <div class="qfoot">
+                    <span class="chip">✓ model v1 pinned</span>
+                    <span class="chip">✓ snapshot stored</span>
+                    <span class="chip dim">PDF ready</span>
+                </div>`;
+        }
+
+        function setStep(i) {
+            scenes.forEach((s, j) => s.classList.toggle('on', j === i));
+            steps.forEach((st, j) => {
+                st.classList.toggle('on', j === i);
+                st.classList.toggle('done', j < i);
+            });
+        }
+
+        function resetDemo() {
+            timers.forEach(clearTimeout); timers = [];
+            document.getElementById('type-target').textContent = '';
+            document.querySelector('.caret').style.display = '';
+            document.getElementById('ai-reply').style.display = 'none';
+            document.querySelectorAll('.mnode').forEach(n => n.classList.remove('in', 'hot'));
+            document.querySelectorAll('#cfg-rows .row').forEach(r => r.classList.remove('in'));
+            document.querySelectorAll('.fall').forEach(f => { f.classList.remove('in'); f.querySelector('.bar').style.width = '0'; });
+            const q = document.getElementById('quote-box');
+            q.style.opacity = '0';
+            q.style.transform = 'translateY(12px)';
+        }
+
+        function runDemo() {
+            resetDemo();
+            setStep(0);
+            const prompt = SCENARIOS[curScenario].prompt;
+            const target = document.getElementById('type-target');
+            let i = 0;
+            (function type() {
+                if (i <= prompt.length) {
+                    target.textContent = prompt.slice(0, i++);
+                    timers.push(setTimeout(type, 16));
+                } else {
+                    document.querySelector('.caret').style.display = 'none';
+                    later(500, () => {
+                        document.getElementById('ai-reply').style.display = 'block';
+                        later(2200, () => { setStep(1); buildModel(); });
+                    });
+                }
+            })();
+        }
+
+        function buildModel() {
+            const nodes = [...document.querySelectorAll('#model-cols .mnode')];
+            nodes.forEach((n, k) => later(140 + k * 160, () => {
+                n.classList.add('in');
+                if (k === nodes.length - 1) later(1400, () => { setStep(2); runPrice(); });
+            }));
+        }
+
+        function runPrice() {
+            const rows = [...document.querySelectorAll('#cfg-rows .row')];
+            rows.forEach((r, k) => later(120 + k * 180, () => r.classList.add('in')));
+            const falls = [...document.querySelectorAll('.fall')];
+            falls.forEach((f, k) => later(1300 + k * 300, () => {
+                f.classList.add('in');
+                f.querySelector('.bar').style.width = f.dataset.w + '%';
+                if (k === falls.length - 1) later(1400, () => { setStep(3); showQuote(); });
+            }));
+        }
+
+        function showQuote() {
+            const q = document.getElementById('quote-box');
+            q.style.transition = 'opacity .6s var(--ease-out), transform .6s var(--ease-out)';
+            q.style.opacity = '1';
+            q.style.transform = 'none';
+        }
+
+        const indWrap = document.getElementById('demo-ind');
+        SCENARIOS.forEach((s, i) => {
+            const b = mk('button', 'ind' + (i === 0 ? ' on' : ''), s.label);
+            b.type = 'button';
+            b.addEventListener('click', () => {
+                renderScenario(i);
+                indWrap.querySelectorAll('.ind').forEach((c, j) => c.classList.toggle('on', j === i));
+                runDemo();
+            });
+            indWrap.append(b);
         });
+
+        renderScenario(0);
+        const demoEl = document.querySelector('.demo-app');
+        let played = false;
+        new IntersectionObserver((es, obs) => {
+            if (es[0].isIntersecting && !played) { played = true; runDemo(); obs.disconnect(); }
+        }, { threshold: 0.35 }).observe(demoEl);
+        document.getElementById('demo-replay').addEventListener('click', runDemo);
+        resetDemo();
+
+        // ---- hero tree: live eval flicker ----
+        const priceOut = document.getElementById('price-out');
+        const tickChip = document.getElementById('tick-chip');
+        const nodes = document.querySelectorAll('.tree-stage .node:not(.out)');
+        const base = 1240;
+        let i = 0;
+        setInterval(() => {
+            nodes.forEach(n => n.classList.remove('live'));
+            const n = nodes[i % nodes.length];
+            n.classList.add('live');
+            const delta = (Math.sin(i * 1.7) * 34 + Math.cos(i * .6) * 18);
+            priceOut.textContent = '€ ' + (base + delta).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            tickChip.textContent = 'eval ' + (8 + Math.round(Math.abs(delta) / 4)) + 'ms';
+            i++;
+        }, 1400);
     </script>
-    
-    
-    
 </body>
 </html>
