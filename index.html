@@ -285,6 +285,21 @@
         .pillar p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; }
         .pillar .tag { display: inline-block; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--green); background: var(--mint); padding: 3px 9px; border-radius: 6px; letter-spacing: .02em; }
 
+        /* feedback-loop strip under the costing cards */
+        .loop-line {
+            display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
+            margin-top: 28px; padding: 14px 22px;
+            background: var(--surface); border: 1px solid var(--mint-line); border-radius: 100px;
+            font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--ink-soft);
+        }
+        .loop-line .loop-lbl {
+            font-size: 9.5px; text-transform: uppercase; letter-spacing: .12em;
+            color: var(--green); font-weight: 600; margin-right: 4px;
+        }
+        .loop-line .lp { white-space: nowrap; }
+        .loop-line .arr { color: var(--green); font-weight: 500; }
+        .loop-line .loop-back { color: var(--amber); font-size: 13px; }
+
         /* ============ Demo — interactive app mock ============ */
         .demo-app {
             background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
@@ -481,7 +496,6 @@
         .recog img:hover { opacity: 1; filter: none; transform: translateY(-2px); }
         .recog img[alt="CostCtrl"] { background: #1a2129; padding: 8px 14px; border-radius: 10px; }
         .partner img { height: 15px; vertical-align: -3px; margin-left: 2px; background: #1a2129; padding: 3px 9px; border-radius: 6px; }
-        .recog img:hover { opacity: 1; filter: none; transform: translateY(-2px); }
         .recog .impact { height: 86px; }
 
         /* ============ Team ============ */
@@ -666,8 +680,8 @@
             <div class="container">
                 <div class="section-header reveal">
                     <div class="kicker">Costing</div>
-                    <h2 class="section-title">Quote it now. Prove it at close.</h2>
-                    <p class="section-sub">Pricera prices new and custom products from costing models: forward-looking, built from driver rates, routings and recipes. After every close, those assumptions are checked against what your sold items actually cost. Drift is flagged, a re-tune is proposed, you approve.</p>
+                    <h2 class="section-title">Quote on today's costs, not yesterday's assumptions.</h2>
+                    <p class="section-sub">Pricera prices new and custom products from costing models: forward-looking, built from driver rates, routings and recipes. Those models are continuously recalibrated by the actual costs of the products you've sold. So cost, margin and price stay accurate, for products you quote every week and for products that have never been quoted.</p>
                 </div>
                 <div class="pillars">
                     <div class="pillar reveal">
@@ -685,9 +699,17 @@
                     <div class="pillar reveal" data-delay="2">
                         <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 8h8M18 8h2M4 16h4M14 16h6"/><circle cx="15" cy="8" r="2.4"/><circle cx="11" cy="16" r="2.4"/></svg></div>
                         <h3>Re-tune with approval</h3>
-                        <p>The fix is proposed as a new table version, reference cases re-run, and open quotes below margin floor surface in Needs attention. Nothing publishes without you.</p>
+                        <p>The gap is drafted as a new model version — updated tables, new drivers, missing cost items — and reference cases re-run, so the next quote stands on corrected costs. Nothing publishes without you.</p>
                         <span class="tag">governance</span>
                     </div>
+                </div>
+                <div class="loop-line reveal">
+                    <span class="loop-lbl">the feedback loop</span>
+                    <span class="lp">model the cost</span><span class="arr">→</span>
+                    <span class="lp">make &amp; sell</span><span class="arr">→</span>
+                    <span class="lp">actuals land</span><span class="arr">→</span>
+                    <span class="lp">model recalibrates</span><span class="arr">→</span>
+                    <span class="lp">next quote on current rates</span><span class="arr loop-back">↻</span>
                 </div>
             </div>
         </section>
