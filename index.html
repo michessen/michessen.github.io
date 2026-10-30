@@ -62,8 +62,7 @@
         html.dark .fall.mid .bar, html.dark .s-fall.mid .bar { background: #2d5344; border-color: #41735d; }
         html.dark .badge.warn { border-color: #5c4a2a; }
         html.dark .recog img { background: #fff; padding: 8px 14px; border-radius: 10px; opacity: 1; filter: none; }
-        html.dark .recog img[alt="CostCtrl"] { background: transparent; }
-        html.dark .partner img { background: transparent; padding: 0; }
+        html.dark .partner img { background: #fff; }
         html.dark .ind-img img { filter: invert(1) hue-rotate(180deg) saturate(.75) brightness(.98); }
         html.dark .cta-band { background: linear-gradient(135deg, #124033 0%, #1a5644 55%, #2e8266 100%); }
         html.dark .cta-band .btn-light { color: #16533f; }
@@ -522,7 +521,6 @@
         .recog { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
         .recog img { height: 42px; opacity: .8; filter: grayscale(35%); transition: opacity .3s, filter .3s, transform .3s; }
         .recog img:hover { opacity: 1; filter: none; transform: translateY(-2px); }
-        .recog img[alt="CostCtrl"] { height: 26px; background: #1a2129; padding: 6px 12px; border-radius: 8px; opacity: 1; filter: none; }
         .recog .impact { height: 80px; }
 
         .cta-wrap { padding: 24px 0 88px; }
@@ -545,7 +543,7 @@
         .foot-grid p, .foot-grid a { font-size: 14px; color: var(--ink-soft); line-height: 1.8; text-decoration: none; display: block; }
         .foot-grid a:hover { color: var(--green); }
         .foot-brand { margin-bottom: 14px; }
-        .partner img { height: 15px; vertical-align: -3px; margin-left: 4px; background: #1a2129; padding: 3px 9px; border-radius: 6px; }
+        .partner img { height: 17px; vertical-align: -3px; margin-left: 4px; background: #fff; border: 1px solid var(--line); padding: 3px 9px; border-radius: 6px; }
         .foot-bottom { border-top: 1px solid var(--line); padding-top: 22px; font-size: 12.5px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
         @media (max-width: 980px) {
@@ -651,7 +649,8 @@
                         <section class="story-beat" id="costing" data-scene="calibrate">
                             <span class="beat-kicker">04 / Continuously recalibrated costing</span>
                             <h2>Quote on today's costs, not yesterday's assumptions.</h2>
-                            <p>Pricera prices new and custom products from costing models: forward-looking, built from driver rates, routings and recipes. Those models are continuously recalibrated by the actual costs of the products you've sold. So cost, margin and price stay accurate, for products you quote every week and for products that have never been quoted.</p>
+                            <p>Pricera prices new and custom products from models — costing models, or pure pricing models. Actual costs feed both: they recalibrate the costing models, put true cost and margin behind every priced product — and where no costing model exists yet, they can seed one. So cost, margin and price stay accurate, for products you quote every week and for products that have never been quoted.</p>
+                            <p>Actual costs and profitability are designed to come from CostCtrl, which models your ERP and accounting data with time-driven activity-based costing (TDABC) and multi-stage ABC, by product, customer and the other dimensions you choose. Pricera keeps the pricing and quoting logic; CostCtrl measures what each product and customer really costs and earns.</p>
                             <p>The gap is drafted as a new model version — updated tables, new drivers, missing cost items — and reference cases re-run, so the next quote stands on corrected costs. Nothing publishes without you.</p>
                             <div class="loop-pill">
                                 <span class="lbl">the feedback loop</span>
@@ -932,8 +931,8 @@
                     </div>
                     <div class="person">
                         <div class="person-head">
-                            <h3>Miguel Guimaraes</h3>
-                            <span class="role">CEO · CostCtrl</span>
+                            <h3>Miguel Guimarães</h3>
+                            <span class="role">Co-founder &amp; CPO · CostCtrl</span>
                         </div>
                         <p>Management and industrial engineer. Deep expertise in cost and profitability models across manufacturing, distribution and services.</p>
                     </div>
@@ -946,7 +945,6 @@
                         <img src="insead_logo.png" alt="INSEAD">
                         <img src="websummit_logo.png" alt="Web Summit">
                         <img src="antler_logo.png" alt="Antler">
-                        <img src="costctrl_logo.png" alt="CostCtrl">
                     </div>
                 </div>
             </div>
@@ -983,7 +981,7 @@
                     <p>The costing and pricing engine for complex manufacturing industries: calculated prices, modelled explicitly, traceable on every quote.</p>
                     <p><strong>Email:</strong> <a href="mailto:info@pricera.site" style="display:inline;">info@pricera.site</a></p>
                     <p><strong>Locations:</strong> Doha · Essen · Paris</p>
-                    <p class="partner">Cost actuals powered by <a href="https://www.costctrl.com" target="_blank" rel="noopener" style="display:inline;"><img src="costctrl_logo.png" alt="CostCtrl"></a></p>
+                    <p class="partner">Costing and profitability partner: <a href="https://www.costctrl.com" target="_blank" rel="noopener" style="display:inline;"><img src="costctrl_logo.jpeg" alt="CostCtrl"></a></p>
                 </div>
                 <div>
                     <h4>Product</h4>
