@@ -9,6 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Michroma&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Crect x='1.5' y='1.5' width='27' height='27' rx='8' fill='%23edf6f1' stroke='%23d5e8de'/%3E%3Cpath d='M13.2 11.4 10.6 18M16.8 11.4l2.6 6.6' stroke='%23216c56' stroke-width='1.7' stroke-linecap='round' opacity='.5'/%3E%3Ccircle cx='15' cy='8.8' r='2.9' fill='%23216c56'/%3E%3Ccircle cx='9.4' cy='20.6' r='2.9' fill='%23216c56' opacity='.5'/%3E%3Ccircle cx='20.6' cy='20.6' r='2.9' fill='%23216c56'/%3E%3C/svg%3E">
+    <script>
+    try {
+      var t = localStorage.getItem('pricera-theme');
+      var h = new Date().getHours();
+      if (t ? t === 'dark' : (h >= 19 || h < 7)) document.documentElement.classList.add('dark');
+    } catch (e) {}
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -25,6 +32,29 @@
             --mint-line: #d5e8de;
             --radius: 18px;
         }
+        html.dark {
+            color-scheme: dark;
+            --paper: #11161b;
+            --surface: #1a2129;
+            --surface-soft: #151c23;
+            --ink: #e9eef2;
+            --ink-soft: #b7c2cb;
+            --muted: #8d99a4;
+            --line: #2a343e;
+            --green: #4fae8b;
+            --green-dark: #6fd4ae;
+            --mint: #1c2b25;
+            --mint-line: #2f4a3e;
+        }
+        html.dark header { background: rgba(17,22,27,.86); }
+        html.dark .video-card { box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+        .theme-btn {
+            background: var(--mint); border: 1px solid var(--mint-line); border-radius: 8px;
+            width: 34px; height: 34px; cursor: pointer; font-size: 15px; line-height: 1;
+            color: var(--green-dark); display: inline-grid; place-items: center;
+            transition: border-color .25s, transform .25s;
+        }
+        .theme-btn:hover { border-color: var(--green); transform: translateY(-1px); }
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: var(--paper);
@@ -97,7 +127,10 @@
     <header>
         <div class="container">
             <a href="/" class="brand"><img src="/pricera_logo.png" alt="Pricera"></a>
-            <a href="/#demo" class="back" data-track="demo-back">← Back to site</a>
+            <div style="display:flex;gap:10px;align-items:center">
+                <a href="/#demo" class="back" data-track="demo-back">← Back to site</a>
+                <button class="theme-btn" id="theme-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+            </div>
         </div>
     </header>
     <main class="container">
@@ -157,6 +190,14 @@
           fetch(EP, { method: "POST", body: data, keepalive: true, mode: "no-cors" });
         }
       }
+      var themeBtn = document.getElementById('theme-btn');
+      themeBtn.textContent = document.documentElement.classList.contains('dark') ? '☀' : '☾';
+      themeBtn.addEventListener('click', function () {
+        var d = !document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', d);
+        themeBtn.textContent = d ? '☀' : '☾';
+        try { localStorage.setItem('pricera-theme', d ? 'dark' : 'light'); } catch (e) {}
+      });
       send("pageview");
       document.querySelectorAll("video").forEach(function (v) {
         v.addEventListener("play", function once() {
