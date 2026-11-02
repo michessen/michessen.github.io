@@ -71,8 +71,13 @@
             display: flex; align-items: center; justify-content: space-between;
             padding-top: 14px; padding-bottom: 14px;
         }
-        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 700; }
-        .brand img { height: 28px; }
+        .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand .mark { width: 28px; height: 28px; display: block; }
+        .brand .word {
+            font-family: 'Michroma', 'Inter', sans-serif; font-size: 16px;
+            letter-spacing: .10em; color: var(--green); text-transform: uppercase;
+            -webkit-text-stroke: .45px currentColor; text-stroke: .45px currentColor;
+        }
         .back {
             font-size: 14px; font-weight: 600; color: var(--green);
             text-decoration: none; padding: 8px 14px; border: 1px solid var(--mint-line);
@@ -126,7 +131,16 @@
 <body>
     <header>
         <div class="container">
-            <a href="/" class="brand"><img src="/pricera_logo.png" alt="Pricera"></a>
+            <a href="/" class="brand" aria-label="Pricera">
+                <svg class="mark" viewBox="0 0 30 30" aria-hidden="true">
+                    <rect x="1.5" y="1.5" width="27" height="27" rx="8" fill="#edf6f1" stroke="#d5e8de"/>
+                    <path d="M13.2 11.4 10.6 18M16.8 11.4l2.6 6.6" stroke="#216c56" stroke-width="1.7" stroke-linecap="round" opacity=".5"/>
+                    <circle cx="15" cy="8.8" r="2.9" fill="#216c56"/>
+                    <circle cx="9.4" cy="20.6" r="2.9" fill="#216c56" opacity=".5"/>
+                    <circle cx="20.6" cy="20.6" r="2.9" fill="#216c56"/>
+                </svg>
+                <span class="word">Pricera</span>
+            </a>
             <div style="display:flex;gap:10px;align-items:center">
                 <a href="/#demo" class="back" data-track="demo-back">← Back to site</a>
                 <button class="theme-btn" id="theme-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
