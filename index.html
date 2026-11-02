@@ -63,7 +63,7 @@
         html.dark .badge.warn { border-color: #5c4a2a; }
         html.dark .recog img { background: #fff; padding: 8px 14px; border-radius: 10px; opacity: 1; filter: none; }
         html.dark .partner img { background: #fff; }
-        html.dark .ind-img img { filter: invert(1) hue-rotate(180deg) saturate(.75) brightness(.98); }
+        html.dark .ind-img { filter: invert(1) hue-rotate(180deg) saturate(.75) brightness(.98); border-color: transparent; box-shadow: none; }
         html.dark .cta-band { background: linear-gradient(135deg, #124033 0%, #1a5644 55%, #2e8266 100%); }
         html.dark .cta-band .btn-light { color: #16533f; }
         html.dark .caret { background: rgba(0,0,0,.45); }
@@ -1553,6 +1553,56 @@
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             setInterval(() => { if (indAuto && indVisible) setIndustry((indIdx + 1) % INDUSTRIES.length); }, 4500);
         }
+    </script>
+    <script>
+    (function () {
+      "use strict";
+      var EP = "https://t.pricera.site/";
+      var loaded = Date.now();
+      function payload(e, x) {
+        var q = new URLSearchParams(location.search);
+        return JSON.stringify({
+          e: e, p: location.pathname + location.hash,
+          r: document.referrer || null,
+          l: navigator.language,
+          tz: (Intl.DateTimeFormat().resolvedOptions() || {}).timeZone,
+          vw: window.innerWidth, vh: window.innerHeight,
+          d: Date.now() - loaded,
+          u: { us: q.get("utm_source"), um: q.get("utm_medium"), uc: q.get("utm_campaign") },
+          x: x || null,
+        });
+      }
+      function send(e, x) {
+        var data = payload(e, x);
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(EP, new Blob([data], { type: "application/json" }));
+        } else {
+          fetch(EP, { method: "POST", body: data, keepalive: true, mode: "no-cors" });
+        }
+      }
+      send("pageview");
+      if ("IntersectionObserver" in window) {
+        var seen = {};
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            var id = en.target.id;
+            if (en.isIntersecting && id && !seen[id]) { seen[id] = 1; send("view", { section: id }); }
+          });
+        }, { threshold: 0.4 });
+        document.querySelectorAll("section[id]").forEach(function (s) { io.observe(s); });
+      }
+      document.querySelectorAll("video").forEach(function (v) {
+        v.addEventListener("play", function once() {
+          v.removeEventListener("play", once);
+          send("video_play", { src: (v.currentSrc || "").split("/").pop() });
+        });
+      });
+      document.addEventListener("click", function (ev) {
+        var el = ev.target.closest && ev.target.closest("[data-track]");
+        if (el) send("click", { target: el.getAttribute("data-track"), href: el.href || null });
+      });
+      window.addEventListener("pagehide", function () { send("leave"); });
+    })();
     </script>
 </body>
 </html>
