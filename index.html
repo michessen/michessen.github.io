@@ -443,8 +443,13 @@
         .quote .qfoot .chip.dim { color: var(--muted); background: var(--surface); border: 1px solid var(--line); }
         .demo-note { text-align: center; margin-top: 18px; font-size: 12.5px; color: var(--muted); }
         .demo-note code { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--green); }
-        .demo-full { display: block; text-align: center; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--green); text-decoration: none; }
-        .demo-full:hover { text-decoration: underline; }
+        .demo-full {
+            display: block; width: fit-content; margin: 18px auto 0;
+            font-size: 14.5px; font-weight: 600; color: #fff; background: var(--green);
+            text-decoration: none; padding: 12px 26px; border-radius: 999px;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .demo-full:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(33,108,86,.28); }
 
         .drift-wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; justify-content: center; height: 100%; }
         .drow {
@@ -545,7 +550,7 @@
         .foot-grid p, .foot-grid a { font-size: 14px; color: var(--ink-soft); line-height: 1.8; text-decoration: none; display: block; }
         .foot-grid a:hover { color: var(--green); }
         .foot-brand { margin-bottom: 14px; }
-        .partner img { height: 17px; vertical-align: -3px; margin-left: 4px; background: #fff; border: 1px solid var(--line); padding: 3px 9px; border-radius: 6px; }
+        .partner img { height: 34px; vertical-align: -10px; margin-left: 4px; background: #fff; border: 1px solid var(--line); padding: 3px 9px; border-radius: 6px; }
         .foot-bottom { border-top: 1px solid var(--line); padding-top: 22px; font-size: 12.5px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
         @media (max-width: 980px) {
@@ -596,7 +601,6 @@
                 <a href="#why">Why Pricera</a>
                 <a href="#industries">Industries</a>
                 <a href="#team">Team</a>
-                <a href="mailto:info@pricera.site" class="btn btn-primary" style="padding: 8px 16px; font-size: 13.5px;">Book a demo</a>
                 <button class="theme-btn" id="theme-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
             </div>
         </nav>
@@ -619,9 +623,9 @@
                                 <a href="#demo" class="btn btn-ghost">See it in action&nbsp;↓</a>
                             </div>
                             <div class="hero-stats">
-                                <div class="hero-stat"><div class="num"><span class="count" data-target="90">90</span>%</div><div class="lbl">Faster quoting</div></div>
+                                <div class="hero-stat"><div class="num"><span class="count" data-target="99">99</span>%</div><div class="lbl">Faster quoting</div></div>
                                 <div class="hero-stat"><div class="num"><span class="count" data-target="100">100</span>%</div><div class="lbl">Traceable quote lines</div></div>
-                                <div class="hero-stat"><div class="num"><span class="count" data-target="0">0</span></div><div class="lbl">Spreadsheets in the quote path</div></div>
+                                <div class="hero-stat"><div class="num"><span class="count" data-target="100">100</span>%</div><div class="lbl">Pricing-error free</div></div>
                             </div>
                         </div>
 
@@ -696,11 +700,11 @@
                                             <path class="edge"      d="M300,145 C330,105 340,90 345,75" opacity=".5"/>
                                         </svg>
                                         <div class="node" style="left:72px;  top:55px;">  <div class="n-name">input</div><div class="n-val" id="n-qty">quantity · 500</div></div>
-                                        <div class="node" style="left:72px;  top:135px;"> <div class="n-name">lookup</div><div class="n-val" id="n-idx">steel_index · €820</div></div>
+                                        <div class="node" style="left:72px;  top:135px;"> <div class="n-name">nodes type 1</div><div class="n-val" id="n-idx">steel_index · €820</div></div>
                                         <div class="node" style="left:72px;  top:215px;"> <div class="n-name">input</div><div class="n-val" id="n-dim">diameter · 60mm</div></div>
-                                        <div class="node" style="left:212px; top:112px;"> <div class="n-name">formula</div><div class="n-val" id="n-cost">unit_cost · €992</div></div>
+                                        <div class="node" style="left:212px; top:112px;"> <div class="n-name">nodes type 2</div><div class="n-val" id="n-cost">unit_cost · €992</div></div>
                                         <div class="node" style="left:212px; top:198px;"> <div class="n-name">parameter</div><div class="n-val">margin_pct · 20%</div></div>
-                                        <div class="node" style="left:336px; top:152px;"> <div class="n-name">formula</div><div class="n-val">unit_price</div></div>
+                                        <div class="node" style="left:336px; top:152px;"> <div class="n-name">nodes type 2</div><div class="n-val">unit_price</div></div>
                                         <div class="node out" style="left:336px; top:246px;"><div class="n-name">output</div><div class="n-val" id="price-out">€ 1,240.00</div></div>
                                     </div>
                                     <div class="cscene-foot">
@@ -716,9 +720,9 @@
                                     </div>
                                     <div class="s-box">
                                         <div class="s-grid3">
-                                            <div class="s-node lookup"><span class="k">lookup · 1D</span><span class="v">press_rate_eur_h</span></div>
-                                            <div class="s-node lookup"><span class="k">lookup · 1D</span><span class="v">energy_tariff</span></div>
-                                            <div class="s-node"><span class="k">formula</span><span class="v">cost_total</span></div>
+                                            <div class="s-node lookup"><span class="k">nodes type 1</span><span class="v">press_rate_eur_h</span></div>
+                                            <div class="s-node lookup"><span class="k">nodes type 1</span><span class="v">energy_tariff</span></div>
+                                            <div class="s-node"><span class="k">nodes type 2</span><span class="v">cost_total</span></div>
                                         </div>
                                         <div class="s-table">
                                             <div class="s-row head"><span>reference case</span><span class="r">expected</span><span class="r">evaluated</span><span class="r">status</span></div>
@@ -849,7 +853,7 @@
                     </div>
                 </div>
                 <div class="demo-note">A live walkthrough of the real product flow · <code>click any industry tab or step 01–04 to inspect</code></div>
-                <a href="/demo/" class="demo-full" data-track="demo-open-full">Watch the real product recording — pricing document to governed prices (10:36) →</a>
+                <a href="/demo/" class="demo-full" data-track="demo-open-full">Watch the real product →</a>
             </div>
         </section>
 
@@ -956,7 +960,7 @@
         <section class="cta-wrap">
             <div class="container">
                 <div class="cta-band reveal">
-                    <h2>Bring us your hardest pricing spreadsheet.</h2>
+                    <h2>Bring us your hardest pricing case.</h2>
                     <p>We rebuild it as a tested, versioned Pricera model (same numbers, now traceable) before you commit to anything.</p>
                     <div class="row">
                         <a href="mailto:info@pricera.site" class="btn btn-light">Contact sales</a>
@@ -1087,11 +1091,11 @@
                 capQuote: '/quotes/Q-1041',
                 prompt: 'Price aluminium sheet off LME plus regional premium, with gauge and width adders, alloy-series and spec surcharges, an incoterm multiplier and packaging freight.',
                 cardTitle: 'aluminium_sheet_pricing',
-                cardMeta: '5 inputs · 4 lookup tables · 6 formula nodes · output: final_price',
+                cardMeta: '5 inputs · 10 nodes · output: final_price',
                 cols: [
                     { lbl: 'inputs', nodes: [['number · USD/MT', 'lme_price'], ['number · mm', 'gauge_mm'], ['number · mm', 'width_mm'], ['choice', 'alloy_series'], ['choice', 'incoterm']] },
-                    { lbl: 'lookups & formulas', nodes: [['lookup · 2D', 'dim_adder', 'lookup'], ['lookup · 1D', 'alloy_adder', 'lookup'], ['lookup · 1D', 'spec_adder', 'lookup'], ['lookup · 1D', 'incoterm_mult', 'lookup']] },
-                    { lbl: 'aggregates', nodes: [['formula', 'lme_plus_premium'], ['formula', 'adders_total'], ['formula', 'delivered_price']] },
+                    { lbl: 'model layer 1', nodes: [['nodes type 1', 'dim_adder', 'lookup'], ['nodes type 1', 'alloy_adder', 'lookup'], ['nodes type 1', 'spec_adder', 'lookup'], ['nodes type 1', 'incoterm_mult', 'lookup']] },
+                    { lbl: 'model layer 2', nodes: [['nodes type 2', 'lme_plus_premium'], ['nodes type 2', 'adders_total'], ['nodes type 2', 'delivered_price']] },
                     { lbl: 'output', nodes: [['USD/MT', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
                 ],
                 cfg: [['customer', 'Noralu Benelux BV'], ['item', 'Alu sheet · 5754 H22'], ['gauge × width', '2.5 mm × 1 500 mm'], ['incoterm', 'DAP Rotterdam'], ['quantity', '18 MT'], ['LME + premium', '$2 980.00 /MT']],
@@ -1114,11 +1118,11 @@
                 capQuote: '/quotes/Q-1043',
                 prompt: 'Design a pricing model built on costs and margin. Costs are SG&A + manufacturing costs; manufacturing depends on hourly rates and energy costs, add a 1D or 2D lookup table for each, plus constraints.',
                 cardTitle: 'extrusion_costplus',
-                cardMeta: '5 inputs · 4 lookup tables · 7 formula nodes · 2 constraints · output: final_price',
+                cardMeta: '5 inputs · 13 nodes · output: final_price',
                 cols: [
                     { lbl: 'inputs', nodes: [['choice', 'press_line'], ['number · kg/m', 'profile_kg_m'], ['choice', 'alloy'], ['choice', 'surface'], ['number · m', 'qty_m']] },
-                    { lbl: 'lookups & formulas', nodes: [['lookup · 1D', 'press_rate_eur_h', 'lookup'], ['lookup · 1D', 'energy_tariff', 'lookup'], ['lookup · 2D', 'cycle_time', 'lookup'], ['lookup · 1D', 'scrap_rate', 'lookup']] },
-                    { lbl: 'aggregates', nodes: [['formula', 'machine_cost'], ['formula', 'energy_cost'], ['formula', 'mfg_cost'], ['formula', 'sga_alloc'], ['formula', 'cost_total'], ['check', 'margin ≥ 15% · qty ≥ 500 m', 'check']] },
+                    { lbl: 'model layer 1', nodes: [['nodes type 1', 'press_rate_eur_h', 'lookup'], ['nodes type 1', 'energy_tariff', 'lookup'], ['nodes type 1', 'cycle_time', 'lookup'], ['nodes type 1', 'scrap_rate', 'lookup']] },
+                    { lbl: 'model layer 2', nodes: [['nodes type 2', 'machine_cost'], ['nodes type 2', 'energy_cost'], ['nodes type 2', 'mfg_cost'], ['nodes type 2', 'sga_alloc'], ['nodes type 2', 'cost_total'], ['nodes type 3', 'margin ≥ 15% · qty ≥ 500 m', 'check']] },
                     { lbl: 'output', nodes: [['EUR/m', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
                 ],
                 cfg: [['customer', 'Profilux Systems GmbH'], ['item', 'Extrusion · 6063 T6 · 40×40 slot'], ['press line', '22 MN'], ['surface', 'anodised E6'], ['quantity', '2 400 m']],
@@ -1141,11 +1145,11 @@
                 capQuote: '/quotes/Q-1044',
                 prompt: 'Build a pricing model for GRE composite pipe: material cost from a diameter × wall 2D lookup, winding and cure time by pressure class, a liner multiplier, plus end-fitting and hydrotest surcharges.',
                 cardTitle: 'composite_pipe_pricing',
-                cardMeta: '5 inputs · 4 lookup tables · 7 formula nodes · output: final_price',
+                cardMeta: '5 inputs · 11 nodes · output: final_price',
                 cols: [
                     { lbl: 'inputs', nodes: [['number · mm', 'diameter_dn'], ['number · mm', 'wall_mm'], ['choice', 'pressure_class'], ['choice', 'liner_type'], ['number · m', 'qty_m']] },
-                    { lbl: 'lookups & formulas', nodes: [['lookup · 2D', 'resin_glass_cost', 'lookup'], ['lookup · 1D', 'cure_time_min', 'lookup'], ['lookup · 1D', 'liner_mult', 'lookup'], ['lookup · 1D', 'hydrotest_fee', 'lookup']] },
-                    { lbl: 'aggregates', nodes: [['formula', 'material_cost'], ['formula', 'machine_cost'], ['formula', 'pipe_base'], ['formula', 'fittings_total']] },
+                    { lbl: 'model layer 1', nodes: [['nodes type 1', 'resin_glass_cost', 'lookup'], ['nodes type 1', 'cure_time_min', 'lookup'], ['nodes type 1', 'liner_mult', 'lookup'], ['nodes type 1', 'hydrotest_fee', 'lookup']] },
+                    { lbl: 'model layer 2', nodes: [['nodes type 2', 'material_cost'], ['nodes type 2', 'machine_cost'], ['nodes type 2', 'pipe_base'], ['nodes type 2', 'fittings_total']] },
                     { lbl: 'output', nodes: [['EUR/m', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
                 ],
                 cfg: [['customer', 'Oceanic Desal SA'], ['item', 'GRE pipe DN600 · PN16'], ['liner', 'vinyl ester'], ['quantity', '850 m'], ['line speed', '11 m/h']],
@@ -1168,11 +1172,11 @@
                 capQuote: '/quotes/Q-1045',
                 prompt: 'Create an index-based model for specialty chemicals: price = 3-month rolling average of the ICIS index + tolling fee + zone freight − volume rebate, with a floor-price constraint.',
                 cardTitle: 'chemicals_index_pricing',
-                cardMeta: '4 inputs · 1 index series · 3 lookup tables · 6 formula nodes · 1 constraint · output: price_per_t',
+                cardMeta: '4 inputs · 11 nodes · output: price_per_t',
                 cols: [
                     { lbl: 'inputs', nodes: [['series', 'icis_index'], ['number · t', 'qty_t'], ['choice', 'zone'], ['choice', 'grade']] },
-                    { lbl: 'lookups & formulas', nodes: [['index · 3m avg', 'icis_avg', 'lookup'], ['lookup · 1D', 'toll_fee', 'lookup'], ['lookup · 1D', 'zone_freight', 'lookup'], ['lookup · 1D', 'rebate_tier', 'lookup']] },
-                    { lbl: 'aggregates', nodes: [['formula', 'landed_cost'], ['formula', 'rebate_amt'], ['check', 'floor ≥ $1 050', 'check'], ['formula', 'effective_price']] },
+                    { lbl: 'model layer 1', nodes: [['nodes type 1', 'icis_avg', 'lookup'], ['nodes type 1', 'toll_fee', 'lookup'], ['nodes type 1', 'zone_freight', 'lookup'], ['nodes type 1', 'rebate_tier', 'lookup']] },
+                    { lbl: 'model layer 2', nodes: [['nodes type 2', 'landed_cost'], ['nodes type 2', 'rebate_amt'], ['nodes type 3', 'floor ≥ $1 050', 'check'], ['nodes type 2', 'effective_price']] },
                     { lbl: 'output', nodes: [['USD/t', 'final_price', 'out'], ['status', '✓ publish-ready', 'dim']] }
                 ],
                 cfg: [['customer', 'Chemwerk Rhineland AG'], ['item', 'Solvent blend CX-9'], ['index', 'ICIS · 3-mo avg'], ['volume', '120 t'], ['zone', 'EU-2']],

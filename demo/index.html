@@ -48,13 +48,6 @@
         }
         html.dark header { background: rgba(17,22,27,.86); }
         html.dark .video-card { box-shadow: 0 12px 40px rgba(0,0,0,.4); }
-        .theme-btn {
-            background: var(--mint); border: 1px solid var(--mint-line); border-radius: 8px;
-            width: 34px; height: 34px; cursor: pointer; font-size: 15px; line-height: 1;
-            color: var(--green-dark); display: inline-grid; place-items: center;
-            transition: border-color .25s, transform .25s;
-        }
-        .theme-btn:hover { border-color: var(--green); transform: translateY(-1px); }
         body {
             font-family: 'Inter', system-ui, sans-serif;
             background: var(--paper);
@@ -159,10 +152,7 @@
                 </svg>
                 <span class="word">Pricera</span>
             </a>
-            <div style="display:flex;gap:10px;align-items:center">
-                <a href="/#demo" class="back" data-track="demo-back">← Back to site</a>
-                <button class="theme-btn" id="theme-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
-            </div>
+            <a href="/#demo" class="back" data-track="demo-back">← Back to site</a>
         </div>
     </header>
     <main class="container">
@@ -223,14 +213,6 @@
           fetch(EP, { method: "POST", body: data, keepalive: true, mode: "no-cors" });
         }
       }
-      var themeBtn = document.getElementById('theme-btn');
-      themeBtn.textContent = document.documentElement.classList.contains('dark') ? '☀' : '☾';
-      themeBtn.addEventListener('click', function () {
-        var d = !document.documentElement.classList.contains('dark');
-        document.documentElement.classList.toggle('dark', d);
-        themeBtn.textContent = d ? '☀' : '☾';
-        try { localStorage.setItem('pricera-theme', d ? 'dark' : 'light'); } catch (e) {}
-      });
       send("pageview");
       var CHAPTERS = [
         { title: "Customers", seconds: 14.686 },
