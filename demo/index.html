@@ -87,7 +87,11 @@
         .video-card {
             background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
             overflow: hidden; box-shadow: 0 12px 40px rgba(36,45,53,.08);
+            max-width: 720px; margin-left: auto; margin-right: auto;
+            transition: max-width .5s ease;
         }
+        .video-card.playing { max-width: 100%; }
+        .video-card + .video-card { margin-top: 40px; }
         .titlebar {
             display: flex; align-items: center; gap: 8px;
             padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--surface-soft);
@@ -137,6 +141,9 @@
             text-decoration: none; padding: 12px 22px; border-radius: 999px; white-space: nowrap;
         }
         footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 13px; color: var(--muted); }
+        @media (max-width: 720px) {
+            .video-card { max-width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -162,15 +169,29 @@
 
         <div class="video-card">
             <div class="titlebar"><span class="w r"></span><span class="w y"></span><span class="w g"></span><span class="t">pricera · demo</span></div>
-            <video controls preload="metadata" poster="/poster-demo-journey.jpg" data-track="video-journey" id="demo-video">
+            <video controls preload="none" poster="/poster-demo-journey.jpg" data-track="video-journey" id="demo-video">
                 <source src="/demo-journey.mp4" type="video/mp4">
                 Your browser doesn't support the video tag.
             </video>
             <div class="chapters" id="chapters"><span class="ch-lbl">jump to</span></div>
             <div class="meta">
                 <h2>From a pricing document to governed prices</h2>
-                <span class="dur" id="dur">–</span>
+                <span class="dur">10:36</span>
                 <p>Some parts of the interface are intentionally blurred. Want to try the live version yourself? Request access below.</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="titlebar"><span class="w r"></span><span class="w y"></span><span class="w g"></span><span class="t">pricera · demo</span></div>
+            <video controls preload="none" poster="/poster-demo-drawing.jpg" data-track="video-drawing" id="demo-video-2">
+                <source src="/demo-quote-drawing.mp4" type="video/mp4">
+                Your browser doesn't support the video tag.
+            </video>
+            <div class="chapters" id="chapters-2"><span class="ch-lbl">jump to</span></div>
+            <div class="meta">
+                <h2>Technical drawings · image recognition to priced quote</h2>
+                <span class="dur">3:22</span>
+                <p>One costing formula, a ten-item RFQ, and a cross-section that only exists on a drawing — measured by computer vision, priced like the workbook.</p>
             </div>
         </div>
 
@@ -231,34 +252,57 @@
         { title: "The customer-facing quote", seconds: 542.698 },
         { title: "Deep dive — model in model", seconds: 556.608 },
       ];
-      var vid = document.getElementById("demo-video");
-      var rail = document.getElementById("chapters");
-      CHAPTERS.forEach(function (ch, i) {
-        var b = document.createElement("button");
-        b.type = "button";
-        b.className = "ch";
-        b.setAttribute("data-track", "chapter-" + (i + 1));
-        b.innerHTML = '<span class="ix">' + String(i + 1).padStart(2, "0") + "</span>" + ch.title;
-        b.addEventListener("click", function () {
-          vid.currentTime = ch.seconds + 0.02;
-          vid.play().catch(function () {});
-          send("chapter", { i: i + 1, title: ch.title });
+      var CHAPTERS_2 = [
+        { title: "One costing formula", seconds: 13 },
+        { title: "A request arrives with a drawing", seconds: 39 },
+        { title: "The drawing becomes data", seconds: 74 },
+        { title: "Priced", seconds: 166 },
+      ];
+      function wireChapters(vid, rail, chapters, vkey) {
+        chapters.forEach(function (ch, i) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "ch";
+          b.setAttribute("data-track", "chapter-" + vkey + "-" + (i + 1));
+          b.innerHTML = '<span class="ix">' + String(i + 1).padStart(2, "0") + "</span>" + ch.title;
+          b.addEventListener("click", function () {
+            vid.currentTime = ch.seconds + 0.02;
+            vid.play().catch(function () {});
+            send("chapter", { v: vkey, i: i + 1, title: ch.title });
+          });
+          rail.appendChild(b);
         });
-        rail.appendChild(b);
-      });
-      vid.addEventListener("loadedmetadata", function () {
-        var d = Math.round(vid.duration);
-        document.getElementById("dur").textContent =
-          Math.floor(d / 60) + ":" + String(d % 60).padStart(2, "0");
-      });
-      vid.addEventListener("timeupdate", function () {
-        var t = vid.currentTime, active = -1;
-        for (var i = 0; i < CHAPTERS.length; i++) {
-          if (CHAPTERS[i].seconds <= t + 0.01) active = i;
+        var card = vid.closest(".video-card");
+        if (card) {
+          vid.addEventListener("play", function () { card.classList.add("playing"); });
+          ["pause", "ended"].forEach(function (ev) {
+            vid.addEventListener(ev, function () { card.classList.remove("playing"); });
+          });
+          document.addEventListener("pointerdown", function (ev) {
+            if (!card.contains(ev.target)) card.classList.remove("playing");
+          });
+          if ("IntersectionObserver" in window) {
+            new IntersectionObserver(function (entries) {
+              card.classList.toggle("playing", entries[0].isIntersecting && !vid.paused);
+            }, { threshold: 0 }).observe(card);
+          }
         }
-        var btns = rail.querySelectorAll(".ch");
-        for (var k = 0; k < btns.length; k++) btns[k].classList.toggle("on", k === active);
-      });
+        vid.addEventListener("loadedmetadata", function () {
+          var d = Math.round(vid.duration);
+          var dur = vid.closest(".video-card").querySelector(".dur");
+          if (dur) dur.textContent = Math.floor(d / 60) + ":" + String(d % 60).padStart(2, "0");
+        });
+        vid.addEventListener("timeupdate", function () {
+          var t = vid.currentTime, active = -1;
+          for (var i = 0; i < chapters.length; i++) {
+            if (chapters[i].seconds <= t + 0.01) active = i;
+          }
+          var btns = rail.querySelectorAll(".ch");
+          for (var k = 0; k < btns.length; k++) btns[k].classList.toggle("on", k === active);
+        });
+      }
+      wireChapters(document.getElementById("demo-video"), document.getElementById("chapters"), CHAPTERS, "journey");
+      wireChapters(document.getElementById("demo-video-2"), document.getElementById("chapters-2"), CHAPTERS_2, "drawing");
       document.querySelectorAll("video").forEach(function (v) {
         v.addEventListener("play", function once() {
           v.removeEventListener("play", once);
