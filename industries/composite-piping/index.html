@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Composite pipe pricing — the GRE/GRP costing model, explained | Pricera</title>
-    <meta name="description" content="How composite pipe pricing works: diameter × wall material lookups, winding and cure time by pressure class, liner multipliers, fittings, hydrotest, SG&A and margin — modelled, tested and traceable per metre, per quote.">
+    <meta name="description" content="How composite pipe pricing works: diameter × wall material matrices, winding and cure time by pressure class, liner multipliers, fittings, hydrotest, SG&A and margin — modelled, tested and traceable per metre, per quote.">
     <link rel="canonical" href="https://www.pricera.site/industries/composite-piping/">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Pricera">
     <meta property="og:url" content="https://www.pricera.site/industries/composite-piping/">
     <meta property="og:title" content="Composite pipe pricing — the GRE/GRP costing model, explained | Pricera">
-    <meta property="og:description" content="Diameter × wall lookups, winding and cure by pressure class, liner multipliers, fittings and hydrotest — a per-metre costing model that survives audit.">
+    <meta property="og:description" content="Diameter × wall matrices, winding and cure by pressure class, liner multipliers, fittings and hydrotest — a per-metre costing model that survives audit.">
     <meta property="og:image" content="https://www.pricera.site/ind_composites.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Composite pipe pricing — the GRE/GRP costing model, explained | Pricera">
-    <meta name="twitter:description" content="Diameter × wall lookups, winding and cure by pressure class, liner multipliers, fittings and hydrotest — a per-metre costing model that survives audit.">
+    <meta name="twitter:description" content="Diameter × wall matrices, winding and cure by pressure class, liner multipliers, fittings and hydrotest — a per-metre costing model that survives audit.">
     <meta name="twitter:image" content="https://www.pricera.site/ind_composites.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,12 +28,12 @@
         {
           "@type": "Question",
           "name": "How is composite pipe priced?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Per metre, from a cost build-up: material cost driven by diameter and wall construction (liner resin, structural glass and resin, optional barrier foils), plus machine time for winding and cure driven by pressure class and line speed, plus per-unit operations such as end fittings, hydrotest and packing — then SG&A allocation and margin. Each element is typically a lookup or formula, not a catalogue price." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Per metre, from a cost build-up: material cost driven by diameter and wall construction (liner resin, structural glass and resin, optional barrier foils), plus machine time for winding and cure driven by pressure class and line speed, plus per-unit operations such as end fittings, hydrotest and packing — then SG&A allocation and margin. Each element is typically a table or a formula, not a catalogue price." }
         },
         {
           "@type": "Question",
-          "name": "What is a 2D lookup in pipe costing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A 2D lookup maps two dimensions — typically nominal diameter (DN) against wall thickness or pressure class — to a cost or quantity. For example, material cost per metre for DN600 at 12 mm wall is read from a diameter × wall matrix rather than computed from first principles each time." }
+          "name": "What is a diameter × wall matrix in pipe costing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A diameter × wall matrix maps two dimensions — nominal diameter (DN) against wall thickness or pressure class — to a material cost or quantity per metre. For example, material cost for DN600 at 12 mm wall is read from the matrix rather than computed from first principles each time." }
         },
         {
           "@type": "Question",
@@ -263,13 +263,13 @@
         <section>
             <div class="kicker">Why it breaks</div>
             <h2>Where spreadsheet costing models fail</h2>
-            <p class="lede">Every composite pipe maker has this file: decades of tables, nested lookups, plant variants, and exactly one person who understands it. The math is fine — the governance is not:</p>
+            <p class="lede">Every composite pipe maker has this file: decades of tables, nested formulas, plant variants, and exactly one person who understands it. The math is fine — the governance is not:</p>
             <ul class="tight">
                 <li><strong>Interdependent tables multiply silently.</strong> Diameter × wall per product family, cure times per class, plant-specific rates, fitting models — edit one cell and a dozen prices shift with no trace.</li>
                 <li><strong>Variants fork the file.</strong> Per-plant, per-segment, per-currency copies of the same workbook drift apart until nobody knows which is authoritative.</li>
                 <li><strong>Quotes can't be replayed.</strong> A price from six months ago can't be explained — which table version, which resin price, which margin was live that day?</li>
             </ul>
-            <p>Pricera replaces the file without changing the math: the same lookups and formulas become a versioned model, reference cases prove every edit reproduces known prices before publish, and each quote pins the exact inputs that produced it.</p>
+            <p>Pricera replaces the file without changing the math: the same tables and formulas become a versioned model, reference cases prove every edit reproduces known prices before publish, and each quote pins the exact inputs that produced it.</p>
         </section>
 
         <section>
@@ -277,8 +277,8 @@
             <h2>Model it once. Price every pipe and fitting from it.</h2>
             <div class="pillars">
                 <div class="pillar">
-                    <h3>2D lookups, native</h3>
-                    <p>Diameter × wall material matrices, cure-time tables, class-dependent rates — banded and ranged lookups are model nodes, not hidden INDEX/MATCH chains.</p>
+                    <h3>Dimensional tables, native</h3>
+                    <p>Diameter × wall material matrices, cure-time tables, class-dependent rates — governed model tables, not hidden INDEX/MATCH chains.</p>
                 </div>
                 <div class="pillar">
                     <h3>Assemblies compose models</h3>
@@ -286,7 +286,7 @@
                 </div>
                 <div class="pillar">
                     <h3>Multi-plant without file forks</h3>
-                    <p>Plant origin is an input, not a workbook copy. Dubai, Cairo, Riyadh rates live in one governed table — quote the same spec from any origin and compare the margin.</p>
+                    <p>Plant origin is an input, not a workbook copy. Each plant's rates live in one governed table — quote the same spec from any origin and compare the margin.</p>
                 </div>
             </div>
         </section>
@@ -323,11 +323,11 @@
             <h2>Composite pipe pricing, answered</h2>
             <details>
                 <summary>How is composite pipe priced?</summary>
-                <p>Per metre, from a cost build-up: material cost driven by diameter and wall construction (liner resin, structural glass and resin, optional barrier foils), plus machine time for winding and cure driven by pressure class and line speed, plus per-unit operations such as end fittings, hydrotest and packing — then SG&amp;A allocation and margin. Each element is typically a lookup or formula, not a catalogue price.</p>
+                <p>Per metre, from a cost build-up: material cost driven by diameter and wall construction (liner resin, structural glass and resin, optional barrier foils), plus machine time for winding and cure driven by pressure class and line speed, plus per-unit operations such as end fittings, hydrotest and packing — then SG&amp;A allocation and margin. Each element is typically a table or a formula, not a catalogue price.</p>
             </details>
             <details>
-                <summary>What is a 2D lookup in pipe costing?</summary>
-                <p>A 2D lookup maps two dimensions — typically nominal diameter (DN) against wall thickness or pressure class — to a cost or quantity. For example, material cost per metre for DN600 at 12&nbsp;mm wall is read from a diameter × wall matrix rather than computed from first principles each time.</p>
+                <summary>What is a diameter × wall matrix in pipe costing?</summary>
+                <p>A diameter × wall matrix maps two dimensions — nominal diameter (DN) against wall thickness or pressure class — to a material cost or quantity per metre. For example, material cost for DN600 at 12&nbsp;mm wall is read from the matrix rather than computed from first principles each time.</p>
             </details>
             <details>
                 <summary>Why is composite pipe pricing hard to run in spreadsheets?</summary>

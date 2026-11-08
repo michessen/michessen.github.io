@@ -38,7 +38,7 @@
         {
           "@type": "Question",
           "name": "Why do metals companies outgrow spreadsheet pricing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The formulas themselves are simple; the governance is not. Spreadsheets can't pin an index snapshot to a quote, can't prove which premium version was used on a given date, and can't stop a stale lookup from silently repricing a live contract. When an auditor or a customer asks 'how did you get this number', the answer is archaeology." }
+          "acceptedAnswer": { "@type": "Answer", "text": "The formulas themselves are simple; the governance is not. Spreadsheets can't pin an index snapshot to a quote, can't prove which premium version was used on a given date, and can't stop a stale table from silently repricing a live contract. When an auditor or a customer asks 'how did you get this number', the answer is archaeology." }
         },
         {
           "@type": "Question",
@@ -251,10 +251,10 @@
             </div>
             <ul class="tight">
                 <li><strong>The index basis varies by contract</strong> — monthly average, average-plus-lag, spot on order date, or a fixed quarter. Each customer can pin a different one.</li>
-                <li><strong>Adders are dimensional</strong> — alloy series, gauge bands, width ranges, surface and spec surcharges. They live in lookup tables, not in a single cell.</li>
+                <li><strong>Adders are dimensional</strong> — alloy series, gauge bands, width ranges, surface and spec surcharges. They live in rate tables, not in a single cell.</li>
                 <li><strong>The commercial layer sits on top</strong> — incoterm multipliers, MOQ floors, payment-term and volume adjustments, "price on request" flags.</li>
             </ul>
-            <p>This is why metals pricing resists the two tools companies usually reach for. A <strong>spreadsheet</strong> can compute the number but can't govern it — no pinned index snapshot, no proof of which premium version applied on a given date, no way to stop a stale lookup from repricing a live contract. Generic <strong>CPQ</strong> assumes price = list minus discount, so the entire formula ends up as a script nobody can audit.</p>
+            <p>This is why metals pricing resists the two tools companies usually reach for. A <strong>spreadsheet</strong> can compute the number but can't govern it — no pinned index snapshot, no proof of which premium version applied on a given date, no way to stop a stale table from repricing a live contract. Generic <strong>CPQ</strong> assumes price = list minus discount, so the entire formula ends up as a script nobody can audit.</p>
         </section>
 
         <section>
@@ -267,7 +267,7 @@
                 </div>
                 <div class="pillar">
                     <h3>Adders are tables, not IF-chains</h3>
-                    <p>Alloy, dimension and spec adders live in inspectable banded lookups. Update a table, every dependent price recalculates — and reference cases re-test the model before it publishes.</p>
+                    <p>Alloy, dimension and spec adders live in inspectable banded tables. Update a table, every dependent price recalculates — and reference cases re-test the model before it publishes.</p>
                 </div>
                 <div class="pillar">
                     <h3>Every quote shows its work</h3>
@@ -288,7 +288,7 @@
                 <div class="fall add"><span class="lbl">× incoterm (DAP)</span><span class="bar" style="width:9%;"></span><span class="amt">+ $222</span></div>
                 <div class="fall total"><span class="lbl">= unit price</span><span class="bar" style="width:78%;"></span><span class="amt">$3 937 /MT → $70 866</span></div>
             </div>
-            <p>Each segment of that bar is a named node in the pricing model — inspectable, testable, versioned. Sales configures the deal; the engine applies the contract's index basis and the current lookup tables; the quote carries the whole waterfall into your CRM, or out as a standalone document.</p>
+            <p>Each segment of that bar is a named node in the pricing model — inspectable, testable, versioned. Sales configures the deal; the engine applies the contract's index basis and the current rate tables; the quote carries the whole waterfall into your CRM, or out as a standalone document.</p>
         </section>
 
         <section>
@@ -315,7 +315,7 @@
             </details>
             <details>
                 <summary>Why do metals companies outgrow spreadsheet pricing?</summary>
-                <p>The formulas themselves are simple; the governance is not. Spreadsheets can't pin an index snapshot to a quote, can't prove which premium version was used on a given date, and can't stop a stale lookup from silently repricing a live contract. When an auditor or a customer asks "how did you get this number", the answer is archaeology.</p>
+                <p>The formulas themselves are simple; the governance is not. Spreadsheets can't pin an index snapshot to a quote, can't prove which premium version was used on a given date, and can't stop a stale table from silently repricing a live contract. When an auditor or a customer asks "how did you get this number", the answer is archaeology.</p>
             </details>
             <details>
                 <summary>Can pricing software handle monthly LME averages and contract clauses?</summary>
