@@ -1038,6 +1038,7 @@
                     <a href="#demo">Interactive Demo</a>
                     <a href="#industries">Industries</a>
                     <a href="/industries/metals/">Metals pricing</a>
+                    <a href="/industries/composite-piping/">Composite pipe pricing</a>
                     <a href="/ai-pricing/">AI-governed pricing</a>
                 </div>
                 <div>
@@ -1562,7 +1563,8 @@
                 img: 'ind_metals.webp',
                 text: 'LME plus premium, monthly averages, dimension and alloy adders, incoterm multipliers: coil, sheet & plate, custom profiles.',
                 tags: ['Aluminium & steel FRP', 'Extrusions & profiles', 'Toll & service centers'],
-                link: '/industries/metals/'
+                link: '/industries/metals/',
+                linkText: 'How Pricera handles metals pricing →'
             },
             {
                 name: 'Chemicals',
@@ -1574,7 +1576,9 @@
                 name: 'Composites & process industries',
                 img: 'ind_composites.webp',
                 text: 'If your price is a formula (layup, recipe, index, tolling), Pricera models it with full cost and margin traceability.',
-                tags: ['Composites', 'Pulp & paper', 'Glass & ceramics', 'Plastics & rubber', 'Energy', 'Food ingredients']
+                tags: ['Composites', 'Pulp & paper', 'Glass & ceramics', 'Plastics & rubber', 'Energy', 'Food ingredients'],
+                link: '/industries/composite-piping/',
+                linkText: 'How Pricera costs composite pipe →'
             }
         ];
         const indImg = document.getElementById('ind-img');
@@ -1593,7 +1597,7 @@
             indText.textContent = d.text;
             indTags.innerHTML = d.tags.map(t => `<li>${t}</li>`).join('');
             indLink.hidden = !d.link;
-            if (d.link) indLink.href = d.link;
+            if (d.link) { indLink.href = d.link; indLink.textContent = d.linkText; }
             indTabs.forEach(t => t.setAttribute('aria-pressed', String(+t.dataset.ind === i)));
         }
         indTabs.forEach(b => b.addEventListener('click', () => {
