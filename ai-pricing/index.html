@@ -45,7 +45,7 @@
         {
           "@type": "Question",
           "name": "Is AI-governed pricing the same as dynamic pricing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. Dynamic pricing continuously reprices offers in response to market signals — appropriate for seats and rooms, largely wrong for contractual industrial prices. AI-governed pricing keeps prices deterministic and formula-driven; what AI accelerates is the building and maintenance of the pricing model itself." }
+          "acceptedAnswer": { "@type": "Answer", "text": "It depends which part moves. If dynamic means the formula's inputs change — an index tick, a capacity constraint, a stock level — then yes: governed pricing re-evaluates the same model on every spot quote. What it rejects is dynamic logic: repricing rules that change without review. The output can move as fast as the inputs do; the rule stays fixed, versioned and explainable." }
         }
       ]
     }
@@ -239,7 +239,7 @@
         <section>
             <div class="eyebrow"><span class="dot"></span>Concept · AI &amp; governance</div>
             <h1>AI-governed pricing.<br><span class="accent">The AI drafts — you stay in control.</span></h1>
-            <p class="hero-sub">Most "AI pricing" asks you to trust a number nobody can explain. AI-governed pricing inverts the relationship: the pricing model stays explicit and human-owned, and AI works inside it — reading your documents, drafting the model, proposing updates — under review, tests and version control. Fast where AI is good, accountable where it must be.</p>
+            <p class="hero-sub">Most "AI pricing" asks you to trust a number nobody can explain. AI-governed pricing inverts the relationship: the pricing model stays explicit and human-owned, and AI works inside it — reading your documents, drafting the model, proposing updates — under review, tests and version control. Contract or spot: when the governed formula says the price should move — an index tick, a capacity level — it moves. Dynamic where the formula allows it, accountable everywhere.</p>
             <div class="row" style="justify-content:flex-start; margin: 26px 0 8px;">
                 <a href="mailto:info@pricera.site" class="btn btn-primary">Book a demo</a>
                 <a href="/demo/" class="btn btn-ghost">See the AI draft a model</a>
@@ -277,7 +277,7 @@
                         <li>Drafts the pricing model from your documents and descriptions</li>
                         <li>Every formula is readable, inspectable, owned by your team</li>
                         <li>Reference test cases prove the model before it publishes</li>
-                        <li>Prices stay deterministic — and fully replayable</li>
+                        <li>Prices move with governed inputs — index, stock, capacity — while the rule stays fixed and replayable</li>
                     </ul>
                 </div>
             </div>
@@ -304,6 +304,17 @@
         </section>
 
         <section>
+            <div class="kicker">Contract &amp; spot</div>
+            <h2>One governed model, two quoting modes</h2>
+            <p class="lede">Contract prices and spot prices behave differently — but they should come from the same governed model, not from two different worlds:</p>
+            <ul class="tight">
+                <li><strong>Contract &amp; LTA quotes</strong> pin the model version and the index snapshot the contract specifies — monthly average, lagged basis, fixed quarter. The rule and the reference point are locked; disputes and renewals can be replayed years later.</li>
+                <li><strong>Spot quotes</strong> re-evaluate the same model live. The index moved overnight, the price moves. Capacity is tight, the governed premium logic applies. Stock is long, the governed discount rules apply. The output is dynamic; the rule is not.</li>
+            </ul>
+            <p>This is the honest version of "dynamic pricing" for industrial B2B. Your customer doesn't need to see how the price was constructed — but <em>you</em> always can: which formula, which version, which index value and input levels produced it. Dynamic where the formula allows it, explainable every time someone asks.</p>
+        </section>
+
+        <section>
             <div class="kicker">In the product</div>
             <h2>What the AI actually does in Pricera</h2>
             <div class="flow">
@@ -313,7 +324,7 @@
                 <span class="arrow">→</span>
                 <div class="step"><b>3 · Review</b>You inspect and adjust. Reference cases run automatically; publish stays blocked until the model reproduces known prices.</div>
                 <span class="arrow">→</span>
-                <div class="step"><b>4 · Governed run</b>Sales configures deals and quotes off the approved, versioned model — every line shows its full calculation.</div>
+                <div class="step"><b>4 · Governed run</b>Sales configures deals and quotes off the approved, versioned model — contract lines pinned, spot lines live — every line showing its calculation.</div>
             </div>
             <p>The result is the speed people want from AI pricing without the failure mode they fear: models that used to take weeks to encode get drafted in minutes, while every price that goes out the door remains a number your team can stand behind. See it end-to-end in the <a href="/demo/">product demo</a>.</p>
         </section>
@@ -335,7 +346,7 @@
             </details>
             <details>
                 <summary>Is AI-governed pricing the same as dynamic pricing?</summary>
-                <p>No. Dynamic pricing continuously reprices offers in response to market signals — appropriate for seats and rooms, largely wrong for contractual industrial prices. AI-governed pricing keeps prices deterministic and formula-driven; what AI accelerates is the building and maintenance of the pricing model itself.</p>
+                <p>It depends which part moves. If "dynamic" means the formula's inputs change — an index tick, a capacity constraint, a stock level — then yes: governed pricing handles that natively, re-evaluating the same model on every spot quote. What it rejects is dynamic <em>logic</em>: repricing rules that change without review. The output can move as fast as the inputs do; the rule stays fixed, versioned and explainable.</p>
             </details>
         </section>
     </main>
