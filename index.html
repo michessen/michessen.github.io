@@ -535,6 +535,8 @@
         }
         .ind-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; box-sizing: border-box; padding: 16px 40px; transition: transform .5s var(--ease-out); }
         .ind-tabs { display: flex; gap: 8px; margin: 22px 0 20px; flex-wrap: wrap; }
+        .ind-link { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--green); text-decoration: none; }
+        .ind-link:hover { text-decoration: underline; }
         .ind-copy h3 { font-size: 21px; font-weight: 700; margin-bottom: 8px; }
         .ind-copy p { color: var(--ink-soft); font-size: 15px; max-width: 480px; margin-bottom: 16px; line-height: 1.68; }
         .ind-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -937,6 +939,7 @@
                             <li>Extrusions &amp; profiles</li>
                             <li>Toll &amp; service centers</li>
                         </ul>
+                        <a class="ind-link" id="ind-link" href="/industries/metals/">How Pricera handles metals pricing →</a>
                     </div>
                 </div>
             </div>
@@ -1555,7 +1558,8 @@
                 name: 'Metals',
                 img: 'ind_metals.webp',
                 text: 'LME plus premium, monthly averages, dimension and alloy adders, incoterm multipliers: coil, sheet & plate, custom profiles.',
-                tags: ['Aluminium & steel FRP', 'Extrusions & profiles', 'Toll & service centers']
+                tags: ['Aluminium & steel FRP', 'Extrusions & profiles', 'Toll & service centers'],
+                link: '/industries/metals/'
             },
             {
                 name: 'Chemicals',
@@ -1574,6 +1578,7 @@
         const indTitle = document.getElementById('ind-title');
         const indText = document.getElementById('ind-text');
         const indTags = document.getElementById('ind-tags');
+        const indLink = document.getElementById('ind-link');
         const indTabs = document.querySelectorAll('.ind-tab');
         let indIdx = 0, indAuto = true, indVisible = false;
         function setIndustry(i) {
@@ -1584,6 +1589,8 @@
             indTitle.textContent = d.name;
             indText.textContent = d.text;
             indTags.innerHTML = d.tags.map(t => `<li>${t}</li>`).join('');
+            indLink.hidden = !d.link;
+            if (d.link) indLink.href = d.link;
             indTabs.forEach(t => t.setAttribute('aria-pressed', String(+t.dataset.ind === i)));
         }
         indTabs.forEach(b => b.addEventListener('click', () => {
