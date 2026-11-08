@@ -20,34 +20,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Michroma&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Crect x='1.5' y='1.5' width='27' height='27' rx='8' fill='%23edf6f1' stroke='%23d5e8de'/%3E%3Cpath d='M13.2 11.4 10.6 18M16.8 11.4l2.6 6.6' stroke='%23216c56' stroke-width='1.7' stroke-linecap='round' opacity='.5'/%3E%3Ccircle cx='15' cy='8.8' r='2.9' fill='%23216c56'/%3E%3Ccircle cx='9.4' cy='20.6' r='2.9' fill='%23216c56' opacity='.5'/%3E%3Ccircle cx='20.6' cy='20.6' r='2.9' fill='%23216c56'/%3E%3C/svg%3E">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How is composite pipe priced?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Per metre, from a cost build-up: material cost driven by diameter and wall construction (liner resin, structural glass and resin, optional barrier foils), plus machine time for winding and cure driven by pressure class and line speed, plus per-unit operations such as end fittings, hydrotest and packing — then SG&A allocation and margin. Each element is typically a table or a formula, not a catalogue price." }
-        },
-        {
-          "@type": "Question",
-          "name": "What is a diameter × wall matrix in pipe costing?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A diameter × wall matrix maps two dimensions — nominal diameter (DN) against wall thickness or pressure class — to a material cost or quantity per metre. For example, material cost for DN600 at 12 mm wall is read from the matrix rather than computed from first principles each time." }
-        },
-        {
-          "@type": "Question",
-          "name": "Why is composite pipe pricing hard to run in spreadsheets?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The model is a web of interdependent tables: diameter × wall matrices per product family, cure and winding times per pressure class, liner multipliers, plant-specific rates, plus fittings priced in separate models that roll into one quote. A spreadsheet can hold the numbers but cannot govern them — no version pinning per quote, no test that a table edit reproduces yesterday's price, and plant, customer segment and currency variants multiply the file copies." }
-        },
-        {
-          "@type": "Question",
-          "name": "Can a pricing model handle pipe assemblies — pipe plus fittings?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, when the engine supports nested models. Each fitting type is its own costing model; the pipe quote assembles the pipe line plus the fitting lines, sharing the same customer, currency and margin terms — and every component line carries its own cost breakdown into the quote total." }
-        }
-      ]
-    }
-    </script>
     <script>
     try {
       var t = localStorage.getItem('pricera-theme');
@@ -177,9 +149,7 @@
         html.dark .fall.mult .bar { background: #41735d; }
         .fall.total { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; font-weight: 600; }
         .fall.total .amt { color: var(--green); }
-        details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 20px; margin: 12px 0; }
-        details summary { cursor: pointer; font-weight: 600; font-size: 15.5px; }
-        details p { margin: 10px 0 0; font-size: 15px; }
+        .cta-band {
 
         .cta-band {
             margin: 56px 0 0; padding: 52px 0;
@@ -263,7 +233,7 @@
         <section>
             <div class="kicker">Why it breaks</div>
             <h2>Where spreadsheet costing models fail</h2>
-            <p class="lede">Every composite pipe maker has this file: decades of tables, nested formulas, plant variants, and exactly one person who understands it. The math is fine — the governance is not:</p>
+            <p class="lede">Every manufacturer has this file: decades of tables, nested formulas, plant variants, and exactly one person who understands it. The math is fine — the governance is not:</p>
             <ul class="tight">
                 <li><strong>Interdependent tables multiply silently.</strong> Diameter × wall per product family, cure times per class, plant-specific rates, fitting models — edit one cell and a dozen prices shift with no trace.</li>
                 <li><strong>Variants fork the file.</strong> Per-plant, per-segment, per-currency copies of the same workbook drift apart until nobody knows which is authoritative.</li>
@@ -274,7 +244,7 @@
 
         <section>
             <div class="kicker">The approach</div>
-            <h2>Model it once. Price every pipe and fitting from it.</h2>
+            <h2>Model it once. Price every product and component from it.</h2>
             <div class="pillars">
                 <div class="pillar">
                     <h3>Dimensional tables, native</h3>
@@ -318,26 +288,6 @@
             </ul>
         </section>
 
-        <section>
-            <div class="kicker">FAQ</div>
-            <h2>Composite pipe pricing, answered</h2>
-            <details>
-                <summary>How is composite pipe priced?</summary>
-                <p>Per metre, from a cost build-up: material cost driven by diameter and wall construction (liner resin, structural glass and resin, optional barrier foils), plus machine time for winding and cure driven by pressure class and line speed, plus per-unit operations such as end fittings, hydrotest and packing — then SG&amp;A allocation and margin. Each element is typically a table or a formula, not a catalogue price.</p>
-            </details>
-            <details>
-                <summary>What is a diameter × wall matrix in pipe costing?</summary>
-                <p>A diameter × wall matrix maps two dimensions — nominal diameter (DN) against wall thickness or pressure class — to a material cost or quantity per metre. For example, material cost for DN600 at 12&nbsp;mm wall is read from the matrix rather than computed from first principles each time.</p>
-            </details>
-            <details>
-                <summary>Why is composite pipe pricing hard to run in spreadsheets?</summary>
-                <p>The model is a web of interdependent tables: diameter × wall matrices per product family, cure and winding times per pressure class, liner multipliers, plant-specific rates, plus fittings priced in separate models that roll into one quote. A spreadsheet can hold the numbers but cannot govern them — no version pinning per quote, no test that a table edit reproduces yesterday's price, and plant, customer segment and currency variants multiply the file copies.</p>
-            </details>
-            <details>
-                <summary>Can a pricing model handle pipe assemblies — pipe plus fittings?</summary>
-                <p>Yes, when the engine supports nested models. Each fitting type is its own costing model; the pipe quote assembles the pipe line plus the fitting lines, sharing the same customer, currency and margin terms — and every component line carries its own cost breakdown into the quote total.</p>
-            </details>
-        </section>
     </main>
 
     <section class="cta-band">
