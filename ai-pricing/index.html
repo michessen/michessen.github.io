@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-governed pricing — the AI drafts, you stay in control | Pricera</title>
+    <meta name="description" content="AI-governed pricing uses AI to build and maintain pricing models — while humans approve every change, tests gate every publish, and every quoted price stays explainable. How Pricera applies AI to industrial pricing without the black box.">
+    <link rel="canonical" href="https://www.pricera.site/ai-pricing/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Pricera">
+    <meta property="og:url" content="https://www.pricera.site/ai-pricing/">
+    <meta property="og:title" content="AI-governed pricing — the AI drafts, you stay in control | Pricera">
+    <meta property="og:description" content="AI builds the pricing model; humans approve every change, tests gate every publish, and every quoted price shows its work.">
+    <meta property="og:image" content="https://www.pricera.site/poster-demo-journey.jpg">
+    <meta property="og:image:width" content="1440">
+    <meta property="og:image:height" content="900">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI-governed pricing — the AI drafts, you stay in control | Pricera">
+    <meta name="twitter:description" content="AI builds the pricing model; humans approve every change, tests gate every publish, and every quoted price shows its work.">
+    <meta name="twitter:image" content="https://www.pricera.site/poster-demo-journey.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Michroma&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Crect x='1.5' y='1.5' width='27' height='27' rx='8' fill='%23edf6f1' stroke='%23d5e8de'/%3E%3Cpath d='M13.2 11.4 10.6 18M16.8 11.4l2.6 6.6' stroke='%23216c56' stroke-width='1.7' stroke-linecap='round' opacity='.5'/%3E%3Ccircle cx='15' cy='8.8' r='2.9' fill='%23216c56'/%3E%3Ccircle cx='9.4' cy='20.6' r='2.9' fill='%23216c56' opacity='.5'/%3E%3Ccircle cx='20.6' cy='20.6' r='2.9' fill='%23216c56'/%3E%3C/svg%3E">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is AI-governed pricing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AI-governed pricing is an operating model where AI builds and maintains pricing models — reading documents, drafting formulas and lookups — while governance stays with humans: every change is reviewed, every publish is gated by reference test cases, and every quoted price can be replayed and explained. The AI accelerates the modelling work; it never becomes an unaccountable decision-maker." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is AI-governed pricing different from AI price optimization?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AI price optimization typically means a machine-learning model that outputs recommended prices sales teams cannot decompose or defend. AI-governed pricing inverts the relationship: the pricing model stays explicit and human-owned, and AI works inside it — drafting models, proposing updates, flagging stale inputs — under tests and approvals." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI safely set contractual B2B prices?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not as an unsupervised decider. Contract prices carry clauses, index bases and commitments that must be explainable to customers and auditable internally. The safe pattern is AI-assisted modelling: the AI reads the contract and drafts the pricing logic; a pricing owner reviews it; automated reference cases prove the model reproduces known prices before anything goes live." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is AI-governed pricing the same as dynamic pricing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Dynamic pricing continuously reprices offers in response to market signals — appropriate for seats and rooms, largely wrong for contractual industrial prices. AI-governed pricing keeps prices deterministic and formula-driven; what AI accelerates is the building and maintenance of the pricing model itself." }
+        }
+      ]
+    }
+    </script>
+    <script>
+    try {
+      var t = localStorage.getItem('pricera-theme');
+      var h = new Date().getHours();
+      if (t ? t === 'dark' : (h >= 19 || h < 7)) document.documentElement.classList.add('dark');
+    } catch (e) {}
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --paper: #f6f7f9;
+            --surface: #ffffff;
+            --surface-soft: #f7f9f8;
+            --ink: #242d35;
+            --ink-soft: #46515b;
+            --muted: #737e88;
+            --line: #e7ebef;
+            --green: #216c56;
+            --green-dark: #16533f;
+            --mint: #edf6f1;
+            --mint-line: #d5e8de;
+            --amber: #a96b20;
+            --amber-bg: #fff7e8;
+            --shadow-sm: 0 1px 2px rgba(38,52,68,.04), 0 3px 12px rgba(38,52,68,.05);
+            --shadow-md: 0 4px 8px rgba(38,52,68,.05), 0 12px 32px rgba(38,52,68,.08);
+            --radius: 14px;
+        }
+        html { color-scheme: light; scroll-behavior: smooth; }
+        html.dark {
+            color-scheme: dark;
+            --paper: #11161b;
+            --surface: #1a2129;
+            --surface-soft: #151c23;
+            --ink: #e9eef2;
+            --ink-soft: #b7c2cb;
+            --muted: #8d99a4;
+            --line: #2a343e;
+            --green: #4fae8b;
+            --green-dark: #6fd4ae;
+            --mint: #1c2b25;
+            --mint-line: #2f4a3e;
+            --amber: #d99a45;
+            --amber-bg: #2e2413;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,.25), 0 3px 12px rgba(0,0,0,.28);
+            --shadow-md: 0 4px 8px rgba(0,0,0,.28), 0 12px 32px rgba(0,0,0,.35);
+        }
+        html.dark header { background: rgba(17,22,27,.86); }
+        html.dark .cta-band { background: linear-gradient(135deg, #124033 0%, #1a5644 55%, #2e8266 100%); }
+        html.dark .cta-band .btn-light { color: #16533f; }
+        html.dark .vs-col.no { background: #241f1c; border-color: #4a3a2e; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            transition: background .45s, color .45s;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(246,247,249,.86);
+            backdrop-filter: blur(14px) saturate(1.4);
+            -webkit-backdrop-filter: blur(14px) saturate(1.4);
+            border-bottom: 1px solid var(--line);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; min-height: 68px; gap: 14px; flex-wrap: wrap; padding: 10px 0; }
+        .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand .mark { width: 28px; height: 28px; display: block; }
+        .brand .word {
+            font-family: 'Michroma', 'Inter', sans-serif; font-size: 16px;
+            letter-spacing: .10em; color: var(--green); text-transform: uppercase;
+        }
+        .nav-links { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+        .nav-links a { color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav-links a:hover { color: var(--green); }
+        .theme-btn {
+            border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+            width: 34px; height: 34px; border-radius: 10px; cursor: pointer; font-size: 15px;
+        }
+
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+            color: var(--green); background: var(--mint); border: 1px solid var(--mint-line);
+            border-radius: 999px; padding: 6px 14px;
+        }
+        .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+        .kicker {
+            font-size: 12.5px; font-weight: 700; letter-spacing: .10em; text-transform: uppercase;
+            color: var(--green); margin-bottom: 12px;
+        }
+        h1 { font-size: clamp(32px, 4.6vw, 50px); line-height: 1.12; font-weight: 800; letter-spacing: -.02em; margin: 22px 0 18px; }
+        h1 .accent { color: var(--green); }
+        h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.2; font-weight: 700; letter-spacing: -.015em; margin-bottom: 14px; }
+        h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        p { color: var(--ink-soft); margin-bottom: 14px; }
+        .hero-sub { font-size: 18px; max-width: 740px; }
+        .lede { font-size: 16.5px; }
+
+        section { padding: 44px 0 8px; }
+        .card {
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+            padding: 22px 26px; box-shadow: var(--shadow-sm); margin: 18px 0;
+        }
+        .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+        .vs-col { border-radius: var(--radius); padding: 22px; border: 1px solid var(--line); }
+        .vs-col.no { background: var(--amber-bg); border-color: #ecd9b8; }
+        .vs-col.yes { background: var(--mint); border-color: var(--mint-line); }
+        .vs-col h3 { font-size: 14px; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
+        .vs-col.no h3 { color: var(--amber); }
+        .vs-col.yes h3 { color: var(--green); }
+        .vs-col ul { margin: 0 0 0 18px; color: var(--ink-soft); font-size: 14.5px; }
+        .vs-col li { margin-bottom: 7px; }
+        @media (max-width: 680px) { .vs { grid-template-columns: 1fr; } }
+
+        .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 20px 0; }
+        .pillar { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+        .pillar h3 { color: var(--green); font-size: 15.5px; }
+        .pillar p { font-size: 14.5px; margin-bottom: 0; }
+        ul.tight { margin: 6px 0 16px 22px; color: var(--ink-soft); }
+        ul.tight li { margin-bottom: 7px; }
+        .flow { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; margin: 18px 0; }
+        .flow .step {
+            flex: 1 1 140px; background: var(--surface); border: 1px solid var(--line);
+            border-radius: 12px; padding: 14px 16px; font-size: 13.5px;
+        }
+        .flow .step b { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--green); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; }
+        .flow .arrow { align-self: center; color: var(--muted); font-size: 18px; }
+        details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px 20px; margin: 12px 0; }
+        details summary { cursor: pointer; font-weight: 600; font-size: 15.5px; }
+        details p { margin: 10px 0 0; font-size: 15px; }
+
+        .cta-band {
+            margin: 56px 0 0; padding: 52px 0;
+            background: linear-gradient(135deg, #16533f 0%, #216c56 55%, #2e8266 100%);
+            color: #fff; text-align: center;
+        }
+        .cta-band h2 { color: #fff; }
+        .cta-band p { color: rgba(255,255,255,.85); max-width: 560px; margin: 0 auto 24px; }
+        .btn { display: inline-block; padding: 12px 26px; border-radius: 11px; font-weight: 600; font-size: 15px; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+        .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .btn-primary { background: var(--green); color: #fff; }
+        .btn-light { background: #fff; color: var(--green-dark); }
+        .btn-ghost { border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+        .btn-outline { border: 1px solid rgba(255,255,255,.55); color: #fff; }
+        .row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+        footer { border-top: 1px solid var(--line); padding: 44px 0 30px; margin-top: 0; }
+        .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .foot-grid p { font-size: 14px; }
+        .foot-grid h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; }
+        .foot-grid a { display: block; color: var(--ink-soft); text-decoration: none; font-size: 14px; margin-bottom: 8px; }
+        .foot-grid a:hover { color: var(--green); }
+        .foot-brand { margin-bottom: 14px; }
+        .foot-bottom { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+        @media (max-width: 720px) { .foot-grid { grid-template-columns: 1fr; gap: 26px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="brand" aria-label="Pricera home">
+                <svg class="mark" viewBox="0 0 30 30" aria-hidden="true">
+                    <rect x="1.5" y="1.5" width="27" height="27" rx="8" fill="#edf6f1" stroke="#d5e8de"/>
+                    <path d="M13.2 11.4 10.6 18" fill="none" stroke="#216c56" stroke-width="1.7" stroke-linecap="round" opacity=".5"/>
+                    <path d="M16.8 11.4l2.6 6.6" fill="none" stroke="#216c56" stroke-width="1.7" stroke-linecap="round" opacity=".5"/>
+                    <circle cx="15" cy="8.8" r="2.9" fill="#216c56"/>
+                    <circle cx="9.4" cy="20.6" r="2.9" fill="rgba(33,108,86,.5)"/>
+                    <circle cx="20.6" cy="20.6" r="2.9" fill="#216c56"/>
+                </svg>
+                <span class="word">Pricera</span>
+            </a>
+            <div class="nav-links">
+                <a href="/#story">How it works</a>
+                <a href="/demo/">Demo</a>
+                <a href="/#industries">Industries</a>
+                <a href="/#team">Team</a>
+                <button class="theme-btn" id="theme-btn" type="button" title="Toggle dark mode" aria-label="Toggle dark mode">☾</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section>
+            <div class="eyebrow"><span class="dot"></span>Concept · AI &amp; governance</div>
+            <h1>AI-governed pricing.<br><span class="accent">The AI drafts — you stay in control.</span></h1>
+            <p class="hero-sub">Most "AI pricing" asks you to trust a number nobody can explain. AI-governed pricing inverts the relationship: the pricing model stays explicit and human-owned, and AI works inside it — reading your documents, drafting the model, proposing updates — under review, tests and version control. Fast where AI is good, accountable where it must be.</p>
+            <div class="row" style="justify-content:flex-start; margin: 26px 0 8px;">
+                <a href="mailto:info@pricera.site" class="btn btn-primary">Book a demo</a>
+                <a href="/demo/" class="btn btn-ghost">See the AI draft a model</a>
+            </div>
+        </section>
+
+        <section>
+            <div class="kicker">The problem</div>
+            <h2>Why "AI pricing" makes B2B buyers nervous</h2>
+            <p class="lede">The pitch usually goes: feed us your transactions, our models find the optimal price. For an airline seat or a hotel night, fine. For a €70&nbsp;000 contract with index clauses and an 18-month term, it fails on three counts:</p>
+            <ul class="tight">
+                <li><strong>Undefendable quotes.</strong> A sales rep cannot stand behind a price they cannot decompose. "The model said so" is not an answer to a purchasing manager.</li>
+                <li><strong>Unauditable decisions.</strong> When a customer disputes an invoice or an auditor asks how a price was set, an opaque recommendation engine has no answer — and no replay button.</li>
+                <li><strong>Unbounded behaviour.</strong> A decider-AI can drift: quietly reprice a live contract, invent a discount no one approved, or chase a margin objective into a customer relationship problem.</li>
+            </ul>
+            <p>The instinct to distrust decider-AI is correct. But it doesn't follow that AI has no place in pricing — it follows that AI belongs in the job where speed matters and accountability is checkable: <strong>building the model</strong>, not deciding the price.</p>
+        </section>
+
+        <section>
+            <div class="kicker">The distinction</div>
+            <h2>Two jobs for AI: builder, not decider</h2>
+            <div class="vs">
+                <div class="vs-col no">
+                    <h3>AI as decider — the black box</h3>
+                    <ul>
+                        <li>Outputs recommended prices; the reasoning is hidden</li>
+                        <li>Cannot explain a quote to a customer or an auditor</li>
+                        <li>Optimizes against its objective, not your contract</li>
+                        <li>Trust required; verification impossible</li>
+                    </ul>
+                </div>
+                <div class="vs-col yes">
+                    <h3>AI as builder — governed by design</h3>
+                    <ul>
+                        <li>Drafts the pricing model from your documents and descriptions</li>
+                        <li>Every formula is readable, inspectable, owned by your team</li>
+                        <li>Reference test cases prove the model before it publishes</li>
+                        <li>Prices stay deterministic — and fully replayable</li>
+                    </ul>
+                </div>
+            </div>
+            <p>In the builder role, the AI does what it's genuinely good at: reading a 40-page pricing document, extracting the index basis, the adder tables and the clauses, and drafting the model in minutes instead of the weeks a manual build takes. Then it steps aside — a human reviews, reference cases run, and only a passing model goes live.</p>
+        </section>
+
+        <section>
+            <div class="kicker">The rails</div>
+            <h2>What "governed" means in practice</h2>
+            <div class="pillars">
+                <div class="pillar">
+                    <h3>Review before publish</h3>
+                    <p>AI-drafted models are proposals, not releases. A pricing owner inspects the generated formulas and tables — readable, not code — and approves or edits before anything reaches sales.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Tests gate every change</h3>
+                    <p>Reference cases — known inputs with known correct prices — run on every edit, human or AI. Publishing is blocked until they pass. The model can't silently drift.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Everything is versioned</h3>
+                    <p>Each quote pins the model version and index snapshot used. Replay any historical quote; see who or what changed the model and when; roll back if needed.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="kicker">In the product</div>
+            <h2>What the AI actually does in Pricera</h2>
+            <div class="flow">
+                <div class="step"><b>1 · Ask</b>Describe the model in plain language, or hand it the pricing document — contract, price list, clause sheet.</div>
+                <span class="arrow">→</span>
+                <div class="step"><b>2 · Draft</b>AI generates the model: inputs, lookups, formulas, named nodes — readable by a pricing manager, not just an engineer.</div>
+                <span class="arrow">→</span>
+                <div class="step"><b>3 · Review</b>You inspect and adjust. Reference cases run automatically; publish stays blocked until the model reproduces known prices.</div>
+                <span class="arrow">→</span>
+                <div class="step"><b>4 · Governed run</b>Sales configures deals and quotes off the approved, versioned model — every line shows its full calculation.</div>
+            </div>
+            <p>The result is the speed people want from AI pricing without the failure mode they fear: models that used to take weeks to encode get drafted in minutes, while every price that goes out the door remains a number your team can stand behind. See it end-to-end in the <a href="/demo/">product demo</a>.</p>
+        </section>
+
+        <section>
+            <div class="kicker">FAQ</div>
+            <h2>AI-governed pricing, answered</h2>
+            <details>
+                <summary>What is AI-governed pricing?</summary>
+                <p>AI-governed pricing is an operating model where AI builds and maintains pricing models — reading documents, drafting formulas and lookups — while governance stays with humans: every change is reviewed, every publish is gated by reference test cases, and every quoted price can be replayed and explained. The AI accelerates the modelling work; it never becomes an unaccountable decision-maker.</p>
+            </details>
+            <details>
+                <summary>How is AI-governed pricing different from AI price optimization?</summary>
+                <p>AI price optimization typically means a machine-learning model that outputs recommended prices sales teams cannot decompose or defend. AI-governed pricing inverts the relationship: the pricing model stays explicit and human-owned, and AI works inside it — drafting models, proposing updates, flagging stale inputs — under tests and approvals.</p>
+            </details>
+            <details>
+                <summary>Can AI safely set contractual B2B prices?</summary>
+                <p>Not as an unsupervised decider. Contract prices carry clauses, index bases and commitments that must be explainable to customers and auditable internally. The safe pattern is AI-assisted modelling: the AI reads the contract and drafts the pricing logic; a pricing owner reviews it; automated reference cases prove the model reproduces known prices before anything goes live.</p>
+            </details>
+            <details>
+                <summary>Is AI-governed pricing the same as dynamic pricing?</summary>
+                <p>No. Dynamic pricing continuously reprices offers in response to market signals — appropriate for seats and rooms, largely wrong for contractual industrial prices. AI-governed pricing keeps prices deterministic and formula-driven; what AI accelerates is the building and maintenance of the pricing model itself.</p>
+            </details>
+        </section>
+    </main>
+
+    <section class="cta-band">
+        <div class="container">
+            <h2>Hand the AI your pricing document.</h2>
+            <p>Watch it draft the model — then check every formula yourself before anything goes live.</p>
+            <div class="row">
+                <a href="mailto:info@pricera.site" class="btn btn-light">Contact sales</a>
+                <a href="/demo/" class="btn btn-outline">Watch the demo</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="foot-grid">
+                <div>
+                    <a href="/" class="brand foot-brand" aria-label="Pricera">
+                        <svg class="mark" viewBox="0 0 30 30" aria-hidden="true">
+                            <rect x="1.5" y="1.5" width="27" height="27" rx="8" fill="#edf6f1" stroke="#d5e8de"/>
+                            <path d="M13.2 11.4 10.6 18" fill="none" stroke="#216c56" stroke-width="1.7" stroke-linecap="round" opacity=".5"/>
+                            <path d="M16.8 11.4l2.6 6.6" fill="none" stroke="#216c56" stroke-width="1.7" stroke-linecap="round" opacity=".5"/>
+                            <circle cx="15" cy="8.8" r="2.9" fill="#216c56"/>
+                            <circle cx="9.4" cy="20.6" r="2.9" fill="rgba(33,108,86,.5)"/>
+                            <circle cx="20.6" cy="20.6" r="2.9" fill="#216c56"/>
+                        </svg>
+                        <span class="word">Pricera</span>
+                    </a>
+                    <p>The costing and pricing engine for complex manufacturing industries: calculated prices, modelled explicitly, traceable on every quote.</p>
+                    <p><strong>Email:</strong> <a href="mailto:info@pricera.site" style="display:inline;">info@pricera.site</a></p>
+                    <p><strong>Locations:</strong> Doha · Essen · Paris</p>
+                </div>
+                <div>
+                    <h4>Product</h4>
+                    <a href="/#story">How it works</a>
+                    <a href="/#demo">Interactive Demo</a>
+                    <a href="/#industries">Industries</a>
+                    <a href="/industries/metals/">Metals pricing</a>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <a href="/#team">Team</a>
+                    <a href="mailto:info@pricera.site">Contact</a>
+                </div>
+            </div>
+            <div class="foot-bottom">
+                <span>&copy; 2026 Pricera. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeBtn = document.getElementById('theme-btn');
+        const applyTheme = dark => {
+            document.documentElement.classList.toggle('dark', dark);
+            themeBtn.textContent = dark ? '☀' : '☾';
+        };
+        applyTheme(document.documentElement.classList.contains('dark'));
+        themeBtn.addEventListener('click', () => {
+            const dark = !document.documentElement.classList.contains('dark');
+            try { localStorage.setItem('pricera-theme', dark ? 'dark' : 'light'); } catch (e) {}
+            applyTheme(dark);
+        });
+    </script>
+</body>
+</html>
