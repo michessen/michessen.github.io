@@ -44,6 +44,11 @@
         },
         {
           "@type": "Question",
+          "name": "Does Pricera use machine learning to predict prices?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It uses machine learning to predict everything around the price — production cost, yield, lead time, the probability a quote converts. Predictions arrive as labelled inputs and advisory signals inside the governed model; the price itself always comes from the explicit, versioned formula." }
+        },
+        {
+          "@type": "Question",
           "name": "Is AI-governed pricing the same as dynamic pricing?",
           "acceptedAnswer": { "@type": "Answer", "text": "It depends which part moves. If dynamic means the formula's inputs change — an index tick, a capacity constraint, a stock level — then yes: governed pricing re-evaluates the same model on every spot quote. What it rejects is dynamic logic: repricing rules that change without review. The output can move as fast as the inputs do; the rule stays fixed, versioned and explainable." }
         }
@@ -325,6 +330,18 @@
         </section>
 
         <section>
+            <div class="kicker">Beyond drafting</div>
+            <h2>The data keeps learning — the formula still decides</h2>
+            <p class="lede">Drafting isn't the only place trained models earn their keep. Pricera's prediction models learn from the systems that record your operations — ERP orders and lead times, MES yields and cycle times, CRM wins and losses — and estimate what no formula and no actuals can supply:</p>
+            <ul class="tight">
+                <li><strong>Predicted yields and lead times</strong> for configurations never run — proposed as labelled inputs inside the model.</li>
+                <li><strong>Index and input forecasts</strong> that sharpen governed inputs for long-term quotes — reviewed before they land.</li>
+                <li><strong>Deal signals</strong> like win probability and renewal risk, shown beside the governed price — advisory, never applied.</li>
+            </ul>
+            <p>Predictions pass through the same gates as any edit: proposed, tested, approved — or they stay out. The decider is still the formula. <a href="/predictive-pricing/">Predictive pricing, in detail →</a></p>
+        </section>
+
+        <section>
             <div class="kicker">In the product</div>
             <h2>What the AI actually does in Pricera</h2>
             <div class="flow">
@@ -353,6 +370,10 @@
             <details>
                 <summary>Can AI safely set contractual B2B prices?</summary>
                 <p>Not as an unsupervised decider. Contract prices carry clauses, index bases and commitments that must be explainable to customers and auditable internally. The safe pattern is AI-assisted modelling: the AI reads the contract and drafts the pricing logic; a pricing owner reviews it; automated reference cases prove the model reproduces known prices before anything goes live.</p>
+            </details>
+            <details>
+                <summary>Does Pricera use machine learning to predict prices?</summary>
+                <p>It uses machine learning to predict everything <em>around</em> the price — production cost, yield, lead time, the probability a quote converts. Predictions arrive as labelled inputs and advisory signals inside the governed model; the price itself always comes from the explicit, versioned formula. See <a href="/predictive-pricing/">predictive pricing</a>.</p>
             </details>
             <details>
                 <summary>Is AI-governed pricing the same as dynamic pricing?</summary>
@@ -398,6 +419,7 @@
                     <a href="/#story">How it works</a>
                     <a href="/#demo">Interactive Demo</a>
                     <a href="/#industries">Industries</a>
+                    <a href="/predictive-pricing/">Predictive pricing</a>
                     <a href="/industries/metals/">Metals pricing</a>
                 </div>
                 <div>
